@@ -1,0 +1,9 @@
+#baseurl = "andrewjorgensen.com"
+title = "Andrew Jorgensen"
+languageCode = "en-us"
+theme = "hemingway"
+
+contentdir = "content/post"
+layoutdir = "layouts"
+publishdir = "public"
+canonifyurls = true
