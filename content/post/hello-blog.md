@@ -3,7 +3,7 @@ date = "2016-10-11T21:33:09-04:00"
 title = "Hello Blog"
 
 +++
-I've tried to start this blog at least 20 times over the past few years. Every time I'd start with all the easy stuff, the stuff I knew I was good at. I'd search for a sweet template and then painstakingly tweak all of the things about it I didn't like. I'd read blog posts about writing a blog (how meta). I'd make sure git was setup properly and I had an easy way to deploy the site to Github. Then I'd reach a sticking point, all that upfront work squandered because I didn't know what to write about. Oh yeah, and I am a chronic procrastinator.  
+I've tried to start this blog at least 20 times over the past few years. Every time I'd start with all the easy stuff, the stuff I knew I was good at. I'd search for a sweet template and then painstakingly tweak all of the things about it I didn't like. I'd read blog posts about writing a blog (how meta). I'd make sure git was setup properly and I had an easy way to deploy the site to Github. Then I'd reach a sticking point, all that upfront work squandered because I didn't know what to write about. Oh yeah, I'm also a chronic procrastinator.  
 
 <!--more-->
 
