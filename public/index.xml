@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Andrew Jorgensen</title>
-    <link>http://andrewjorgensen.com/index.xml</link>
+    <link>http://andrewjorgensen.com/</link>
     <description>Recent content on Andrew Jorgensen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,20 +11,24 @@
     <atom:link href="http://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>welcome</title>
-      <link>http://andrewjorgensen.com/welcome/</link>
+      <title>Hello Blog</title>
+      <link>http://andrewjorgensen.com/hello-blog/</link>
       <pubDate>Tue, 11 Oct 2016 21:33:09 -0400</pubDate>
       
-      <guid>http://andrewjorgensen.com/welcome/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a lorem risus. Duis maximus elementum dui, sit amet tristique mi posuere eu. Phasellus nisi odio, pellentesque sit amet aliquet sed, rhoncus eu mi. Suspendisse pharetra commodo nulla vitae suscipit. Aenean lobortis mauris vitae massa pretium, sed gravida massa pulvinar. Nam nec pharetra nibh, sed porttitor urna. Ut malesuada mauris blandit nisl consectetur, nec feugiat justo fermentum. Mauris lobortis, lectus vel sagittis placerat, justo nisl luctus nunc, in pretium tortor quam ut velit. Nam hendrerit urna ut eros porttitor, vel tincidunt est mollis. Fusce venenatis condimentum quam sit amet convallis. Suspendisse quam sem, vestibulum nec posuere eget, varius sit amet leo.&lt;/p&gt;
+      <guid>http://andrewjorgensen.com/hello-blog/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years. Every time I&amp;rsquo;d start with all the easy stuff, the stuff I knew I was good at. I&amp;rsquo;d search for a sweet template and then painstakingly tweak all of the things about it I didn&amp;rsquo;t like. I&amp;rsquo;d read blog posts about writing a blog (how meta). I&amp;rsquo;d make sure git was setup properly and I had an easy way to deploy the site to Github. Then I&amp;rsquo;d reach a sticking point, all that upfront work squandered because I didn&amp;rsquo;t know what to write about. Oh yeah, and I am a chronic procrastinator.&lt;/p&gt;
 
-&lt;p&gt;Sed ornare ullamcorper mauris non tincidunt. Morbi augue purus, viverra in ullamcorper nec, pharetra non est. Mauris fermentum elit eu magna consectetur, eu vulputate odio pulvinar. Donec tincidunt porttitor venenatis. Aenean pulvinar, turpis facilisis hendrerit sollicitudin, velit ex fringilla quam, vitae dapibus metus justo vitae nibh. Nunc quis urna posuere, aliquam lectus rhoncus, imperdiet leo. Suspendisse vitae accumsan lorem. Maecenas eros ante, elementum in tristique tincidunt, aliquam nec sem. Nam lectus enim, gravida vel tincidunt ac, facilisis bibendum felis. Duis vulputate rhoncus augue nec sodales. Donec a egestas quam, eu ullamcorper dolor. Proin luctus et justo sit amet sagittis. Ut metus eros, rhoncus at faucibus non, maximus a metus.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;The secret of getting ahead is getting started.&amp;rdquo; -Mark Twain&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Aenean fringilla mi ac neque tincidunt iaculis. Fusce varius nisl ac nisi viverra finibus. Nulla quis ante vestibulum, blandit elit id, blandit velit. Fusce euismod, ante a volutpat venenatis, felis ante imperdiet neque, at gravida urna ipsum in nulla. Suspendisse ac pretium arcu. Pellentesque congue convallis lorem, quis dapibus nisi vulputate quis. In porttitor pellentesque ullamcorper. Sed scelerisque lacus sed urna pellentesque dignissim. Aenean ornare non arcu at lacinia. Praesent id tristique risus.&lt;/p&gt;
+&lt;p&gt;So here I am, getting started. My hope for this blog is to serve as a living document of my journey through software development, entrepreneurship, and probably a smörgåsbord of other interesting topics that come up along the way.&lt;/p&gt;
 
-&lt;p&gt;Integer leo quam, sollicitudin accumsan lacinia id, gravida non est. Fusce fermentum ex in cursus venenatis. Praesent commodo in eros eu consequat. Nulla pellentesque massa ut diam ullamcorper luctus. Cras facilisis, quam interdum mollis lobortis, mauris risus interdum augue, quis elementum est eros eu erat. Quisque eu mattis neque. Aenean vel est urna. Nulla auctor tristique rutrum. Praesent enim justo, pharetra id enim sed, sodales eleifend tellus. Suspendisse varius feugiat euismod.&lt;/p&gt;
+&lt;p&gt;So what can you expect?&lt;/p&gt;
 
-&lt;p&gt;Sed ut congue felis. In sodales hendrerit leo. Maecenas at urna rhoncus, laoreet libero vitae, ornare arcu. Quisque tempus placerat nunc, vel fermentum magna egestas a. Nunc ut dolor porta tellus rutrum tristique tristique ac lorem. Donec sed magna ligula. Cras a ex gravida, posuere nibh at, mollis libero. Nunc sit amet commodo mauris. Aenean vel justo accumsan, hendrerit dolor commodo, luctus purus. Praesent gravida urna turpis, vitae consectetur sem luctus sed. Cras ultricies magna urna, eget aliquam orci consequat id. Mauris varius mi urna, ac ullamcorper nisi feugiat in. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;&lt;/p&gt;
+&lt;p&gt;Short answer is, I have no idea. Longer answer is it will probably be a collection of things that I&amp;rsquo;ve learned related, but not limited to, topics like vim, elixir, java, and software development best practices. My hope is that others will find at least some of these posts interesting and helpful in their own journey.&lt;/p&gt;
+
+&lt;p&gt;Hope you enjoy and feel free to reach out to me on Twitter, Github, or really most places on the interwebs!&lt;/p&gt;
 </description>
     </item>
     
