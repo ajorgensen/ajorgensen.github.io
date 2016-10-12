@@ -2,19 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Andrew Jorgensen</title>
-    <link>/index.xml</link>
+    <link>http://andrewjorgensen.com/index.xml</link>
     <description>Recent content on Andrew Jorgensen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/ajorgensen&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2016</copyright>
     <lastBuildDate>Tue, 11 Oct 2016 21:33:09 -0400</lastBuildDate>
-    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>welcome</title>
-      <link>/welcome/</link>
+      <link>http://andrewjorgensen.com/welcome/</link>
       <pubDate>Tue, 11 Oct 2016 21:33:09 -0400</pubDate>
       
-      <guid>/welcome/</guid>
+      <guid>http://andrewjorgensen.com/welcome/</guid>
       <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a lorem risus. Duis maximus elementum dui, sit amet tristique mi posuere eu. Phasellus nisi odio, pellentesque sit amet aliquet sed, rhoncus eu mi. Suspendisse pharetra commodo nulla vitae suscipit. Aenean lobortis mauris vitae massa pretium, sed gravida massa pulvinar. Nam nec pharetra nibh, sed porttitor urna. Ut malesuada mauris blandit nisl consectetur, nec feugiat justo fermentum. Mauris lobortis, lectus vel sagittis placerat, justo nisl luctus nunc, in pretium tortor quam ut velit. Nam hendrerit urna ut eros porttitor, vel tincidunt est mollis. Fusce venenatis condimentum quam sit amet convallis. Suspendisse quam sem, vestibulum nec posuere eget, varius sit amet leo.&lt;/p&gt;
 
 &lt;p&gt;Sed ornare ullamcorper mauris non tincidunt. Morbi augue purus, viverra in ullamcorper nec, pharetra non est. Mauris fermentum elit eu magna consectetur, eu vulputate odio pulvinar. Donec tincidunt porttitor venenatis. Aenean pulvinar, turpis facilisis hendrerit sollicitudin, velit ex fringilla quam, vitae dapibus metus justo vitae nibh. Nunc quis urna posuere, aliquam lectus rhoncus, imperdiet leo. Suspendisse vitae accumsan lorem. Maecenas eros ante, elementum in tristique tincidunt, aliquam nec sem. Nam lectus enim, gravida vel tincidunt ac, facilisis bibendum felis. Duis vulputate rhoncus augue nec sodales. Donec a egestas quam, eu ullamcorper dolor. Proin luctus et justo sit amet sagittis. Ut metus eros, rhoncus at faucibus non, maximus a metus.&lt;/p&gt;
