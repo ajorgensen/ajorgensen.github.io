@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Andrew Jorgensen</title>
-    <link>http://andrewjorgensen.com/</link>
+    <link>http://andrewjorgensen.com/index.xml</link>
     <description>Recent content on Andrew Jorgensen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -18,7 +18,9 @@
       <guid>http://andrewjorgensen.com/hello-blog/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&lt;/p&gt;
 
-&lt;p&gt;Every time I&amp;rsquo;d start with all the easy stuff, the stuff I knew I was good at. I&amp;rsquo;d search for a sweet template and then painstakingly tweak all of the things about it I didn&amp;rsquo;t like. I&amp;rsquo;d read blog posts about writing a blog (how meta). I&amp;rsquo;d make sure git was setup properly and I had an easy way to deploy the site to Github. Then I&amp;rsquo;d reach a sticking point, all that upfront work squandered because I didn&amp;rsquo;t know what to write about. That and I&amp;rsquo;m also a chronic procrastinator.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Every time I&amp;rsquo;d start with all the easy stuff, the stuff I knew I was good at. I&amp;rsquo;d search for a sweet template and then painstakingly tweak all the things about it I didn&amp;rsquo;t like, read blog posts about writing a blog (how meta), make sure git was setup properly and I had an easy way to deploy the site to Github. Then I&amp;rsquo;d reach a sticking point, all that upfront work squandered because I didn&amp;rsquo;t know what to write about. That and I&amp;rsquo;m also a chronic procrastinator.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;The secret of getting ahead is getting started.&amp;rdquo; -Mark Twain&lt;/p&gt;
@@ -30,8 +32,7 @@
 
 &lt;p&gt;Short answer is, I have no idea. Longer answer is it will probably be a collection of things that I&amp;rsquo;ve learned related, but not limited to, topics like vim, elixir, java, and related best practices. My hope is that others will find at least some of these posts interesting and helpful.&lt;/p&gt;
 
-&lt;p&gt;Hope you enjoy and feel free to reach out to me on Twitter, Github, or anywhere else on the interwebs!&lt;/p&gt;
-</description>
+&lt;p&gt;Hope you enjoy and feel free to reach out to me on Twitter, Github, or anywhere else on the interwebs!&lt;/p&gt;</description>
     </item>
     
   </channel>
