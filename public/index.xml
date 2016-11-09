@@ -7,8 +7,71 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2016</copyright>
-    <lastBuildDate>Tue, 11 Oct 2016 21:33:09 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 09 Nov 2016 08:57:28 -0500</lastBuildDate>
     <atom:link href="http://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Elixir ExUnit.DocTest</title>
+      <link>http://andrewjorgensen.com/elixir-doctests/</link>
+      <pubDate>Wed, 09 Nov 2016 08:57:28 -0500</pubDate>
+      
+      <guid>http://andrewjorgensen.com/elixir-doctests/</guid>
+      <description>&lt;p&gt;Have you ever been frustrated by the lack working examples in documentation? &lt;a href=&#34;http://elixir-lang.org/&#34;&gt;Elixir&lt;/a&gt; helps solve this problem with a built in feature called DocTest.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Elixir&amp;rsquo;s testing framework ExUnit provides built in support for a feature called &lt;a href=&#34;http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html&#34;&gt;DocTest&lt;/a&gt; which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;defmodule Calculator do
+  @doc &amp;quot;&amp;quot;&amp;quot;
+  Adds two numbers and returns the result.
+
+  ## Examples
+      iex&amp;gt; Calculator.add(1, 2)
+      3
+
+      iex&amp;gt; Calculator.add(5, 5)
+      10
+  &amp;quot;&amp;quot;&amp;quot;
+  def add(a, b) do
+    a + b
+  end
+
+  @doc &amp;quot;&amp;quot;&amp;quot;
+  Subtracts two numbers and returns the result.
+
+  ## Examples
+      iex&amp;gt; Calculator.subtract(1, 2)
+      -1
+
+      iex&amp;gt; Calculator.subtract(5, 5)
+      0
+  &amp;quot;&amp;quot;&amp;quot;
+  def subtract(a, b) do
+    a - b
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;iex&amp;gt; h Calculator.add
+
+                                 def add(a, b)
+
+Adds two numbers and returns the result.
+
+Examples
+
+┃ iex&amp;gt; Calculator.add(1, 2)
+┃ 3
+┃
+┃ iex&amp;gt; Calculator.add(5, 5)
+┃ 10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://elixirschool.com/lessons/basics/documentation/#documenting-functions&#34;&gt;Elixir School&lt;/a&gt; also provides some great information on function documentation and the features that Elixir provides.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Hello Blog</title>
@@ -16,7 +79,7 @@
       <pubDate>Tue, 11 Oct 2016 21:33:09 -0400</pubDate>
       
       <guid>http://andrewjorgensen.com/hello-blog/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&lt;/p&gt;
+      <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
