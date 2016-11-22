@@ -7,8 +7,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2016</copyright>
-    <lastBuildDate>Wed, 09 Nov 2016 08:57:28 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 21 Nov 2016 22:30:10 -0500</lastBuildDate>
     <atom:link href="http://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to not leak your credentials to the internet</title>
+      <link>http://andrewjorgensen.com/content/post/secure-shell-config/</link>
+      <pubDate>Mon, 21 Nov 2016 22:30:10 -0500</pubDate>
+      
+      <guid>http://andrewjorgensen.com/content/post/secure-shell-config/</guid>
+      <description>&lt;p&gt;Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&amp;rsquo;re not careful.
+&lt;/p&gt;
+
+&lt;p&gt;Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.&lt;/p&gt;
+
+&lt;p&gt;One good security practice is to not store any unencrypted credentials at rest. If you can run &lt;code&gt;cat&lt;/code&gt; on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export AWS_ACCESS_KEY_ID &amp;quot;AKIATHISISMYKEY&amp;quot;
+export AWS_ACCESS_KEY_SECRET &amp;quot;thisismyreallysecretkeythatnooneshouldknow&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If that looks anything like your &lt;code&gt;~/.zshrc&lt;/code&gt; or &lt;code&gt;~/.bash_profile&lt;/code&gt; then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;### Functions for setting and getting environment variables from the OSX keychain ###
+### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
+
+# Use: keychain-environment-variable SECRET_ENV_VAR
+function keychain-environment-variable () {
+    security find-generic-password -w -a ${USER} -D &amp;quot;environment variable&amp;quot; -s &amp;quot;${1}&amp;quot;
+}
+
+# Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
+function set-keychain-environment-variable () {
+    [ -n &amp;quot;$1&amp;quot; ] || print &amp;quot;Missing environment variable name&amp;quot;
+    
+    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
+    read -s &amp;quot;?Enter Value for ${1}: &amp;quot; secret
+    
+    ( [ -n &amp;quot;$1&amp;quot; ] &amp;amp;&amp;amp; [ -n &amp;quot;$secret&amp;quot; ] ) || return 1
+    security add-generic-password -U -a ${USER} -D &amp;quot;environment variable&amp;quot; -s &amp;quot;${1}&amp;quot; -w &amp;quot;${secret}&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can easily and securely store keys and secrets using the &lt;code&gt;set-keychain-environment-variable&lt;/code&gt; function! Instead of hard coding the credentials we can simply replace all the hard coded values with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export AWS_ACCESS_KEY_ID $(keychain-environment-variable AWS_ACCESS_KEY_ID)
+export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&amp;rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your &lt;code&gt;~/.zsh_history&lt;/code&gt; or &lt;code&gt;~/.bash_history&lt;/code&gt; files after you&amp;rsquo;ve run the commands to make sure the credentials were not recorded there.&lt;/p&gt;
+
+&lt;p&gt;Happy encrypting!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Elixir ExUnit.DocTest</title>
