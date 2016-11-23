@@ -2,7 +2,8 @@
 date = "2016-11-09T08:57:28-05:00"
 title = "Elixir ExUnit.DocTest"
 tags = [ "elixir", "testing" ]
-slug = "elixir-doctests"
+
+aliases = ["elixir-doctests"]
 
 +++
 

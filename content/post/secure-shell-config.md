@@ -1,8 +1,9 @@
 +++
 date = "2016-11-21T22:30:10-05:00"
 title = "How to not leak your credentials to the internet"
-
 tags = ["security", "bash", "zsh"] 
+
+aliases = ["/content/post/secure-shell-config"]
 
 +++
 Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you're not careful.

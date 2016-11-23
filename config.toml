@@ -3,13 +3,16 @@ title = "Andrew Jorgensen"
 languageCode = "en-us"
 theme = "hemingway"
 
-contentdir = "content/post"
+contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 canonifyurls = true
 
 copyright = "&copy; <a href=\"http://andrewjorgensen.com\">Andrew Jorgensen</a> 2016"
 googleAnalytics = "UA-51883548-1"
+
+[permalinks]
+post = "/post/:title/"
 
 [params]
 
