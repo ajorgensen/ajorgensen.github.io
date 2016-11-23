@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Post-rsses on Andrew Jorgensen</title>
+    <title>Posts on Andrew Jorgensen</title>
     <link>http://andrewjorgensen.com/post/index.xml</link>
-    <description>Recent content in Post-rsses on Andrew Jorgensen</description>
+    <description>Recent content in Posts on Andrew Jorgensen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2016</copyright>
@@ -12,10 +12,10 @@
     
     <item>
       <title>How to not leak your credentials to the internet</title>
-      <link>http://andrewjorgensen.com/content/post/secure-shell-config/</link>
+      <link>http://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</link>
       <pubDate>Mon, 21 Nov 2016 22:30:10 -0500</pubDate>
       
-      <guid>http://andrewjorgensen.com/content/post/secure-shell-config/</guid>
+      <guid>http://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</guid>
       <description>&lt;p&gt;Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&amp;rsquo;re not careful.
 &lt;/p&gt;
 
@@ -58,6 +58,94 @@ export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECR
 &lt;p&gt;OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&amp;rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your &lt;code&gt;~/.zsh_history&lt;/code&gt; or &lt;code&gt;~/.bash_history&lt;/code&gt; files after you&amp;rsquo;ve run the commands to make sure the credentials were not recorded there.&lt;/p&gt;
 
 &lt;p&gt;Happy encrypting!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Elixir ExUnit.DocTest</title>
+      <link>http://andrewjorgensen.com/post/elixir-exunit.doctest/</link>
+      <pubDate>Wed, 09 Nov 2016 08:57:28 -0500</pubDate>
+      
+      <guid>http://andrewjorgensen.com/post/elixir-exunit.doctest/</guid>
+      <description>&lt;p&gt;Have you ever been frustrated by the lack working examples in documentation? &lt;a href=&#34;http://elixir-lang.org/&#34;&gt;Elixir&lt;/a&gt; helps solve this problem with a built in feature called DocTest.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Elixir&amp;rsquo;s testing framework ExUnit provides built in support for a feature called &lt;a href=&#34;http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html&#34;&gt;DocTest&lt;/a&gt; which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;defmodule Calculator do
+  @doc &amp;quot;&amp;quot;&amp;quot;
+  Adds two numbers and returns the result.
+
+  ## Examples
+      iex&amp;gt; Calculator.add(1, 2)
+      3
+
+      iex&amp;gt; Calculator.add(5, 5)
+      10
+  &amp;quot;&amp;quot;&amp;quot;
+  def add(a, b) do
+    a + b
+  end
+
+  @doc &amp;quot;&amp;quot;&amp;quot;
+  Subtracts two numbers and returns the result.
+
+  ## Examples
+      iex&amp;gt; Calculator.subtract(1, 2)
+      -1
+
+      iex&amp;gt; Calculator.subtract(5, 5)
+      0
+  &amp;quot;&amp;quot;&amp;quot;
+  def subtract(a, b) do
+    a - b
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;iex&amp;gt; h Calculator.add
+
+                                 def add(a, b)
+
+Adds two numbers and returns the result.
+
+Examples
+
+┃ iex&amp;gt; Calculator.add(1, 2)
+┃ 3
+┃
+┃ iex&amp;gt; Calculator.add(5, 5)
+┃ 10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://elixirschool.com/lessons/basics/documentation/#documenting-functions&#34;&gt;Elixir School&lt;/a&gt; also provides some great information on function documentation and the features that Elixir provides.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello Blog</title>
+      <link>http://andrewjorgensen.com/post/hello-blog/</link>
+      <pubDate>Tue, 11 Oct 2016 21:33:09 -0400</pubDate>
+      
+      <guid>http://andrewjorgensen.com/post/hello-blog/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Every time I&amp;rsquo;d start with all the easy stuff, the stuff I knew I was good at. I&amp;rsquo;d search for a sweet template and then painstakingly tweak all the things about it I didn&amp;rsquo;t like, read blog posts about writing a blog (how meta), make sure git was setup properly and I had an easy way to deploy the site to Github. Then I&amp;rsquo;d reach a sticking point, all that upfront work squandered because I didn&amp;rsquo;t know what to write about. That and I&amp;rsquo;m also a chronic procrastinator.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;The secret of getting ahead is getting started.&amp;rdquo; -Mark Twain&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So here I am, getting started. My hope for this blog is to serve as a living document of my journey with software development, entrepreneurship, and probably a smörgåsbord of other interesting topics that come up along the way.&lt;/p&gt;
+
+&lt;p&gt;So what can you expect?&lt;/p&gt;
+
+&lt;p&gt;Short answer is, I have no idea. Longer answer is it will probably be a collection of things that I&amp;rsquo;ve learned related, but not limited to, topics like vim, elixir, java, and related best practices. My hope is that others will find at least some of these posts interesting and helpful.&lt;/p&gt;
+
+&lt;p&gt;Hope you enjoy and feel free to reach out to me on Twitter, Github, or anywhere else on the interwebs!&lt;/p&gt;</description>
     </item>
     
   </channel>

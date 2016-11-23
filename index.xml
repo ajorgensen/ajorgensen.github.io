@@ -12,10 +12,10 @@
     
     <item>
       <title>How to not leak your credentials to the internet</title>
-      <link>http://andrewjorgensen.com/content/post/secure-shell-config/</link>
+      <link>http://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</link>
       <pubDate>Mon, 21 Nov 2016 22:30:10 -0500</pubDate>
       
-      <guid>http://andrewjorgensen.com/content/post/secure-shell-config/</guid>
+      <guid>http://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</guid>
       <description>&lt;p&gt;Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&amp;rsquo;re not careful.
 &lt;/p&gt;
 
@@ -62,10 +62,10 @@ export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECR
     
     <item>
       <title>Elixir ExUnit.DocTest</title>
-      <link>http://andrewjorgensen.com/elixir-doctests/</link>
+      <link>http://andrewjorgensen.com/post/elixir-exunit.doctest/</link>
       <pubDate>Wed, 09 Nov 2016 08:57:28 -0500</pubDate>
       
-      <guid>http://andrewjorgensen.com/elixir-doctests/</guid>
+      <guid>http://andrewjorgensen.com/post/elixir-exunit.doctest/</guid>
       <description>&lt;p&gt;Have you ever been frustrated by the lack working examples in documentation? &lt;a href=&#34;http://elixir-lang.org/&#34;&gt;Elixir&lt;/a&gt; helps solve this problem with a built in feature called DocTest.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
@@ -125,10 +125,10 @@ Examples
     
     <item>
       <title>Hello Blog</title>
-      <link>http://andrewjorgensen.com/hello-blog/</link>
+      <link>http://andrewjorgensen.com/post/hello-blog/</link>
       <pubDate>Tue, 11 Oct 2016 21:33:09 -0400</pubDate>
       
-      <guid>http://andrewjorgensen.com/hello-blog/</guid>
+      <guid>http://andrewjorgensen.com/post/hello-blog/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;

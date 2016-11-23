@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to not leak your credentials to the internet | Andrew Jorgensen</title>
+<link rel="stylesheet" href="http://andrewjorgensen.com/css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="http://andrewjorgensen.com"><h1 class="title is-4">Andrew Jorgensen</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/ajorgensen">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/ajorgensen">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="http://andrewjorgensen.com/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">November 21, 2016</h2>
+    <h1 class="title">How to not leak your credentials to the internet</h1>
+    
+      <div class="tags">
+        
+        <span class="tag">security</span>
+        
+        <span class="tag">bash</span>
+        
+        <span class="tag">zsh</span>
+        
+      </div>
+    
+    <div class="content">
+      <p>Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful.
+</p>
+
+<p>Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.</p>
+
+<p>One good security practice is to not store any unencrypted credentials at rest. If you can run <code>cat</code> on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like&hellip;</p>
+
+<pre><code>export AWS_ACCESS_KEY_ID &quot;AKIATHISISMYKEY&quot;
+export AWS_ACCESS_KEY_SECRET &quot;thisismyreallysecretkeythatnooneshouldknow&quot;
+</code></pre>
+
+<p>If that looks anything like your <code>~/.zshrc</code> or <code>~/.bash_profile</code> then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.</p>
+
+<pre><code>### Functions for setting and getting environment variables from the OSX keychain ###
+### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
+
+# Use: keychain-environment-variable SECRET_ENV_VAR
+function keychain-environment-variable () {
+    security find-generic-password -w -a ${USER} -D &quot;environment variable&quot; -s &quot;${1}&quot;
+}
+
+# Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
+function set-keychain-environment-variable () {
+    [ -n &quot;$1&quot; ] || print &quot;Missing environment variable name&quot;
+    
+    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
+    read -s &quot;?Enter Value for ${1}: &quot; secret
+    
+    ( [ -n &quot;$1&quot; ] &amp;&amp; [ -n &quot;$secret&quot; ] ) || return 1
+    security add-generic-password -U -a ${USER} -D &quot;environment variable&quot; -s &quot;${1}&quot; -w &quot;${secret}&quot;
+}
+</code></pre>
+
+<p>Now you can easily and securely store keys and secrets using the <code>set-keychain-environment-variable</code> function! Instead of hard coding the credentials we can simply replace all the hard coded values with:</p>
+
+<pre><code>export AWS_ACCESS_KEY_ID $(keychain-environment-variable AWS_ACCESS_KEY_ID)
+export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
+</code></pre>
+
+<p>OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your <code>~/.zsh_history</code> or <code>~/.bash_history</code> files after you&rsquo;ve run the commands to make sure the credentials were not recorded there.</p>
+
+<p>Happy encrypting!</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="http://andrewjorgensen.com">Andrew Jorgensen</a> 2016</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', "UA-51883548-1", 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
