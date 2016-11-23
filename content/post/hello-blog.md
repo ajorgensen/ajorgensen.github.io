@@ -2,6 +2,8 @@
 date = "2016-10-11T21:33:09-04:00"
 title = "Hello Blog"
 
+tags = ["meta"]
+
 +++
 I've tried to start this blog at least 20 times over the past few years so here we go...
 
