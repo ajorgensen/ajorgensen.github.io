@@ -6,6 +6,13 @@
     <article>
       <h2 class="subtitle is-6">{{ .Date.Format "January 2, 2006" }}</h2>
       <h1 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a>{{ if .Draft }} ::Draft{{ end }}</h1>
+      {{ if .Params.tags }}
+        <div class="tags">
+          {{ range .Params.tags }}
+          <span class="tag">{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
       <div class="content">
         {{ .Summary | plainify | safeHTML }}
         {{ if .Truncated }}
