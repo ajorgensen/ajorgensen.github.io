@@ -10,6 +10,7 @@ canonifyurls = true
 
 copyright = "&copy; <a href=\"http://andrewjorgensen.com\">Andrew Jorgensen</a> 2016"
 googleAnalytics = "UA-51883548-1"
+disqusShortname = "ajorgensen"
 
 [permalinks]
 post = "/post/:title/"
