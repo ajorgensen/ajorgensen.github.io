@@ -82,10 +82,10 @@ function keychain-environment-variable () {
 # Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
 function set-keychain-environment-variable () {
     [ -n &quot;$1&quot; ] || print &quot;Missing environment variable name&quot;
-    
+
     # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
     read -s &quot;?Enter Value for ${1}: &quot; secret
-    
+
     ( [ -n &quot;$1&quot; ] &amp;&amp; [ -n &quot;$secret&quot; ] ) || return 1
     security add-generic-password -U -a ${USER} -D &quot;environment variable&quot; -s &quot;${1}&quot; -w &quot;${secret}&quot;
 }
@@ -93,8 +93,8 @@ function set-keychain-environment-variable () {
 
 <p>Now you can easily and securely store keys and secrets using the <code>set-keychain-environment-variable</code> function! Instead of hard coding the credentials we can simply replace all the hard coded values with:</p>
 
-<pre><code>export AWS_ACCESS_KEY_ID $(keychain-environment-variable AWS_ACCESS_KEY_ID)
-export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
+<pre><code>export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
+export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
 </code></pre>
 
 <p>OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your <code>~/.zsh_history</code> or <code>~/.bash_history</code> files after you&rsquo;ve run the commands to make sure the credentials were not recorded there.</p>
