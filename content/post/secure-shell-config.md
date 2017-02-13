@@ -1,7 +1,7 @@
 +++
 date = "2016-11-21T22:30:10-05:00"
 title = "How to not leak your credentials to the internet"
-tags = ["security", "bash", "zsh"] 
+tags = ["security", "bash", "zsh"]
 
 aliases = ["content/post/secure-shell-config/"]
 
@@ -32,10 +32,10 @@ function keychain-environment-variable () {
 # Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
 function set-keychain-environment-variable () {
     [ -n "$1" ] || print "Missing environment variable name"
-    
+
     # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
     read -s "?Enter Value for ${1}: " secret
-    
+
     ( [ -n "$1" ] && [ -n "$secret" ] ) || return 1
     security add-generic-password -U -a ${USER} -D "environment variable" -s "${1}" -w "${secret}"
 }
@@ -45,10 +45,10 @@ Now you can easily and securely store keys and secrets using the `set-keychain-e
 
 
 ```
-export AWS_ACCESS_KEY_ID $(keychain-environment-variable AWS_ACCESS_KEY_ID)
-export AWS_ACCESS_KEY_SECRET $(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
+export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
+export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
 ```
 
-OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don't have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your `~/.zsh_history` or `~/.bash_history` files after you've run the commands to make sure the credentials were not recorded there. 
+OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don't have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your `~/.zsh_history` or `~/.bash_history` files after you've run the commands to make sure the credentials were not recorded there.
 
 Happy encrypting!
