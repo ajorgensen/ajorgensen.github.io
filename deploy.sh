@@ -22,4 +22,4 @@ git commit -m "$msg"
 
 # Push source and build repos.
 git push origin master
-git subtree push --prefix=public https://github.com/ajorgensen/blog.git gh-pages
+git subtree push --prefix=public git@github.com:ajorgensen/blog.git gh-pages
