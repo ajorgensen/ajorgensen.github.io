@@ -1,4 +1,4 @@
-baseurl = "http://andrewjorgensen.com"
+baseurl = "https://andrewjorgensen.com"
 title = "Andrew Jorgensen"
 languageCode = "en-us"
 theme = "hemingway"
@@ -32,4 +32,3 @@ fa_icon = "fa-twitter"
 [[params.social]]
 url = "/index.xml"
 fa_icon = "fa-rss"
-
