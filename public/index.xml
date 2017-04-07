@@ -2,13 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Andrew Jorgensen</title>
-    <link>https://andrewjorgensen.com/index.xml</link>
+    <link>https://andrewjorgensen.com/</link>
     <description>Recent content on Andrew Jorgensen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2016</copyright>
+    <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2017</copyright>
     <lastBuildDate>Mon, 21 Nov 2016 22:30:10 -0500</lastBuildDate>
-    <atom:link href="https://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>How to not leak your credentials to the internet</title>
@@ -17,47 +19,7 @@
       
       <guid>https://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</guid>
       <description>&lt;p&gt;Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&amp;rsquo;re not careful.
-&lt;/p&gt;
-
-&lt;p&gt;Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.&lt;/p&gt;
-
-&lt;p&gt;One good security practice is to not store any unencrypted credentials at rest. If you can run &lt;code&gt;cat&lt;/code&gt; on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like&amp;hellip;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export AWS_ACCESS_KEY_ID &amp;quot;AKIATHISISMYKEY&amp;quot;
-export AWS_ACCESS_KEY_SECRET &amp;quot;thisismyreallysecretkeythatnooneshouldknow&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If that looks anything like your &lt;code&gt;~/.zshrc&lt;/code&gt; or &lt;code&gt;~/.bash_profile&lt;/code&gt; then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;### Functions for setting and getting environment variables from the OSX keychain ###
-### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
-
-# Use: keychain-environment-variable SECRET_ENV_VAR
-function keychain-environment-variable () {
-    security find-generic-password -w -a ${USER} -D &amp;quot;environment variable&amp;quot; -s &amp;quot;${1}&amp;quot;
-}
-
-# Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
-function set-keychain-environment-variable () {
-    [ -n &amp;quot;$1&amp;quot; ] || print &amp;quot;Missing environment variable name&amp;quot;
-
-    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
-    read -s &amp;quot;?Enter Value for ${1}: &amp;quot; secret
-
-    ( [ -n &amp;quot;$1&amp;quot; ] &amp;amp;&amp;amp; [ -n &amp;quot;$secret&amp;quot; ] ) || return 1
-    security add-generic-password -U -a ${USER} -D &amp;quot;environment variable&amp;quot; -s &amp;quot;${1}&amp;quot; -w &amp;quot;${secret}&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now you can easily and securely store keys and secrets using the &lt;code&gt;set-keychain-environment-variable&lt;/code&gt; function! Instead of hard coding the credentials we can simply replace all the hard coded values with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
-export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&amp;rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your &lt;code&gt;~/.zsh_history&lt;/code&gt; or &lt;code&gt;~/.bash_history&lt;/code&gt; files after you&amp;rsquo;ve run the commands to make sure the credentials were not recorded there.&lt;/p&gt;
-
-&lt;p&gt;Happy encrypting!&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -68,59 +30,7 @@ export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECR
       <guid>https://andrewjorgensen.com/post/elixir-exunit.doctest/</guid>
       <description>&lt;p&gt;Have you ever been frustrated by the lack working examples in documentation? &lt;a href=&#34;http://elixir-lang.org/&#34;&gt;Elixir&lt;/a&gt; helps solve this problem with a built in feature called DocTest.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Elixir&amp;rsquo;s testing framework ExUnit provides built in support for a feature called &lt;a href=&#34;http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html&#34;&gt;DocTest&lt;/a&gt; which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;defmodule Calculator do
-  @doc &amp;quot;&amp;quot;&amp;quot;
-  Adds two numbers and returns the result.
-
-  ## Examples
-      iex&amp;gt; Calculator.add(1, 2)
-      3
-
-      iex&amp;gt; Calculator.add(5, 5)
-      10
-  &amp;quot;&amp;quot;&amp;quot;
-  def add(a, b) do
-    a + b
-  end
-
-  @doc &amp;quot;&amp;quot;&amp;quot;
-  Subtracts two numbers and returns the result.
-
-  ## Examples
-      iex&amp;gt; Calculator.subtract(1, 2)
-      -1
-
-      iex&amp;gt; Calculator.subtract(5, 5)
-      0
-  &amp;quot;&amp;quot;&amp;quot;
-  def subtract(a, b) do
-    a - b
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;iex&amp;gt; h Calculator.add
-
-                                 def add(a, b)
-
-Adds two numbers and returns the result.
-
-Examples
-
-┃ iex&amp;gt; Calculator.add(1, 2)
-┃ 3
-┃
-┃ iex&amp;gt; Calculator.add(5, 5)
-┃ 10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://elixirschool.com/lessons/basics/documentation/#documenting-functions&#34;&gt;Elixir School&lt;/a&gt; also provides some great information on function documentation and the features that Elixir provides.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -131,21 +41,7 @@ Examples
       <guid>https://andrewjorgensen.com/post/hello-blog/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Every time I&amp;rsquo;d start with all the easy stuff, the stuff I knew I was good at. I&amp;rsquo;d search for a sweet template and then painstakingly tweak all the things about it I didn&amp;rsquo;t like, read blog posts about writing a blog (how meta), make sure git was setup properly and I had an easy way to deploy the site to Github. Then I&amp;rsquo;d reach a sticking point, all that upfront work squandered because I didn&amp;rsquo;t know what to write about. That and I&amp;rsquo;m also a chronic procrastinator.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;The secret of getting ahead is getting started.&amp;rdquo; -Mark Twain&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So here I am, getting started. My hope for this blog is to serve as a living document of my journey with software development, entrepreneurship, and probably a smörgåsbord of other interesting topics that come up along the way.&lt;/p&gt;
-
-&lt;p&gt;So what can you expect?&lt;/p&gt;
-
-&lt;p&gt;Short answer is, I have no idea. Longer answer is it will probably be a collection of things that I&amp;rsquo;ve learned related, but not limited to, topics like vim, elixir, java, and related best practices. My hope is that others will find at least some of these posts interesting and helpful.&lt;/p&gt;
-
-&lt;p&gt;Hope you enjoy and feel free to reach out to me on Twitter, Github, or anywhere else on the interwebs!&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
