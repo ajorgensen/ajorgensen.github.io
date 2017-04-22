@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if test ! $(which hugo); then
   echo "You need to have hugo installed"
   exit 1

@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://andrewjorgensen.com/post/install-homebrew-to-your-home-directory/</loc>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
   </url>
@@ -18,7 +23,7 @@
   
   <url>
     <loc>https://andrewjorgensen.com/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -29,13 +34,14 @@
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/categories/</loc>
+    <loc>https://andrewjorgensen.com/tags/elixir/</loc>
+    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/tags/elixir/</loc>
-    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
+    <loc>https://andrewjorgensen.com/tags/homebrew/</loc>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -47,7 +53,7 @@
   
   <url>
     <loc>https://andrewjorgensen.com/post/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -59,7 +65,6 @@
   
   <url>
     <loc>https://andrewjorgensen.com/tags/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
     <priority>0</priority>
   </url>
   
