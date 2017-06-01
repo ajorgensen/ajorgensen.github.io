@@ -1,19 +1,20 @@
 +++
-date = "2017-05-06T13:57:08-04:00"
+date = "2017-06-01T13:57:08-04:00"
 title = "A Tale of Two Pipes"
-draft = "True"
 tags = ["python"]
 +++
-The moral of this story is, be careful when using pipes with python subprocesses.
+Let me first introduce you to two leading characters: STDIN and STDOUT
 
 <!--more-->
 
-A story begins with a simple python script. The purpose of this script is to shell out using pythons subprocess module and capture the output.
+This story begins with a simple python script who's purpose is to shell out using pythons subprocess module and capture the output.
 
 ```python
 import subprocess
 
-ps = subprocess.Popen(("ls", "-la"), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+ps = subprocess.Popen(("ls", "-la"),
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.PIPE)
 
 # Wait for the process to finish
 ps.wait()
@@ -22,7 +23,7 @@ print sys.stdout
 print sys.stderr
 ```
 
-This works all well and good, it will print the output of `ls -la` to the console. Lets go ahead and add another character to this story, a c program that logs messages to stderr which can be common for some scripts printing out debug information.
+At first glance this appears to work well for our use case, it will print the output of `ls -la` to the console. At this point we must add another character to this story, a c program that logs meaningless messages to stderr in order to prove a point.
 
 ```c
 #include <stdio.h>
@@ -30,6 +31,7 @@ This works all well and good, it will print the output of `ls -la` to the consol
 
 int main(int argc, char* argv[]) {
   int logTimes = atoi(argv[1]);
+
   for (int i = 0; i < logTimes; i++)  {
     fprintf(stderr, "%s\n", "Hello stderr");
   }
@@ -39,7 +41,7 @@ int main(int argc, char* argv[]) {
 
 ```
 
-After compiling this small program, running it will do what we expect, `./log 5` prints out `Hello stderr` 5 times to stderr on the console..
+After compiling this small program, running it will do what we expect, `./log 5` prints out `Hello stderr` 5 times to stderr.
 
 ```
 Hello stderr
@@ -49,14 +51,17 @@ Hello stderr
 Hello stderr
 ```
 
-As our story continues these two characters meet and start working together. We can modify our original python script to call out to our new c program to read its output.
+Now that we have our shiny new program we want to use our python script to call it. We can modify our original python script to call out to our new c program to read its output.
 
 ```python
 import subprocess
 import sys
 
 logTimes = sys.argv[1]
-ps = subprocess.Popen(("./log", logTimes), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+ps = subprocess.Popen(("./log", logTimes),
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.PIPE)
+
 print "PID: " + str(ps.pid)
 
 ps.wait()
@@ -66,7 +71,7 @@ print ps.stderr.read()
 
 ```
 
-This again does what we expect, logs out the pid of the subprocess and then both the stdout and stderr once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you're following along with this story at home you should see something unexpected.
+This again does what we expect, logs out the PID of the subprocess and then both STDOUT and STDERR once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you're following along with this story at home you should see something unexpected.
 
 ```
 Starting subprocess
@@ -74,7 +79,7 @@ PID: 90908
 
 ```
 
-No log messages are printed to the console and the python script is actually stuck and does not exit. Let's fire up gdb and take a look to see whats going on.
+No log messages are printed to the console and the python script is actually stopped and will exit the stage. Let's fire up gdb and take a look to see whats going on.
 
 ```
 (gdb) bt
@@ -94,11 +99,11 @@ No log messages are printed to the console and the python script is actually stu
 
 From this we can see that our c program is actually deadlocked on trying to write `"Hello stderr\n"` to stderr. So why was the program ok running when there were only 5 messages to log out but now that we've cranked it up to 6000 its deadlocks?
 
-It turns out that there is a limited buffer size for pipes. On linux you can find this size by running `cat /proc/sys/fs/pipe-max-size`. Once this buffer files up and nothing on the other side is reading from the buffer the process logging will deadlock waiting for space in the buffer to free up. The [python documenation](https://docs.python.org/2/library/subprocess.html#subprocess.call) does mention the potential to deadlock but does not go into the circumstances where a deadlock can occur.
+It turns out that there is a limited buffer size for pipes. On linux you can find this limit by running `cat /proc/sys/fs/pipe-max-size`. Once this buffer files up and nothing on the other side is reading from the buffer the process will deadlock waiting for space in the buffer to free up. The [python documenation](https://docs.python.org/2/library/subprocess.html#subprocess.call) does mention the potential to deadlock but does not go into the circumstances where a deadlock can occur.
 
-There are a few ways to handle this issue to make sure the subprocess does not deadlock. The [first](https://docs.python.org/2/library/subprocess.html#subprocess.Popen.communicate) and easiest is to use `subprocess.communicate` instead of calling `subprocess.wait()`. This will continually read off of the stdout and stderr pipes and buffer the messages in memory, wait for the process to finish, and return both stdout and stderr as a tuple once completed. You should be careful here as well since the log output is buffered in memory it has the potential to consume all available memory depending on the output log volume of the subprocess.
+There are a few ways to work around this issue. The [first](https://docs.python.org/2/library/subprocess.html#subprocess.Popen.communicate) and easiest is to use `subprocess.communicate` instead of calling `subprocess.wait()`. This will continually read off of the STDOUT and STDERR pipes and buffer the messages in memory, wait for the process to finish, and return them both as a tuple once the subprocess has finished. You should be careful here as well since the log output is buffered in memory it has the potential to consume all available memory depending on the output log volume of the subprocess. This is also not suitable for long running processes where python is acting as a supervisor as you will eventually run out of memory.
 
-One place that `subprocess.communicate()` wont work however is if your python process is acting as a supervisor to many other subprocesses. Since we cannot block on any one process running at once we want to be able to stream the logs from the all of the subprocesses at once without blocking the execution of other processes. The easiest way to accomplish this to redirect stderr to stout and create a custom log streaming function that will stream the logs via a background thread.
+For applications where python is performing the role of a supervisor we need to be stream the logs from the subprocess to another location. The easiest way to accomplish this is to redirect STDERR to STDOUT and create a log streaming function that will stream the logs via a background thread.
 
 ```python
 import subprocess
@@ -111,7 +116,8 @@ def async_stream_process_stdout(process, log_fn):
     :param log_fn: a function that will be called for each log line
     :return: None
     """
-    logging_thread = Thread(target=stream_process_stdout, args=(process, log_fn, ))
+    logging_thread = Thread(target=stream_process_stdout,
+                            args=(process, log_fn, ))
     logging_thread.start()
 
     return logging_thread
@@ -143,6 +149,4 @@ logger_one.join()
 logger_two.join()
 ```
 
-Moral of the story is be careful when using pipes between two processes. If you're not careful you can cause a deadlock because the allocated pipe buffer gets filled up.
-
-The End
+One other alternative is to make sure that you are always streaming the STDOUT and STDERR of a subprocess to a dedicated file rather than to `subprocess.PIPE`.

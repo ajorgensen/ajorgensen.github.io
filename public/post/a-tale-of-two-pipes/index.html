@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Tale of Two Pipes | Andrew Jorgensen</title>
+<link rel="stylesheet" href="https://andrewjorgensen.com/css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://andrewjorgensen.com"><h1 class="title is-4">Andrew Jorgensen</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/ajorgensen">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/ajorgensen">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://andrewjorgensen.com/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 1, 2017</h2>
+    <h1 class="title">A Tale of Two Pipes</h1>
+    
+      <div class="tags">
+        
+        <span class="tag">python</span>
+        
+      </div>
+    
+    <div class="content">
+      <p>Let me first introduce you to two leading characters: STDIN and STDOUT</p>
+
+<p></p>
+
+<p>This story begins with a simple python script who&rsquo;s purpose is to shell out using pythons subprocess module and capture the output.</p>
+
+<pre><code class="language-python">import subprocess
+
+ps = subprocess.Popen((&quot;ls&quot;, &quot;-la&quot;),
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.PIPE)
+
+# Wait for the process to finish
+ps.wait()
+
+print sys.stdout
+print sys.stderr
+</code></pre>
+
+<p>At first glance this appears to work well for our use case, it will print the output of <code>ls -la</code> to the console. At this point we must add another character to this story, a c program that logs meaningless messages to stderr in order to prove a point.</p>
+
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char* argv[]) {
+  int logTimes = atoi(argv[1]);
+
+  for (int i = 0; i &lt; logTimes; i++)  {
+    fprintf(stderr, &quot;%s\n&quot;, &quot;Hello stderr&quot;);
+  }
+
+  return 0;
+}
+
+</code></pre>
+
+<p>After compiling this small program, running it will do what we expect, <code>./log 5</code> prints out <code>Hello stderr</code> 5 times to stderr.</p>
+
+<pre><code>Hello stderr
+Hello stderr
+Hello stderr
+Hello stderr
+Hello stderr
+</code></pre>
+
+<p>Now that we have our shiny new program we want to use our python script to call it. We can modify our original python script to call out to our new c program to read its output.</p>
+
+<pre><code class="language-python">import subprocess
+import sys
+
+logTimes = sys.argv[1]
+ps = subprocess.Popen((&quot;./log&quot;, logTimes),
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.PIPE)
+
+print &quot;PID: &quot; + str(ps.pid)
+
+ps.wait()
+
+print ps.stdout.read()
+print ps.stderr.read()
+
+</code></pre>
+
+<p>This again does what we expect, logs out the PID of the subprocess and then both STDOUT and STDERR once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you&rsquo;re following along with this story at home you should see something unexpected.</p>
+
+<pre><code>Starting subprocess
+PID: 90908
+
+</code></pre>
+
+<p>No log messages are printed to the console and the python script is actually stopped and will exit the stage. Let&rsquo;s fire up gdb and take a look to see whats going on.</p>
+
+<pre><code>(gdb) bt
+#0  0x00007f14ebc9df80 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81
+#1  0x00007f14ebc27f13 in _IO_new_file_write (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=0x7ffc8f5b0ea0, n=13)
+    at fileops.c:1261
+#2  0x00007f14ebc286af in new_do_write (to_do=13, data=0x7ffc8f5b0ea0 &quot;Hello stderr\n&quot;,
+    fp=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;) at fileops.c:538
+#3  _IO_new_file_xsputn (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=&lt;optimized out&gt;, n=13) at fileops.c:1343
+#4  0x00007f14ebbfdf0d in buffered_vfprintf (s=s@entry=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;,
+    format=format@entry=0x400710 &quot;%s\n&quot;, args=args@entry=0x7ffc8f5b34c8) at vfprintf.c:2377
+#5  0x00007f14ebbf8dfe in _IO_vfprintf_internal (s=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, format=0x400710 &quot;%s\n&quot;,
+    ap=ap@entry=0x7ffc8f5b34c8) at vfprintf.c:1313
+#6  0x00007f14ebc03337 in __fprintf (stream=&lt;optimized out&gt;, format=&lt;optimized out&gt;) at fprintf.c:32
+#7  0x0000000000400658 in main (argc=2, argv=0x7ffc8f5b36a8) at main.c:10
+</code></pre>
+
+<p>From this we can see that our c program is actually deadlocked on trying to write <code>&quot;Hello stderr\n&quot;</code> to stderr. So why was the program ok running when there were only 5 messages to log out but now that we&rsquo;ve cranked it up to 6000 its deadlocks?</p>
+
+<p>It turns out that there is a limited buffer size for pipes. On linux you can find this limit by running <code>cat /proc/sys/fs/pipe-max-size</code>. Once this buffer files up and nothing on the other side is reading from the buffer the process will deadlock waiting for space in the buffer to free up. The <a href="https://docs.python.org/2/library/subprocess.html#subprocess.call">python documenation</a> does mention the potential to deadlock but does not go into the circumstances where a deadlock can occur.</p>
+
+<p>There are a few ways to work around this issue. The <a href="https://docs.python.org/2/library/subprocess.html#subprocess.Popen.communicate">first</a> and easiest is to use <code>subprocess.communicate</code> instead of calling <code>subprocess.wait()</code>. This will continually read off of the STDOUT and STDERR pipes and buffer the messages in memory, wait for the process to finish, and return them both as a tuple once the subprocess has finished. You should be careful here as well since the log output is buffered in memory it has the potential to consume all available memory depending on the output log volume of the subprocess. This is also not suitable for long running processes where python is acting as a supervisor as you will eventually run out of memory.</p>
+
+<p>For applications where python is performing the role of a supervisor we need to be stream the logs from the subprocess to another location. The easiest way to accomplish this is to redirect STDERR to STDOUT and create a log streaming function that will stream the logs via a background thread.</p>
+
+<pre><code class="language-python">import subprocess
+import sys
+from threading import Thread
+
+def async_stream_process_stdout(process, log_fn):
+    &quot;&quot;&quot; Stream the stdout and stderr for a process out to display async
+    :param process: the process to stream the log for
+    :param log_fn: a function that will be called for each log line
+    :return: None
+    &quot;&quot;&quot;
+    logging_thread = Thread(target=stream_process_stdout,
+                            args=(process, log_fn, ))
+    logging_thread.start()
+
+    return logging_thread
+
+def stream_process_stdout(process, log_fn):
+    &quot;&quot;&quot; Stream the stdout and stderr for a process out to display
+    :param process: the process to stream the logs for
+    :param log_fn: a function that will be called for each log line
+    :return: None
+    &quot;&quot;&quot;
+    while 1:
+        line = process.stdout.readline()
+        if not line:
+            break
+
+        log_fn(line)
+
+def log_fn(process):
+    return lambda line: sys.stdout.write(&quot;%s: %s&quot; % (process, line))
+
+logTimes = sys.argv[1]
+ps_one = subprocess.Popen((&quot;./log&quot;, logTimes), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1)
+ps_two = subprocess.Popen((&quot;./log&quot;, logTimes), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1)
+
+logger_one = async_stream_process_stdout(ps_one, log_fn(&quot;ps_one&quot;))
+logger_two = async_stream_process_stdout(ps_two, log_fn(&quot;ps_two&quot;))
+
+logger_one.join()
+logger_two.join()
+</code></pre>
+
+<p>One other alternative is to make sure that you are always streaming the STDOUT and STDERR of a subprocess to a dedicated file rather than to <code>subprocess.PIPE</code>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'ajorgensen';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="http://andrewjorgensen.com">Andrew Jorgensen</a> 2017</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', "UA-51883548-1", 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
