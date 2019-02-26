@@ -8,7 +8,7 @@ layoutdir = "layouts"
 publishdir = "public"
 canonifyurls = true
 
-copyright = "&copy; <a href=\"http://andrewjorgensen.com\">Andrew Jorgensen</a> 2017"
+copyright = "&copy; <a href=\"http://andrewjorgensen.com\">Andrew Jorgensen</a> 2019"
 googleAnalytics = "UA-51883548-1"
 disqusShortname = "ajorgensen"
 
