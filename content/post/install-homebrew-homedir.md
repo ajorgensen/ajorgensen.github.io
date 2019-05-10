@@ -5,6 +5,8 @@ tags = ["homebrew"]
 
 +++
 
+__NOTE__: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the [homebrew website](https://brew.sh) for current installation instructions.
+
 Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.
 <!--more-->
 
