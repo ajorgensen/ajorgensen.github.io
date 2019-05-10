@@ -8,62 +8,19 @@
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/post/install-homebrew-to-your-home-directory/</loc>
-    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/post/elixir-exunit.doctest/</loc>
-    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/post/hello-blog/</loc>
-    <lastmod>2016-10-11T21:33:09-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://andrewjorgensen.com/</loc>
     <lastmod>2017-06-01T13:57:08-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/tags/bash/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/tags/elixir/</loc>
-    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/tags/homebrew/</loc>
-    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/tags/meta/</loc>
-    <lastmod>2016-10-11T21:33:09-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://andrewjorgensen.com/post/</loc>
+    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/</loc>
     <lastmod>2017-06-01T13:57:08-04:00</lastmod>
     <priority>0</priority>
   </url>
@@ -75,14 +32,47 @@
   </url>
   
   <url>
+    <loc>https://andrewjorgensen.com/post/install-homebrew-to-your-home-directory/</loc>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/homebrew/</loc>
+    <lastmod>2017-04-22T13:38:10-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/post/how-to-not-leak-your-credentials-to-the-internet/</loc>
+    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/bash/</loc>
+    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://andrewjorgensen.com/tags/security/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/tags/</loc>
+    <loc>https://andrewjorgensen.com/tags/zsh/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/post/elixir-exunit.doctest/</loc>
+    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/elixir/</loc>
+    <lastmod>2016-11-09T08:57:28-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -93,8 +83,18 @@
   </url>
   
   <url>
-    <loc>https://andrewjorgensen.com/tags/zsh/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
+    <loc>https://andrewjorgensen.com/post/hello-blog/</loc>
+    <lastmod>2016-10-11T21:33:09-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/meta/</loc>
+    <lastmod>2016-10-11T21:33:09-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/categories/</loc>
     <priority>0</priority>
   </url>
   
