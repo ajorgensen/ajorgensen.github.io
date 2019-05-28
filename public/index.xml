@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;http://andrewjorgensen.com&#34;&gt;Andrew Jorgensen&lt;/a&gt; 2019</copyright>
-    <lastBuildDate>Thu, 01 Jun 2017 13:57:08 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 28 May 2019 00:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://andrewjorgensen.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Signing Git Commits With Keybase</title>
+      <link>https://andrewjorgensen.com/post/signing-git-commits-with-keybase/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 -0400</pubDate>
+      
+      <guid>https://andrewjorgensen.com/post/signing-git-commits-with-keybase/</guid>
+      <description>&lt;p&gt;Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn&amp;rsquo;t like badges. Managing private keys can be a tricky process but fortunately &lt;a href=&#34;https://keybase.io/&#34;&gt;keybase&lt;/a&gt; greatly simplifies this and allows us to easily share keys between different machines.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>A Tale of Two Pipes</title>

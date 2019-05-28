@@ -3,26 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://andrewjorgensen.com/post/a-tale-of-two-pipes/</loc>
-    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://andrewjorgensen.com/</loc>
-    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://andrewjorgensen.com/post/</loc>
-    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://andrewjorgensen.com/post/signing-git-commits-with-keybase/</loc>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://andrewjorgensen.com/tags/</loc>
-    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/git/</loc>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/keybase/</loc>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/tags/security/</loc>
+    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andrewjorgensen.com/post/a-tale-of-two-pipes/</loc>
+    <lastmod>2017-06-01T13:57:08-04:00</lastmod>
   </url>
   
   <url>
@@ -49,12 +72,6 @@
   
   <url>
     <loc>https://andrewjorgensen.com/tags/bash/</loc>
-    <lastmod>2016-11-21T22:30:10-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://andrewjorgensen.com/tags/security/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
     <priority>0</priority>
   </url>
