@@ -1,4 +1,59 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name=viewport content="width=device-width,initial-scale=1"><meta property="og:description" content><meta name=twitter:description content><meta name=description content><meta name=description content><meta property="og:title" content="Elixir ExUnit.DocTest | Andrew Jorgensen"><meta name=twitter:title content="Elixir ExUnit.DocTest | Andrew Jorgensen"><meta property="og:image" content><meta itemprop=name content="Elixir ExUnit.DocTest | Andrew Jorgensen"><meta name=application-name content="Elixir ExUnit.DocTest | Andrew Jorgensen"><meta property="og:site_name" content><meta property="og:title" content="Elixir ExUnit.DocTest"><meta property="og:description" content="Have you ever been frustrated by the lack working examples in documentation? Elixir helps solve this problem with a built in feature called DocTest."><meta property="og:type" content="article"><meta property="og:url" content="https://aj.codes/post/elixir-doctests/"><meta property="article:published_time" content="2016-11-09T08:57:28-05:00"><meta property="article:modified_time" content="2016-11-09T08:57:28-05:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Elixir ExUnit.DocTest"><meta name=twitter:description content="Have you ever been frustrated by the lack working examples in documentation? Elixir helps solve this problem with a built in feature called DocTest."><script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script><link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel=stylesheet><link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel=stylesheet><link rel=stylesheet type=text/css media=screen href=https://aj.codescss/main.css></head><body><div class=content><header><div class=main><a href=https://aj.codes>Andrew Jorgensen</a></div><nav><a href=/tags>Tags</a></nav></header><main><article><div class=title><h1 class=title>Elixir ExUnit.DocTest</h1><div class=meta>Posted on Nov 9, 2016</div></div><section class=body><p>Have you ever been frustrated by the lack working examples in documentation? <a href=http://elixir-lang.org/>Elixir</a> helps solve this problem with a built in feature called DocTest.</p><p>Elixir&rsquo;s testing framework ExUnit provides built in support for a feature called <a href=http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html>DocTest</a> which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.</p><div class=highlight><pre style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>defmodule Calculator do
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:description" content="" />
+	<meta name="twitter:description" content="" />
+	<meta name="description" content="" />
+	<meta name="description" content="" />
+
+	<meta property="og:title" content="Elixir ExUnit.DocTest | Andrew Jorgensen" />
+	<meta name="twitter:title" content="Elixir ExUnit.DocTest | Andrew Jorgensen" />
+
+	<meta property="og:image" content=""/>
+	<meta itemprop="name" content="Elixir ExUnit.DocTest | Andrew Jorgensen" />
+	<meta name="application-name" content="Elixir ExUnit.DocTest | Andrew Jorgensen" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:title" content="Elixir ExUnit.DocTest" />
+<meta property="og:description" content="Have you ever been frustrated by the lack working examples in documentation? Elixir helps solve this problem with a built in feature called DocTest." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aj.codes/post/elixir-doctests/" />
+<meta property="article:published_time" content="2016-11-09T08:57:28-05:00" />
+<meta property="article:modified_time" content="2016-11-09T08:57:28-05:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Elixir ExUnit.DocTest"/>
+<meta name="twitter:description" content="Have you ever been frustrated by the lack working examples in documentation? Elixir helps solve this problem with a built in feature called DocTest."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://aj.codescss/main.css" />
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://aj.codes">Andrew Jorgensen</a>
+	</div>
+	<nav>
+		
+		<a href="/tags">Tags</a>
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Elixir ExUnit.DocTest</h1>
+			<div class="meta">Posted on Nov 9, 2016</div>
+		</div>
+		
+
+		<section class="body">
+			<p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
+<p>Elixir&rsquo;s testing framework ExUnit provides built in support for a feature called <a href="http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html">DocTest</a> which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">defmodule Calculator do
   @doc &#34;&#34;&#34;
   Adds two numbers and returns the result.
 
@@ -27,7 +82,8 @@
     a - b
   end
 end
-</code></pre></div><p>When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.</p><div class=highlight><pre style=background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown>iex&gt; h Calculator.add
+</code></pre></div><p>When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">iex&gt; h Calculator.add
 
                                  def add(a, b)
 
@@ -40,5 +96,45 @@ Examples
 ┃
 ┃ iex&gt; Calculator.add(5, 5)
 ┃ 10
-</code></pre></div><p>The <a href=https://elixirschool.com/lessons/basics/documentation/#documenting-functions>Elixir School</a> also provides some great information on function documentation and the features that Elixir provides.</p></section><div class=post-tags><nav class="nav tags"><ul class=tags><li><a href=/tags/elixir>elixir</a></li><li><a href=/tags/testing>testing</a></li></ul></nav></div></article></main><footer><hr><a class=soc href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class=soc href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|⚡️
-2020 © Andrew Jorgensen | <a href=https://github.com/athul/archie>Archie Theme</a> | Built with <a href=https://gohugo.io>Hugo</a></footer><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-51883548-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script><script>feather.replace()</script></div></body></html>
+</code></pre></div><p>The <a href="https://elixirschool.com/lessons/basics/documentation/#documenting-functions">Elixir School</a> also provides some great information on function documentation and the features that Elixir provides.</p>
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/elixir">elixir</a></li>
+					
+					<li><a href="/tags/testing">testing</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr><a class="soc" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
+	2020  © Andrew Jorgensen |  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-51883548-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+<script>
+      feather.replace()
+</script></div>
+    </body>
+</html>
