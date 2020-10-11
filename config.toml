@@ -1,34 +1,38 @@
-baseurl = "https://andrewjorgensen.com"
+baseurl = "https://aj.codes"
 title = "Andrew Jorgensen"
 languageCode = "en-us"
-theme = "hemingway"
 
-contentdir = "content"
-layoutdir = "layouts"
-publishdir = "public"
-canonifyurls = true
-
-copyright = "&copy; <a href=\"http://andrewjorgensen.com\">Andrew Jorgensen</a> 2019"
+theme = "archie"
+copyright = "© Andrew Jorgensen"
 googleAnalytics = "UA-51883548-1"
-disqusShortname = "ajorgensen"
 
-[permalinks]
-post = "/post/:title/"
+# Code Highlight
+pygmentsstyle = "friendly"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+# Pagination
+paginate=5
 
 [params]
+	mode="light" # color-mode → light,dark or auto
+	featherIconsCDN=true
 
-[params.highlight]
-style = "github"
-languages = ["go", "dockerfile"]
-
-[[params.social]]
-url = "https://github.com/ajorgensen"
-fa_icon = "fa-github"
+# Social Tags
 
 [[params.social]]
-url = "https://twitter.com/ajorgensen"
-fa_icon = "fa-twitter"
+name = "GitHub"
+icon = "github"
+url = "https://github.com/ajorgensen/"
 
 [[params.social]]
-url = "/index.xml"
-fa_icon = "fa-rss"
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/ajorgensen/"
+
+# Main menu Items
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 1
