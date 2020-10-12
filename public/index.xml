@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Andrew Jorgensen</copyright>
-    <lastBuildDate>Tue, 28 May 2019 00:00:00 -0400</lastBuildDate><atom:link href="https://aj.codes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Oct 2020 00:00:00 -0400</lastBuildDate><atom:link href="https://aj.codes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Branch Agnostic Git Aliases</title>
+      <link>https://aj.codes/post/branch-agnostic-git-aliases/</link>
+      <pubDate>Mon, 12 Oct 2020 00:00:00 -0400</pubDate>
+      
+      <guid>https://aj.codes/post/branch-agnostic-git-aliases/</guid>
+      <description>&lt;p&gt;Github and others have recently changed the name of the default branch in git
+from &lt;code&gt;master&lt;/code&gt; to &lt;code&gt;main&lt;/code&gt;, you can read more about the change &lt;a href=&#34;https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/&#34;&gt;here&lt;/a&gt;. If you
+are like me you likely had a few git aliases that were hard coded to assume the
+default branch in a repository was &lt;code&gt;master&lt;/code&gt;, however there is a better way of
+writing git aliases that will work no matter what the default is set to.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Signing Git Commits With Keybase</title>
       <link>https://aj.codes/post/signing-git-commits-with-keybase/</link>

@@ -4,21 +4,31 @@
   
   <url>
     <loc>https://aj.codes/</loc>
-    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+    <lastmod>2020-10-12T00:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aj.codes/post/branch-agnostic-git-aliases/</loc>
+    <lastmod>2020-10-12T00:00:00-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://aj.codes/tags/git/</loc>
-    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aj.codes/tags/keybase/</loc>
-    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
+    <lastmod>2020-10-12T00:00:00-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://aj.codes/post/</loc>
+    <lastmod>2020-10-12T00:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aj.codes/tags/</loc>
+    <lastmod>2020-10-12T00:00:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aj.codes/tags/keybase/</loc>
     <lastmod>2019-05-28T00:00:00-04:00</lastmod>
   </url>
   
@@ -29,11 +39,6 @@
   
   <url>
     <loc>https://aj.codes/post/signing-git-commits-with-keybase/</loc>
-    <lastmod>2019-05-28T00:00:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aj.codes/tags/</loc>
     <lastmod>2019-05-28T00:00:00-04:00</lastmod>
   </url>
   

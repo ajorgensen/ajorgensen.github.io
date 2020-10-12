@@ -15,7 +15,7 @@
 				{{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
 				{{ range $paginator.Pages }}
 				<section class="list-item">
-					<h1 class="title"><a href="{{ .RelPermalink }}">{{.Title}}</a></h1>
+					<h1 class="title"><a class="no-underline" href="{{ .RelPermalink }}">{{.Title}}</a></h1>
 					<time>{{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
 					<br><div class="description">
 						{{ if isset .Params "description" }}
@@ -24,7 +24,7 @@
 						{{ .Summary }}
 						{{ end }}
 					</div>
-					<a href="{{ .RelPermalink }}">Read more ⟶</a>
+					<a class="no-underline" href="{{ .RelPermalink }}">Read more ⟶</a>
 				</section>
 				{{ end }}
 				{{ template "partials/paginator.html" . }}
