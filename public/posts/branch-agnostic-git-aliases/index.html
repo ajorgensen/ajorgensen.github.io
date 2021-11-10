@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<meta name="generator" content="Hugo 0.88.1" />
+<html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Andrew Jorgensen | Home </title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Branch Agnostic Git Aliases - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
 
@@ -182,133 +180,86 @@
 
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-
-
-  <body>
-    <header>
+<body><header>
   <div class="navbar">
     <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
     <a class="navbar-item" href="/tags">Tags</a>
   </div>
 </header>
 
+<main>
+	<article>
+		<div>
+			<h1 class="title">Branch Agnostic Git Aliases</h1>
 
-    <main class="list">
-      
-      
-      
+			<div class="meta">
+        Oct 12, 2020
+        ⋅
+        
 
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/branch-agnostic-git-aliases/"> Branch Agnostic Git Aliases</a>
-        </h1>
-        <time>Oct 12, 2020</time>
-        <br>
-         <a href="/tags/git"> git</a> 
-        <br><div class="description">
-          
-          <p>Github and others have recently changed the name of the default branch in git
+        
+          <a class="no-underline" href="/tags/git">git</a>
+        
+      </div>
+		</div>
+
+		<section class="body">
+			<p>Github and others have recently changed the name of the default branch in git
 from <code>master</code> to <code>main</code>, you can read more about the change <a href="https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/">here</a>. If you
 are like me you likely had a few git aliases that were hard coded to assume the
 default branch in a repository was <code>master</code>, however there is a better way of
 writing git aliases that will work no matter what the default is set to.</p>
-          
-        </div>
-      </section>
-      
+<p>Git aliases allow you to create custom shortcuts to make your git workflow
+easier and more intuitive, you can find a full list of the git aliases I use
+<a href="https://github.com/ajorgensen/dotfiles/blob/master/.gitconfig#L40">here</a>. To outline the problem lets looks at a few example aliases that someone
+might have.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[alias]
+  diff = diff master
+  pom = push origin master
+  merged-branches = &#34;!git branch --merged master&#34;
+  sync = &#34;!git fetch -p &amp;&amp; git rebase origin/master&#34;
+</code></pre></div><p>With the change to the default branch being up to the repository maintainer you
+may be in a scenario where some repositories you work with will have different
+default branch names. One solution to this is to duplicate any aliases you want
+to work with each of the defaults but that can get tedious and error prone, what
+if someone chooses to go old school and use <code>trunk</code> instead?</p>
+<p>Fortunately there is a way to write your git aliases in a branch agnostic way
+using <code>git symbolic-ref</code>. First the <strong>tl;dr</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[alias]
+  default-branch = &#34;!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/&#34;
+  diff = diff $(git default-branch)
+  pom = push origin $(git default-branch)
+  merged-branches = &#34;!git branch --merged $(git default-branch)&#34;
+  sync = &#34;!git fetch -p &amp;&amp; git rebase origin/$(git default-branch)&#34;
+</code></pre></div><h1 id="how-does-it-work">How does it work?</h1>
+<p>If you want to rename the branch for your own repositories you can find steps
+<a href="https://jarv.is/notes/github-rename-master/">here</a>.</p>
+<p>In git there is a reference stored at the <code>.git/HEAD</code> that tells git what the
+default branch is. There is a similar reference on the remote side as well. One
+thing to note is that actually charging the default branch on the remote side,
+each client should also sync their local state as well to match using <code>git remote set-head origin --auto</code>.</p>
+<p>Once this value is synchronized, it should be updated locally as well and we can
+use <code>git symbolic-ref</code> to get the branch that <code>HEAD</code>. Fortunately this gives as
+a way to create git aliases and scripts that are agnostic to what the remote has
+set the default branch to be.</p>
+		</section>
 
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/signing-git-commits-with-keybase/"> Signing Git Commits With Keybase</a>
-        </h1>
-        <time>May 28, 2019</time>
-        <br>
-         <a href="/tags/git"> git</a>  , <a href="/tags/security"> security</a>  , <a href="/tags/keybase"> keybase</a> 
-        <br><div class="description">
-          
-          <p>Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn&rsquo;t like badges. Managing private keys can be a tricky process but fortunately <a href="https://keybase.io/">keybase</a> greatly simplifies this and allows us to easily share keys between different machines.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/tale-of-two-pipes-subprocess/"> A Tale of Two Pipes</a>
-        </h1>
-        <time>Jun 1, 2017</time>
-        <br>
-         <a href="/tags/python"> python</a> 
-        <br><div class="description">
-          
-          <p>Let me first introduce you to two leading characters: STDIN and STDOUT</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/install-homebrew-homedir/"> Install homebrew to your home directory</a>
-        </h1>
-        <time>Apr 22, 2017</time>
-        <br>
-         <a href="/tags/homebrew"> homebrew</a> 
-        <br><div class="description">
-          
-          <p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh">homebrew website</a> for current installation instructions.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/secure-shell-config/"> How to not leak your credentials to the internet</a>
-        </h1>
-        <time>Nov 21, 2016</time>
-        <br>
-         <a href="/tags/security"> security</a>  , <a href="/tags/bash"> bash</a>  , <a href="/tags/zsh"> zsh</a> 
-        <br><div class="description">
-          
-          <p>Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/elixir-doctests/"> Elixir ExUnit.DocTest</a>
-        </h1>
-        <time>Nov 9, 2016</time>
-        <br>
-         <a href="/tags/elixir"> elixir</a>  , <a href="/tags/testing"> testing</a> 
-        <br><div class="description">
-          
-          <p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/hello-blog/"> Hello Blog</a>
-        </h1>
-        <time>Oct 11, 2016</time>
-        <br>
-         <a href="/tags/meta"> meta</a> 
-        <br><div class="description">
-          
-          <p>I&rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&hellip;</p>
-          
-        </div>
-      </section>
-      
-    </main>
-
-    <footer>
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a class="no-underline" href="/tags/git">git</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
 <hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2021  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
 </footer>
@@ -327,6 +278,5 @@ if (!doNotTrack) {
 
 <script>
       feather.replace()
-</script>
-  </body>
+</script></body>
 </html>

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<meta name="generator" content="Hugo 0.88.1" />
+<html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Andrew Jorgensen | Home </title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
 
@@ -182,133 +180,66 @@
 
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-
-
-  <body>
-    <header>
+<body><header>
   <div class="navbar">
     <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
     <a class="navbar-item" href="/tags">Tags</a>
   </div>
 </header>
 
+<main>
+	<article>
+		<div>
+			<h1 class="title">Install homebrew to your home directory</h1>
 
-    <main class="list">
-      
-      
-      
+			<div class="meta">
+        Apr 22, 2017
+        ⋅
+        
 
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/branch-agnostic-git-aliases/"> Branch Agnostic Git Aliases</a>
-        </h1>
-        <time>Oct 12, 2020</time>
-        <br>
-         <a href="/tags/git"> git</a> 
-        <br><div class="description">
-          
-          <p>Github and others have recently changed the name of the default branch in git
-from <code>master</code> to <code>main</code>, you can read more about the change <a href="https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/">here</a>. If you
-are like me you likely had a few git aliases that were hard coded to assume the
-default branch in a repository was <code>master</code>, however there is a better way of
-writing git aliases that will work no matter what the default is set to.</p>
-          
-        </div>
-      </section>
-      
+        
+          <a class="no-underline" href="/tags/homebrew">homebrew</a>
+        
+      </div>
+		</div>
 
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/signing-git-commits-with-keybase/"> Signing Git Commits With Keybase</a>
-        </h1>
-        <time>May 28, 2019</time>
-        <br>
-         <a href="/tags/git"> git</a>  , <a href="/tags/security"> security</a>  , <a href="/tags/keybase"> keybase</a> 
-        <br><div class="description">
-          
-          <p>Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn&rsquo;t like badges. Managing private keys can be a tricky process but fortunately <a href="https://keybase.io/">keybase</a> greatly simplifies this and allows us to easily share keys between different machines.</p>
-          
-        </div>
-      </section>
-      
+		<section class="body">
+			<p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh">homebrew website</a> for current installation instructions.</p>
+<p>Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.</p>
+<h2 id="fresh-install">Fresh install</h2>
+<p>If you already have homebrew installed you can run <code>brew list | tr '\r\n' ' '</code> to get a list of packages that were installed with homebrew. Save this list, we will use it later. At this point you can also uninstall homebrew so it does not conflict with the new installation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ruby -e <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall<span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></div><p>Installing homebrew to a custom directory is pretty straightforward.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="nv">$HOME</span>
+git clone https://github.com/mxcl/homebrew.git
+</code></pre></div><p>Next we need to make sure the homebrew bin directory is in your <code>$PATH</code> in order to use installed packages.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/homebrew/bin:<span class="nv">$PATH</span>
+</code></pre></div><p>It&rsquo;s important to note here that we are putting the <code>homebrew/bin</code> directory at the front of the path. This allows us to install packages that are also provided by OSX but because the homebrew directory comes first it will us our installed version rather than the default os version.</p>
+<p>At this point you can install all of the packages that were previously installed. This step might take a little while.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install vim tree tmux ...
+</code></pre></div><p>You&rsquo;re done! Reload your terminal and verify that running <code>which brew</code> shows homebrew is installed in its new location.</p>
+<h2 id="bonus-tip">Bonus tip</h2>
+<p>I&rsquo;ve create an alias that updates homebrew, upgrades any installed formulas, and then cleans up any files that are no longer necessary. This can be useful for keeping your system up to date. Running <code>brew cleanup</code> from time to time is also important as I&rsquo;ve seen it clean upwards of <strong>1GB</strong> of space.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">alias</span> <span class="nv">sysup</span><span class="o">=</span><span class="s1">&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
+</code></pre></div>
+		</section>
 
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/tale-of-two-pipes-subprocess/"> A Tale of Two Pipes</a>
-        </h1>
-        <time>Jun 1, 2017</time>
-        <br>
-         <a href="/tags/python"> python</a> 
-        <br><div class="description">
-          
-          <p>Let me first introduce you to two leading characters: STDIN and STDOUT</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/install-homebrew-homedir/"> Install homebrew to your home directory</a>
-        </h1>
-        <time>Apr 22, 2017</time>
-        <br>
-         <a href="/tags/homebrew"> homebrew</a> 
-        <br><div class="description">
-          
-          <p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh">homebrew website</a> for current installation instructions.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/secure-shell-config/"> How to not leak your credentials to the internet</a>
-        </h1>
-        <time>Nov 21, 2016</time>
-        <br>
-         <a href="/tags/security"> security</a>  , <a href="/tags/bash"> bash</a>  , <a href="/tags/zsh"> zsh</a> 
-        <br><div class="description">
-          
-          <p>Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/elixir-doctests/"> Elixir ExUnit.DocTest</a>
-        </h1>
-        <time>Nov 9, 2016</time>
-        <br>
-         <a href="/tags/elixir"> elixir</a>  , <a href="/tags/testing"> testing</a> 
-        <br><div class="description">
-          
-          <p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
-          
-        </div>
-      </section>
-      
-
-      <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="/posts/hello-blog/"> Hello Blog</a>
-        </h1>
-        <time>Oct 11, 2016</time>
-        <br>
-         <a href="/tags/meta"> meta</a> 
-        <br><div class="description">
-          
-          <p>I&rsquo;ve tried to start this blog at least 20 times over the past few years so here we go&hellip;</p>
-          
-        </div>
-      </section>
-      
-    </main>
-
-    <footer>
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a class="no-underline" href="/tags/homebrew">homebrew</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
 <hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2021  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
 </footer>
@@ -327,6 +258,5 @@ if (!doNotTrack) {
 
 <script>
       feather.replace()
-</script>
-  </body>
+</script></body>
 </html>

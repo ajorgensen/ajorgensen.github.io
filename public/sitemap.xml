@@ -5,13 +5,13 @@
     <loc>https://aj.codes/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/branch-agnostic-git-aliases/</loc>
+    <loc>https://aj.codes/posts/branch-agnostic-git-aliases/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/git/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/</loc>
+    <loc>https://aj.codes/posts/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/</loc>
@@ -23,10 +23,10 @@
     <loc>https://aj.codes/tags/security/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/signing-git-commits-with-keybase/</loc>
+    <loc>https://aj.codes/posts/signing-git-commits-with-keybase/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/tale-of-two-pipes-subprocess/</loc>
+    <loc>https://aj.codes/posts/tale-of-two-pipes-subprocess/</loc>
     <lastmod>2017-06-01T13:57:08-04:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/python/</loc>
@@ -35,13 +35,13 @@
     <loc>https://aj.codes/tags/homebrew/</loc>
     <lastmod>2017-04-22T13:38:10-04:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/install-homebrew-homedir/</loc>
+    <loc>https://aj.codes/posts/install-homebrew-homedir/</loc>
     <lastmod>2017-04-22T13:38:10-04:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/bash/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/secure-shell-config/</loc>
+    <loc>https://aj.codes/posts/secure-shell-config/</loc>
     <lastmod>2016-11-21T22:30:10-05:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/zsh/</loc>
@@ -50,13 +50,13 @@
     <loc>https://aj.codes/tags/elixir/</loc>
     <lastmod>2016-11-09T08:57:28-05:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/elixir-doctests/</loc>
+    <loc>https://aj.codes/posts/elixir-doctests/</loc>
     <lastmod>2016-11-09T08:57:28-05:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/testing/</loc>
     <lastmod>2016-11-09T08:57:28-05:00</lastmod>
   </url><url>
-    <loc>https://aj.codes/post/hello-blog/</loc>
+    <loc>https://aj.codes/posts/hello-blog/</loc>
     <lastmod>2016-10-11T21:33:09-04:00</lastmod>
   </url><url>
     <loc>https://aj.codes/tags/meta/</loc>
