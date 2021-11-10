@@ -31,7 +31,7 @@ if [ $? -ne 0 ]; then
   git commit -m "$msg"
 
   # Push source and build repos.
-  git push origin $(git default-branch)
+  git push origin main
 fi
 
 # Deploy to firebase
