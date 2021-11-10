@@ -1,0 +1,12 @@
+name = "ajorgensen"
+license = "MIT"
+licenselink = "https://github.com/ajorgensen/blog/blob/master/LICENSE"
+description = "Personal blog theme"
+homepage = "https://github.com/ajorgensen/blog"
+tags = ["blog","simple","responsive","minimal","tags","personal","clean","shortcodes"]
+features = ["blog", "Clean and minimal", "Responsive", "Syntax highlighting",]
+min_version = "0.41"
+
+[author]
+  name = "Andrew Jorgensen"
+  homepage = "https://github.com/ajorgensen"

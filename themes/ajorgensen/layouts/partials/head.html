@@ -1,0 +1,31 @@
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	{{- $title := ( .Title ) -}}
+	{{- $siteTitle := ( .Site.Title ) -}}
+	{{- if .IsHome -}}
+	<title>{{ $siteTitle }} | Home </title>
+	{{- else -}}
+	<title>{{ $title }} - {{ $siteTitle }}</title>
+	{{- end -}}
+
+	{{- if isset .Site.Params "favicon" -}}
+	<link rel="icon" type="image/png" href={{ .Site.Params.favicon }} />
+	{{- end -}}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/main.css" />
+
+  <style type="text/css" media="screen">
+    @media (prefers-color-scheme: dark) {
+      {{ partial "css/syntax-dark.css" . | safeCSS }}
+    }
+    @media (prefers-color-scheme: light) {
+      {{ partial "css/syntax-light.css" . | safeCSS }}
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>

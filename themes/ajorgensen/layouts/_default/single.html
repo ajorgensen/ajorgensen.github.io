@@ -1,15 +1,19 @@
 {{ define "main" }}
 <main>
 	<article>
-		<div class="title">
+		<div>
 			<h1 class="title">{{ .Title }}</h1>
-			<div class="meta">Posted on {{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</div>
+
+			<div class="meta">
+        {{ dateFormat "Jan 2, 2006" .Date }}
+        ⋅
+        {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
+
+        {{ range .Params.tags }}
+          <a class="no-underline" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+      </div>
 		</div>
-		{{ if isset .Params "tldr" }}
-		<div class="tldr">
-			<strong>tl;dr:</strong>
-			{{ .Params.tldr }}
-		</div>{{ end }}
 
 		<section class="body">
 			{{ .Content }}

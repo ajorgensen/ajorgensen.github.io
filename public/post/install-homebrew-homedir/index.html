@@ -3,37 +3,13 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta property="og:description" content="" />
-	<meta name="twitter:description" content="" />
-	<meta name="description" content="" />
-	<meta name="description" content="" />
-
-	<meta property="og:title" content="Install homebrew to your home directory | Andrew Jorgensen" />
-	<meta name="twitter:title" content="Install homebrew to your home directory | Andrew Jorgensen" />
-
-	<meta property="og:image" content=""/>
-	<meta itemprop="name" content="Install homebrew to your home directory | Andrew Jorgensen" />
-	<meta name="application-name" content="Install homebrew to your home directory | Andrew Jorgensen" />
-	<meta property="og:site_name" content="" />
-	<meta property="og:title" content="Install homebrew to your home directory" />
-<meta property="og:description" content="NOTE: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the homebrew website for current installation instructions." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://aj.codes/post/install-homebrew-homedir/" />
-<meta property="article:published_time" content="2017-04-22T13:38:10-04:00" />
-<meta property="article:modified_time" content="2017-04-22T13:38:10-04:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Install homebrew to your home directory"/>
-<meta name="twitter:description" content="NOTE: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the homebrew website for current installation instructions."/>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" media="screen" href="https://aj.codes/css/main.css" />
-	
+  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body>
-        <div class="content"><header>
+<body><header>
 	<div class="main">
-		<a class="no-underline" href="https://aj.codes/">Andrew Jorgensen</a>
+    TITLE map[feathericonscdn:true mainSections:[post] mainsections:[post] mode:light social:[map[icon:github name:GitHub url:https://github.com/ajorgensen/] map[icon:twitter name:Twitter url:https://twitter.com/ajorgensen/]]]
+		<a class="no-underline" href="https://aj.codes/">Install homebrew to your home directory</a>
 	</div>
 	<nav>
 		
@@ -55,19 +31,19 @@
 <p>Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.</p>
 <h2 id="fresh-install">Fresh install</h2>
 <p>If you already have homebrew installed you can run <code>brew list | tr '\r\n' ' '</code> to get a list of packages that were installed with homebrew. Save this list, we will use it later. At this point you can also uninstall homebrew so it does not conflict with the new installation.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ruby -e <span style="color:#4070a0">&#34;</span><span style="color:#007020;font-weight:bold">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall<span style="color:#007020;font-weight:bold">)</span><span style="color:#4070a0">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ruby -e <span style="color:#4070a0">&#34;</span><span style="color:#007020;font-weight:bold">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall<span style="color:#007020;font-weight:bold">)</span><span style="color:#4070a0">&#34;</span>
 </code></pre></div><p>Installing homebrew to a custom directory is pretty straightforward.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">cd</span> <span style="color:#bb60d5">$HOME</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">cd</span> <span style="color:#bb60d5">$HOME</span>
 git clone https://github.com/mxcl/homebrew.git
 </code></pre></div><p>Next we need to make sure the homebrew bin directory is in your <code>$PATH</code> in order to use installed packages.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">export</span> <span style="color:#bb60d5">PATH</span><span style="color:#666">=</span><span style="color:#bb60d5">$HOME</span>/homebrew/bin:<span style="color:#bb60d5">$PATH</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">export</span> <span style="color:#bb60d5">PATH</span><span style="color:#666">=</span><span style="color:#bb60d5">$HOME</span>/homebrew/bin:<span style="color:#bb60d5">$PATH</span>
 </code></pre></div><p>It&rsquo;s important to note here that we are putting the <code>homebrew/bin</code> directory at the front of the path. This allows us to install packages that are also provided by OSX but because the homebrew directory comes first it will us our installed version rather than the default os version.</p>
 <p>At this point you can install all of the packages that were previously installed. This step might take a little while.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install vim tree tmux ...
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install vim tree tmux ...
 </code></pre></div><p>You&rsquo;re done! Reload your terminal and verify that running <code>which brew</code> shows homebrew is installed in its new location.</p>
 <h2 id="bonus-tip">Bonus tip</h2>
 <p>I&rsquo;ve create an alias that updates homebrew, upgrades any installed formulas, and then cleans up any files that are no longer necessary. This can be useful for keeping your system up to date. Running <code>brew cleanup</code> from time to time is also important as I&rsquo;ve seen it clean upwards of <strong>1GB</strong> of space.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">alias</span> <span style="color:#bb60d5">sysup</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007020">alias</span> <span style="color:#bb60d5">sysup</span><span style="color:#666">=</span><span style="color:#4070a0">&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
 </code></pre></div>
 		</section>
 
@@ -88,7 +64,7 @@ git clone https://github.com/mxcl/homebrew.git
 </main>
 <footer>
 <hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
-	2020  © Andrew Jorgensen |  <a class="no-underline" href="https://github.com/athul/archie">Archie Theme</a> | Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+	2021  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
 </footer>
 
 
@@ -105,6 +81,5 @@ if (!doNotTrack) {
 
 <script>
       feather.replace()
-</script></div>
-    </body>
+</script></body>
 </html>

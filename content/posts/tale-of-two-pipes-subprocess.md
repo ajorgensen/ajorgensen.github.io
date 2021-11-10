@@ -38,12 +38,11 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
-
 ```
 
 After compiling this small program, running it will do what we expect, `./log 5` prints out `Hello stderr` 5 times to stderr.
 
-```
+```shell
 Hello stderr
 Hello stderr
 Hello stderr
@@ -68,20 +67,18 @@ ps.wait()
 
 print ps.stdout.read()
 print ps.stderr.read()
-
 ```
 
 This again does what we expect, logs out the PID of the subprocess and then both STDOUT and STDERR once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you're following along with this story at home you should see something unexpected.
 
-```
+```shell
 Starting subprocess
 PID: 90908
-
 ```
 
 No log messages are printed to the console and the python script is actually stopped and will exit the stage. Let's fire up gdb and take a look to see whats going on.
 
-```
+```shell
 (gdb) bt
 #0  0x00007f14ebc9df80 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81
 #1  0x00007f14ebc27f13 in _IO_new_file_write (f=0x7f14ebf711c0 <_IO_2_1_stderr_>, data=0x7ffc8f5b0ea0, n=13)

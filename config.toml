@@ -1,21 +1,21 @@
-baseurl = "https://aj.codes/"
+baseURL = "https://aj.codes/"
 title = "Andrew Jorgensen"
 languageCode = "en-us"
 
-theme = "archie"
+theme = "ajorgensen"
 copyright = "© Andrew Jorgensen"
 googleAnalytics = "UA-51883548-1"
 
-# Code Highlight
-pygmentsstyle = "friendly"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    noclasses = false
 
 # Pagination
-paginate=5
+paginate=2
 
 [params]
-	mode="light" # color-mode → light,dark or auto
 	featherIconsCDN=true
 
 # Social Tags

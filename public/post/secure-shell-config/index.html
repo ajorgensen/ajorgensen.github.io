@@ -3,37 +3,13 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How to not leak your credentials to the internet - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta property="og:description" content="" />
-	<meta name="twitter:description" content="" />
-	<meta name="description" content="" />
-	<meta name="description" content="" />
-
-	<meta property="og:title" content="How to not leak your credentials to the internet | Andrew Jorgensen" />
-	<meta name="twitter:title" content="How to not leak your credentials to the internet | Andrew Jorgensen" />
-
-	<meta property="og:image" content=""/>
-	<meta itemprop="name" content="How to not leak your credentials to the internet | Andrew Jorgensen" />
-	<meta name="application-name" content="How to not leak your credentials to the internet | Andrew Jorgensen" />
-	<meta property="og:site_name" content="" />
-	<meta property="og:title" content="How to not leak your credentials to the internet" />
-<meta property="og:description" content="Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://aj.codes/post/secure-shell-config/" />
-<meta property="article:published_time" content="2016-11-21T22:30:10-05:00" />
-<meta property="article:modified_time" content="2016-11-21T22:30:10-05:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="How to not leak your credentials to the internet"/>
-<meta name="twitter:description" content="Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful."/>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" media="screen" href="https://aj.codes/css/main.css" />
-	
+  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body>
-        <div class="content"><header>
+<body><header>
 	<div class="main">
-		<a class="no-underline" href="https://aj.codes/">Andrew Jorgensen</a>
+    TITLE map[feathericonscdn:true mainSections:[post] mainsections:[post] mode:light social:[map[icon:github name:GitHub url:https://github.com/ajorgensen/] map[icon:twitter name:Twitter url:https://twitter.com/ajorgensen/]]]
+		<a class="no-underline" href="https://aj.codes/">How to not leak your credentials to the internet</a>
 	</div>
 	<nav>
 		
@@ -54,10 +30,10 @@
 			<p>Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful.</p>
 <p>Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.</p>
 <p>One good security practice is to not store any unencrypted credentials at rest. If you can run <code>cat</code> on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like&hellip;</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID &#34;AKIATHISISMYKEY&#34;
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID &#34;AKIATHISISMYKEY&#34;
 export AWS_ACCESS_KEY_SECRET &#34;thisismyreallysecretkeythatnooneshouldknow&#34;
 </code></pre></div><p>If that looks anything like your <code>~/.zshrc</code> or <code>~/.bash_profile</code> then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">### Functions for setting and getting environment variables from the OSX keychain ###
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">### Functions for setting and getting environment variables from the OSX keychain ###
 ### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
 
 # Use: keychain-environment-variable SECRET_ENV_VAR
@@ -76,7 +52,7 @@ function set-keychain-environment-variable () {
     security add-generic-password -U -a ${USER} -D &#34;environment variable&#34; -s &#34;${1}&#34; -w &#34;${secret}&#34;
 }
 </code></pre></div><p>Now you can easily and securely store keys and secrets using the <code>set-keychain-environment-variable</code> function! Instead of hard coding the credentials we can simply replace all the hard coded values with:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
+<div class="highlight"><pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
 export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
 </code></pre></div><p>OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your <code>~/.zsh_history</code> or <code>~/.bash_history</code> files after you&rsquo;ve run the commands to make sure the credentials were not recorded there.</p>
 <p>Happy encrypting!</p>
@@ -103,7 +79,7 @@ export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECR
 </main>
 <footer>
 <hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
-	2020  © Andrew Jorgensen |  <a class="no-underline" href="https://github.com/athul/archie">Archie Theme</a> | Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+	2021  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
 </footer>
 
 
@@ -120,6 +96,5 @@ if (!doNotTrack) {
 
 <script>
       feather.replace()
-</script></div>
-    </body>
+</script></body>
 </html>
