@@ -14,6 +14,9 @@ $(HOMEBREW_BIN)/firebase-cli:
 
 deps: $(GOPATH)/bin/hugo $(HOMEBREW_BIN)/firebase-cli
 
+setup: deps
+	@firebase use blog-9e399
+
 serve:
 	open "http://localhost:1313"
 	hugo serve --buildDrafts
