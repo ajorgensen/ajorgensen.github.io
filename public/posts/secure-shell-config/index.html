@@ -211,38 +211,38 @@
 			<p>Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&rsquo;re not careful.</p>
 <p>Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.</p>
 <p>One good security practice is to not store any unencrypted credentials at rest. If you can run <code>cat</code> on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like&hellip;</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID &#34;AKIATHISISMYKEY&#34;
-export AWS_ACCESS_KEY_SECRET &#34;thisismyreallysecretkeythatnooneshouldknow&#34;
-</code></pre></div><p>If that looks anything like your <code>~/.zshrc</code> or <code>~/.bash_profile</code> then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">### Functions for setting and getting environment variables from the OSX keychain ###
-### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
-
-# Use: keychain-environment-variable SECRET_ENV_VAR
-function keychain-environment-variable () {
-    security find-generic-password -w -a ${USER} -D &#34;environment variable&#34; -s &#34;${1}&#34;
-}
-
-# Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
-function set-keychain-environment-variable () {
-    [ -n &#34;$1&#34; ] || print &#34;Missing environment variable name&#34;
-
-    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
-    read -s &#34;?Enter Value for ${1}: &#34; secret
-
-    ( [ -n &#34;$1&#34; ] &amp;&amp; [ -n &#34;$secret&#34; ] ) || return 1
-    security add-generic-password -U -a ${USER} -D &#34;environment variable&#34; -s &#34;${1}&#34; -w &#34;${secret}&#34;
-}
-</code></pre></div><p>Now you can easily and securely store keys and secrets using the <code>set-keychain-environment-variable</code> function! Instead of hard coding the credentials we can simply replace all the hard coded values with:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
-export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
-</code></pre></div><p>OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your <code>~/.zsh_history</code> or <code>~/.bash_history</code> files after you&rsquo;ve run the commands to make sure the credentials were not recorded there.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export AWS_ACCESS_KEY_ID &#34;AKIATHISISMYKEY&#34;
+</span></span><span class="line"><span class="cl">export AWS_ACCESS_KEY_SECRET &#34;thisismyreallysecretkeythatnooneshouldknow&#34;
+</span></span></code></pre></div><p>If that looks anything like your <code>~/.zshrc</code> or <code>~/.bash_profile</code> then you probably want to keep reading. One clever way to work around the need to hard code the keys into environment variables is to use the keychain built into OSX to store any credentials. To make this easier we can add the following functions to store and retrieve keys and secrets.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">### Functions for setting and getting environment variables from the OSX keychain ###
+</span></span><span class="line"><span class="cl">### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Use: keychain-environment-variable SECRET_ENV_VAR
+</span></span><span class="line"><span class="cl">function keychain-environment-variable () {
+</span></span><span class="line"><span class="cl">    security find-generic-password -w -a ${USER} -D &#34;environment variable&#34; -s &#34;${1}&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Use: set-keychain-environment-variable SECRET_ENV_VAR super_secret_key_abc123
+</span></span><span class="line"><span class="cl">function set-keychain-environment-variable () {
+</span></span><span class="line"><span class="cl">    [ -n &#34;$1&#34; ] || print &#34;Missing environment variable name&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
+</span></span><span class="line"><span class="cl">    read -s &#34;?Enter Value for ${1}: &#34; secret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ( [ -n &#34;$1&#34; ] &amp;&amp; [ -n &#34;$secret&#34; ] ) || return 1
+</span></span><span class="line"><span class="cl">    security add-generic-password -U -a ${USER} -D &#34;environment variable&#34; -s &#34;${1}&#34; -w &#34;${secret}&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>Now you can easily and securely store keys and secrets using the <code>set-keychain-environment-variable</code> function! Instead of hard coding the credentials we can simply replace all the hard coded values with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export AWS_ACCESS_KEY_ID=$(keychain-environment-variable AWS_ACCESS_KEY_ID)
+</span></span><span class="line"><span class="cl">export AWS_ACCESS_KEY_SECRET=$(keychain-environment-variable AWS_ACCESS_KEY_SECRET)
+</span></span></code></pre></div><p>OSX will prompt you the first time for the password to unlock the keychain but once you have it unlocked it will remember and wont prompt you again. Now you don&rsquo;t have to be worried about accidentally checking your private keys into your git repository and publishing them to the internet for all to see. Be sure to clear out your <code>~/.zsh_history</code> or <code>~/.bash_history</code> files after you&rsquo;ve run the commands to make sure the credentials were not recorded there.</p>
 <p>Happy encrypting!</p>
 		</section>
 	</article>
 </main>
 <footer>
 <hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
-	2021  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
 </footer>
 
 
