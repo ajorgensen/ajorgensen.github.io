@@ -1,9 +1,10 @@
-+++
-title = "Install homebrew to your home directory"
-date = "2017-04-22T13:38:10-04:00"
-tags = ["homebrew"]
-
-+++
+---
+title: "Install homebrew to your home directory"
+date: "2017-04-22T13:38:10-04:00"
+tags: 
+    - homebrew
+slug: install-homebrew-homedir
+---
 
 __NOTE__: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the [homebrew website](https://brew.sh) for current installation instructions.
 

@@ -1,8 +1,10 @@
-+++
-title = "Branch Agnostic Git Aliases"
-date = 2020-10-12
-tags = ["git"]
-+++
+---
+title: "Branch Agnostic Git Aliases"
+date: 2020-10-12
+tags:
+  - git
+slug: branch-agnostic-git-aliases
+---
 
 Github and others have recently changed the name of the default branch in git
 from `master` to `main`, you can read more about the change [here][1]. If you

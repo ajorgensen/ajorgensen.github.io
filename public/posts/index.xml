@@ -59,10 +59,10 @@ writing git aliases that will work no matter what the default is set to.&lt;/p&g
     
     <item>
       <title>How to not leak your credentials to the internet</title>
-      <link>https://aj.codes/posts/secure-shell-config/</link>
+      <link>https://aj.codes/posts/20161121224010-secure-shell-config/</link>
       <pubDate>Mon, 21 Nov 2016 22:30:10 -0500</pubDate>
       
-      <guid>https://aj.codes/posts/secure-shell-config/</guid>
+      <guid>https://aj.codes/posts/20161121224010-secure-shell-config/</guid>
       <description>&lt;p&gt;Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you&amp;rsquo;re not careful.&lt;/p&gt;</description>
     </item>
     

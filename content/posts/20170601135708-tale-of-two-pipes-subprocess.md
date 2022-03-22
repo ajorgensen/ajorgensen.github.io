@@ -1,8 +1,10 @@
-+++
-date = "2017-06-01T13:57:08-04:00"
-title = "A Tale of Two Pipes"
-tags = ["python"]
-+++
+---
+title: "A Tale of Two Pipes"
+date: 2017-06-01T13:57:08-04:00
+tags:
+    - python
+slug: tale-of-two-pipes-subprocess
+---
 
 Let me first introduce you to two leading characters: STDIN and STDOUT
 

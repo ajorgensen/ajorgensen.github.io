@@ -1,8 +1,12 @@
-+++
-date = 2019-05-28
-title = "Signing Git Commits With Keybase"
-tags = ["git", "security", "keybase"]
-+++
+---
+date: 2019-05-28
+title: "Signing Git Commits With Keybase"
+tags:
+    - git
+    - security
+    - keybase
+slug: signing-git-commits-with-keybase
+---
 
 Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn't like badges. Managing private keys can be a tricky process but fortunately [keybase](https://keybase.io/) greatly simplifies this and allows us to easily share keys between different machines.
 

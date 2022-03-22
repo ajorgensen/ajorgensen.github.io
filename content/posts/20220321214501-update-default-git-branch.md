@@ -1,8 +1,10 @@
-+++
-title = "Change Default git Branch"
-date = 2022-03-21T21:45:01-04:00
-tags = ["git"]
-+++
+---
+title: "Change Default git Branch"
+date: 2022-03-21T21:45:01-04:00
+tags:
+    - git
+slug: update-default-git-branch
+---
 
 First we'll need to rename the old branch to the new branch. For this we'll be renaming the master branch to main.
 
