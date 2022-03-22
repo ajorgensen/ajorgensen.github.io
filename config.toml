@@ -4,7 +4,6 @@ languageCode = "en-us"
 
 theme = "ajorgensen"
 copyright = "© Andrew Jorgensen"
-googleAnalytics = "UA-51883548-1"
 
 [markup]
   [markup.highlight]
