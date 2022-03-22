@@ -2,7 +2,8 @@
 @import 'syntax';
 @import 'syntaxdark';
 
-:root {
+/* variables */
+body {
   --background-color: white;
   --label: rgba(0.0, 0.0, 0.0, 1.0);
   --strong-label: black;
@@ -10,15 +11,14 @@
   --font-size: 18px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: rgb(34, 34, 34);
-    --label: #dddddd;
-    --strong-label: white;
-    --accent: #FF572D;
-  }
+body.dark-mode {
+  --background-color: rgb(34, 34, 34);
+  --label: #dddddd;
+  --strong-label: white;
+  --accent: #FF572D;
 }
 
+/* styles */
 body {
   background-color: var(--background-color);
   color: var(--label);
@@ -27,7 +27,7 @@ body {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 2em 1em;
-  font-size: var(--font-size)
+  font-size: var(--font-size);
 }
 
 header {
@@ -40,7 +40,7 @@ h2 {
 }
 
 .list-item {
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 }
 
 .meta {
@@ -84,4 +84,12 @@ svg {
   padding: 1em;
   overflow: auto;
   border-radius: 0.3em;
+}
+
+#theme-toggle {
+  cursor: pointer;
+}
+
+#theme-toggle:hover{
+  text-decoration: underline;
 }
