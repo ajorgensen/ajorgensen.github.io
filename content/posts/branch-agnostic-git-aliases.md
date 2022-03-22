@@ -17,7 +17,7 @@ easier and more intuitive, you can find a full list of the git aliases I use
 [here][2]. To outline the problem lets looks at a few example aliases that someone
 might have.
 
-```gitconfig
+```yaml
 [alias]
   diff = diff master
   pom = push origin master
@@ -34,7 +34,7 @@ if someone chooses to go old school and use `trunk` instead?
 Fortunately there is a way to write your git aliases in a branch agnostic way
 using `git symbolic-ref`. First the __tl;dr__
 
-```gitconfig
+```yaml
 [alias]
   default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/"
   diff = diff $(git default-branch)
