@@ -13,7 +13,7 @@ Have you ever been frustrated by the lack working examples in documentation? [El
 
 Elixir's testing framework ExUnit provides built in support for a feature called [DocTest](http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html) which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects. 
 
-```
+```elixir
 defmodule Calculator do
   @doc """
   Adds two numbers and returns the result.
@@ -47,7 +47,7 @@ end
 
 When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.
 
-```markdown
+```bash
 iex> h Calculator.add
 
                                  def add(a, b)

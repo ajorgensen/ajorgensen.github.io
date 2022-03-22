@@ -17,15 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/main.css" />
-
-  <style type="text/css" media="screen">
-    @media (prefers-color-scheme: dark) {
-      {{ partial "css/syntax-dark.css" . | safeCSS }}
-    }
-    @media (prefers-color-scheme: light) {
-      {{ partial "css/syntax-light.css" . | safeCSS }}
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/syntax.css" />
 
   <script src="{{ .Site.BaseURL }}js/theme-toggle.js"></script>
   <script src="{{ .Site.BaseURL}}/js/feather.min.js"></script>
