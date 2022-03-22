@@ -19,9 +19,9 @@
         {{ range $index, $value := .Params.tags }} {{if $index}}, {{end}}<a href="/tags/{{$value}}"> {{ $value }}</a> {{ end }}
         <br><div class="description">
           {{ if isset .Params "description" }}
-          {{ .Description }}
+            {{ .Description }}
           {{ else }}
-          {{ .Summary }}
+            {{ .Summary }}
           {{ end }}
         </div>
       </section>

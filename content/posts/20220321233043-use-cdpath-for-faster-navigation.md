@@ -9,7 +9,7 @@ draft: false
 
 CDPATH is an environment variable that allows you to cd into directors that may not be in your current working directory. It can be useful to add commonly used directions, ~/code for example, to allow you to quickly change directory without having to type out the full path.
 
-<!-- more -->
+<!--more-->
 
 Normally, cd will check the current directory for the folder name that is passed to it. However it can be useful to tell cd to also check other directories for a specific folder name. To set the order in which cd will check for the specified folder name is as easy as exporting the environment variable CDPATH in the order you'd like it to check in. For example:
 

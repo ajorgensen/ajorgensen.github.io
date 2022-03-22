@@ -14,8 +14,7 @@
       <pubDate>Mon, 21 Mar 2022 23:30:43 -0400</pubDate>
       
       <guid>https://aj.codes/posts/use-cdpath-for-faster-navigation/</guid>
-      <description>CDPATH is an environment variable that allows you to cd into directors that may not be in your current working directory. It can be useful to add commonly used directions, ~/code for example, to allow you to quickly change directory without having to type out the full path.
-Normally, cd will check the current directory for the folder name that is passed to it. However it can be useful to tell cd to also check other directories for a specific folder name.</description>
+      <description>&lt;p&gt;CDPATH is an environment variable that allows you to cd into directors that may not be in your current working directory. It can be useful to add commonly used directions, ~/code for example, to allow you to quickly change directory without having to type out the full path.&lt;/p&gt;</description>
     </item>
     
     <item>
