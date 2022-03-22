@@ -32,7 +32,7 @@ At this point you can verify that the correct branch is set as the default in Gi
 git branch -a
 ```
 
-Once  you've verified everything correctly you can now safely delete the old branch from Github
+Once  you've verified everything is correct you can now safely delete the old branch from Github
 
 ```bash
 git push origin --delete master
