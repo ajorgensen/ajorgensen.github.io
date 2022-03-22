@@ -42,25 +42,25 @@ writing git aliases that will work no matter what the default is set to.</p>
 easier and more intuitive, you can find a full list of the git aliases I use
 <a href="https://github.com/ajorgensen/dotfiles/blob/master/.gitconfig#L40">here</a>. To outline the problem lets looks at a few example aliases that someone
 might have.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[alias]
-</span></span><span class="line"><span class="cl">  diff = diff master
-</span></span><span class="line"><span class="cl">  pom = push origin master
-</span></span><span class="line"><span class="cl">  merged-branches = &#34;!git branch --merged master&#34;
-</span></span><span class="line"><span class="cl">  sync = &#34;!git fetch -p &amp;&amp; git rebase origin/master&#34;
-</span></span></code></pre></div><p>With the change to the default branch being up to the repository maintainer you
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">alias]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">diff = diff master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">pom = push origin master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">merged-branches = &#34;!git branch --merged master&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">sync = &#34;!git fetch -p &amp;&amp; git rebase origin/master&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>With the change to the default branch being up to the repository maintainer you
 may be in a scenario where some repositories you work with will have different
 default branch names. One solution to this is to duplicate any aliases you want
 to work with each of the defaults but that can get tedious and error prone, what
 if someone chooses to go old school and use <code>trunk</code> instead?</p>
 <p>Fortunately there is a way to write your git aliases in a branch agnostic way
 using <code>git symbolic-ref</code>. First the <strong>tl;dr</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[alias]
-</span></span><span class="line"><span class="cl">  default-branch = &#34;!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/&#34;
-</span></span><span class="line"><span class="cl">  diff = diff $(git default-branch)
-</span></span><span class="line"><span class="cl">  pom = push origin $(git default-branch)
-</span></span><span class="line"><span class="cl">  merged-branches = &#34;!git branch --merged $(git default-branch)&#34;
-</span></span><span class="line"><span class="cl">  sync = &#34;!git fetch -p &amp;&amp; git rebase origin/$(git default-branch)&#34;
-</span></span></code></pre></div><h1 id="how-does-it-work">How does it work?</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">alias]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">default-branch = &#34;!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">diff = diff $(git default-branch)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">pom = push origin $(git default-branch)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">merged-branches = &#34;!git branch --merged $(git default-branch)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">sync = &#34;!git fetch -p &amp;&amp; git rebase origin/$(git default-branch)&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="how-does-it-work">How does it work?</h1>
 <p>If you want to rename the branch for your own repositories you can find steps
 <a href="https://jarv.is/notes/github-rename-master/">here</a>.</p>
 <p>In git there is a reference stored at the <code>.git/HEAD</code> that tells git what the
