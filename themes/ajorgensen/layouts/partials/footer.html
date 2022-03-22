@@ -4,6 +4,7 @@
 <a class="soc no-underline" href="{{ $key.url }}" title="{{ $key.name }}"><i data-feather="{{ $key.icon }}"></i></a>|
 {{- end -}} ⚡️
 	{{ dateFormat "2006" now }} {{ with .Site.Copyright }} {{ . }} | {{ end }} Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+      | <span id="theme-toggle"></span>
 </footer>
 {{ if not .Site.IsServer }}
 {{ template "_internal/google_analytics_async.html" . }}
