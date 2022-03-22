@@ -30,6 +30,11 @@ name = "Twitter"
 icon = "twitter"
 url = "https://twitter.com/ajorgensen/"
 
+[[params.social]]
+name = "RSS"
+icon = "rss"
+url = "/index.xml"
+
 # Main menu Items
 
 [[menu.main]]
