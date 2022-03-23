@@ -3,4 +3,11 @@ title: "{{ .TranslationBaseName | replaceRE "^[0-9]{14}-" "" | replaceRE "-" " "
 slug: {{ .TranslationBaseName | replaceRE "^[0-9]{14}-" ""  }}
 date: {{ .Date }}
 draft: true
+tags:
 ---
+
+First Paragraph
+
+<!--more-->
+
+Rest
