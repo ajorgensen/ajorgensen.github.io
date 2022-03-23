@@ -2,7 +2,7 @@
 title: "Fun With sqlite-utils"
 slug: fun-with-sqlite-utils
 date: 2022-03-23T11:58:41-04:00
-draft: true
+draft: false
 tags: 
     - sqlite
 ---
