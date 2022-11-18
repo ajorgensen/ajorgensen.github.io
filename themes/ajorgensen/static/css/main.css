@@ -6,14 +6,16 @@ body {
   --label: #000000;
   --strong-label: black;
   --accent: #FF572D;
-  --font-size: 18px;
+  --font-size: 1em;
+  --font-mono: "JetBrains MonoVariable", monospace;
 }
 
 body.dark-mode {
-  --background-color: rgb(29, 30, 32);
+  --background-color: #202630;
   --label: #dddddd;
   --strong-label: white;
   --accent: #FF572D;
+  --font-mono: "JetBrains MonoVariable", monospace;
 }
 
 /* styles */
@@ -35,6 +37,18 @@ header {
 h2 {
   margin-top: 1em;
   padding-top: 1em;
+}
+
+time {
+  margin: 1rem 0;
+}
+
+.post-link {
+  margin-left: 1rem;
+}
+
+.date {
+  font-family: var(--font-mono);
 }
 
 .list-item {

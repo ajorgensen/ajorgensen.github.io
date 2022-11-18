@@ -11,19 +11,8 @@
       {{ range $paginator.Pages }}
 
       <section class="list-item">
-        <h1 class="title">
-          <a class="strong-link" href="{{ .RelPermalink }}"> {{.Title}}</a>
-        </h1>
-        <time>{{ dateFormat "Jan 2, 2006" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
-        <br>
-        {{ range $index, $value := .Params.tags }} {{if $index}}, {{end}}<a href="/tags/{{$value}}"> {{ $value }}</a> {{ end }}
-        <br><div class="description">
-          {{ if isset .Params "description" }}
-            {{ .Description }}
-          {{ else }}
-            {{ .Summary }}
-          {{ end }}
-        </div>
+        <time class="date">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
+        <a class="post-link" href="{{ .RelPermalink }}"> {{.Title}}</a>
       </section>
       {{ end }}
     </main>

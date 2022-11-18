@@ -5,7 +5,7 @@
 			<h1 class="title">{{ .Title }}</h1>
 
 			<div class="meta">
-        {{ dateFormat "Jan 2, 2006" .Date }}
+        <time class="date">{{ dateFormat "2006-01-02" .Date }}</time>
         ⋅
         {{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
 
