@@ -4,6 +4,13 @@ languageCode = "en-us"
 
 theme = "ajorgensen"
 copyright = "© Andrew Jorgensen"
+enableRobotsTXT = true
+
+[params]
+	featherIconsCDN=true
+  Description = "My little corner of the internet. Thoughts and opinions are my own"
+  TwitterHandle = "@ajorgensen"
+  Image = "/images/cat.jpg"
 
 [markup]
   [markup.highlight]
@@ -13,9 +20,6 @@ copyright = "© Andrew Jorgensen"
 
 # Pagination
 paginate=2
-
-[params]
-	featherIconsCDN=true
 
 # Social Tags
 
