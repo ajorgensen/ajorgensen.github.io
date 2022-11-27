@@ -1,55 +1,9 @@
-<!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Use CDPATH for Faster Navigation - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
-  </div>
-</header>
-
-<main>
-	<article>
-		<div>
-			<h1 class="title">Use CDPATH for Faster Navigation</h1>
-
-			<div class="meta">
-        <time class="date">2022-03-21</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/shell">shell</a>
-        
-      </div>
-		</div>
-
-		<section class="body">
-			<p>CDPATH is an environment variable that allows you to cd into directors that may not be in your current working directory. It can be useful to add commonly used directions, ~/code for example, to allow you to quickly change directory without having to type out the full path.</p>
-<p>Normally, cd will check the current directory for the folder name that is passed to it. However it can be useful to tell cd to also check other directories for a specific folder name. To set the order in which cd will check for the specified folder name is as easy as exporting the environment variable CDPATH in the order you&rsquo;d like it to check in. For example:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CDPATH</span><span class="o">=</span><span class="s2">&#34;.:</span><span class="nv">$HOME</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/code:</span><span class="nv">$CDPATH</span><span class="s2">&#34;</span>
-</span></span></code></pre></div><p>This will tell cd to first check for the folder name in the current directory and then check in $HOME and finally in $HOME/code. This is especially useful if you have a directory where most of your projects are stored and you want to quickly switch between them without typing the whole path.</p>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
-</footer>
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-</html>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Use CDPATH for Faster Navigation - Andrew Jorgensen</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=https://aj.codes/css/main.css><link rel=stylesheet type=text/css href=https://aj.codes/css/syntax.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body><header><div class=navbar><a class="logo navbar-item" href=https://aj.codes/>Andrew Jorgensen</a>
+<a class=navbar-item href=/tags>Tags</a></div></header><main><article><div><h1 class=title>Use CDPATH for Faster Navigation</h1><div class=meta><time class=date>2022-03-21</time>
+⋅
+<a class=no-underline href=/tags/shell>shell</a></div></div><section class=body><p>CDPATH is an environment variable that allows you to cd into directors that may not be in your current working directory. It can be useful to add commonly used directions, ~/code for example, to allow you to quickly change directory without having to type out the full path.</p><p>Normally, cd will check the current directory for the folder name that is passed to it. However it can be useful to tell cd to also check other directories for a specific folder name. To set the order in which cd will check for the specified folder name is as easy as exporting the environment variable CDPATH in the order you&rsquo;d like it to check in. For example:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>CDPATH</span><span class=o>=</span><span class=s2>&#34;.:</span><span class=nv>$HOME</span><span class=s2>:</span><span class=nv>$HOME</span><span class=s2>/code:</span><span class=nv>$CDPATH</span><span class=s2>&#34;</span>
+</span></span></code></pre></div><p>This will tell cd to first check for the folder name in the current directory and then check in $HOME and finally in $HOME/code. This is especially useful if you have a directory where most of your projects are stored and you want to quickly switch between them without typing the whole path.</p></section></article></main><footer><hr><a class="soc no-underline" href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class="soc no-underline" href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|<a class="soc no-underline" href=/index.xml title=RSS><i data-feather=rss></i></a>|⚡️
+2022 © Andrew Jorgensen | Built with <a class=no-underline href=https://gohugo.io>Hugo</a>
+| <span id=theme-toggle></span></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>

@@ -1,99 +1,51 @@
-<!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
-  </div>
-</header>
-
-<main>
-	<article>
-		<div>
-			<h1 class="title">Elixir ExUnit.DocTest</h1>
-
-			<div class="meta">
-        <time class="date">2016-11-09</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/elixir">elixir</a>
-        
-          <a class="no-underline" href="/tags/testing">testing</a>
-        
-      </div>
-		</div>
-
-		<section class="body">
-			<p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
-<p>Elixir&rsquo;s testing framework ExUnit provides built in support for a feature called <a href="http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html">DocTest</a> which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">defmodule</span> <span class="nc">Calculator</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">  <span class="na">@doc</span> <span class="sh">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sh">  Adds two numbers and returns the result.
-</span></span></span><span class="line"><span class="cl"><span class="sh">
-</span></span></span><span class="line"><span class="cl"><span class="sh">  </span><span class="err">##</span><span class="sh"> Examples
-</span></span></span><span class="line"><span class="cl"><span class="sh">      iex&gt; Calculator.add(1, 2)
-</span></span></span><span class="line"><span class="cl"><span class="sh">      3
-</span></span></span><span class="line"><span class="cl"><span class="sh">
-</span></span></span><span class="line"><span class="cl"><span class="sh">      iex&gt; Calculator.add(5, 5)
-</span></span></span><span class="line"><span class="cl"><span class="sh">      10
-</span></span></span><span class="line"><span class="cl"><span class="sh">  &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="kd">def</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-</span></span><span class="line"><span class="cl">  <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="na">@doc</span> <span class="sh">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sh">  Subtracts two numbers and returns the result.
-</span></span></span><span class="line"><span class="cl"><span class="sh">
-</span></span></span><span class="line"><span class="cl"><span class="sh">  </span><span class="err">##</span><span class="sh"> Examples
-</span></span></span><span class="line"><span class="cl"><span class="sh">      iex&gt; Calculator.subtract(1, 2)
-</span></span></span><span class="line"><span class="cl"><span class="sh">      -1
-</span></span></span><span class="line"><span class="cl"><span class="sh">
-</span></span></span><span class="line"><span class="cl"><span class="sh">      iex&gt; Calculator.subtract(5, 5)
-</span></span></span><span class="line"><span class="cl"><span class="sh">      0
-</span></span></span><span class="line"><span class="cl"><span class="sh">  &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="kd">def</span> <span class="n">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-</span></span><span class="line"><span class="cl">  <span class="k">end</span>
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><p>When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iex&gt; h Calculator.add
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                                 def add<span class="o">(</span>a, b<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Adds two numbers and returns the result.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Examples
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">┃ iex&gt; Calculator.add<span class="o">(</span>1, 2<span class="o">)</span>
-</span></span><span class="line"><span class="cl">┃ <span class="m">3</span>
-</span></span><span class="line"><span class="cl">┃
-</span></span><span class="line"><span class="cl">┃ iex&gt; Calculator.add<span class="o">(</span>5, 5<span class="o">)</span>
-</span></span><span class="line"><span class="cl">┃ <span class="m">10</span>
-</span></span></code></pre></div><p>The <a href="https://elixirschool.com/lessons/basics/documentation/#documenting-functions">Elixir School</a> also provides some great information on function documentation and the features that Elixir provides.</p>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
-</footer>
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-</html>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=https://aj.codes/css/main.css><link rel=stylesheet type=text/css href=https://aj.codes/css/syntax.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body><header><div class=navbar><a class="logo navbar-item" href=https://aj.codes/>Andrew Jorgensen</a>
+<a class=navbar-item href=/tags>Tags</a></div></header><main><article><div><h1 class=title>Elixir ExUnit.DocTest</h1><div class=meta><time class=date>2016-11-09</time>
+⋅
+<a class=no-underline href=/tags/elixir>elixir</a>
+<a class=no-underline href=/tags/testing>testing</a></div></div><section class=body><p>Have you ever been frustrated by the lack working examples in documentation? <a href=http://elixir-lang.org/>Elixir</a> helps solve this problem with a built in feature called DocTest.</p><p>Elixir&rsquo;s testing framework ExUnit provides built in support for a feature called <a href=http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html>DocTest</a> which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-elixir data-lang=elixir><span class=line><span class=cl><span class=kd>defmodule</span> <span class=nc>Calculator</span> <span class=k>do</span>
+</span></span><span class=line><span class=cl>  <span class=na>@doc</span> <span class=sh>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=sh>  Adds two numbers and returns the result.
+</span></span></span><span class=line><span class=cl><span class=sh>
+</span></span></span><span class=line><span class=cl><span class=sh>  </span><span class=err>##</span><span class=sh> Examples
+</span></span></span><span class=line><span class=cl><span class=sh>      iex&gt; Calculator.add(1, 2)
+</span></span></span><span class=line><span class=cl><span class=sh>      3
+</span></span></span><span class=line><span class=cl><span class=sh>
+</span></span></span><span class=line><span class=cl><span class=sh>      iex&gt; Calculator.add(5, 5)
+</span></span></span><span class=line><span class=cl><span class=sh>      10
+</span></span></span><span class=line><span class=cl><span class=sh>  &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>def</span> <span class=n>add</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span> <span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span> <span class=o>+</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>  <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=na>@doc</span> <span class=sh>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=sh>  Subtracts two numbers and returns the result.
+</span></span></span><span class=line><span class=cl><span class=sh>
+</span></span></span><span class=line><span class=cl><span class=sh>  </span><span class=err>##</span><span class=sh> Examples
+</span></span></span><span class=line><span class=cl><span class=sh>      iex&gt; Calculator.subtract(1, 2)
+</span></span></span><span class=line><span class=cl><span class=sh>      -1
+</span></span></span><span class=line><span class=cl><span class=sh>
+</span></span></span><span class=line><span class=cl><span class=sh>      iex&gt; Calculator.subtract(5, 5)
+</span></span></span><span class=line><span class=cl><span class=sh>      0
+</span></span></span><span class=line><span class=cl><span class=sh>  &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>def</span> <span class=n>subtract</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span> <span class=k>do</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span> <span class=o>-</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>  <span class=k>end</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></div><p>When you run the test suite, ExUnit will look for these tests then run and verify the results just like if you had written a standard unit test in a specific test module. Now the documentation for the module includes these examples making it really easy for someone to see how the function works without having to dig into the test code or use trial and error to figure out how it works.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>iex&gt; h Calculator.add
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                                 def add<span class=o>(</span>a, b<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Adds two numbers and returns the result.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Examples
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>┃ iex&gt; Calculator.add<span class=o>(</span>1, 2<span class=o>)</span>
+</span></span><span class=line><span class=cl>┃ <span class=m>3</span>
+</span></span><span class=line><span class=cl>┃
+</span></span><span class=line><span class=cl>┃ iex&gt; Calculator.add<span class=o>(</span>5, 5<span class=o>)</span>
+</span></span><span class=line><span class=cl>┃ <span class=m>10</span>
+</span></span></code></pre></div><p>The <a href=https://elixirschool.com/lessons/basics/documentation/#documenting-functions>Elixir School</a> also provides some great information on function documentation and the features that Elixir provides.</p></section></article></main><footer><hr><a class="soc no-underline" href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class="soc no-underline" href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|<a class="soc no-underline" href=/index.xml title=RSS><i data-feather=rss></i></a>|⚡️
+2022 © Andrew Jorgensen | Built with <a class=no-underline href=https://gohugo.io>Hugo</a>
+| <span id=theme-toggle></span></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>

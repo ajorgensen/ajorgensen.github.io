@@ -1,161 +1,106 @@
-<!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>A Tale of Two Pipes - Andrew Jorgensen</title><meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/main.css" />
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
-  </div>
-</header>
-
-<main>
-	<article>
-		<div>
-			<h1 class="title">A Tale of Two Pipes</h1>
-
-			<div class="meta">
-        <time class="date">2017-06-01</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/python">python</a>
-        
-      </div>
-		</div>
-
-		<section class="body">
-			<p>Let me first introduce you to two leading characters: STDIN and STDOUT</p>
-<p>This story begins with a simple python script who&rsquo;s purpose is to shell out using pythons subprocess module and capture the output.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">ps</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">((</span><span class="s2">&#34;ls&#34;</span><span class="p">,</span> <span class="s2">&#34;-la&#34;</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Wait for the process to finish</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
-</span></span></code></pre></div><p>At first glance this appears to work well for our use case, it will print the output of <code>ls -la</code> to the console. At this point we must add another character to this story, a c program that logs meaningless messages to stderr in order to prove a point.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">logTimes</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">logTimes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>  <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;Hello stderr&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>After compiling this small program, running it will do what we expect, <code>./log 5</code> prints out <code>Hello stderr</code> 5 times to stderr.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Hello stderr
-</span></span><span class="line"><span class="cl">Hello stderr
-</span></span><span class="line"><span class="cl">Hello stderr
-</span></span><span class="line"><span class="cl">Hello stderr
-</span></span><span class="line"><span class="cl">Hello stderr
-</span></span></code></pre></div><p>Now that we have our shiny new program we want to use our python script to call it. We can modify our original python script to call out to our new c program to read its output.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">logTimes</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">((</span><span class="s2">&#34;./log&#34;</span><span class="p">,</span> <span class="n">logTimes</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="s2">&#34;PID: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ps</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">ps</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="n">ps</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span> <span class="n">ps</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</span></span></code></pre></div><p>This again does what we expect, logs out the PID of the subprocess and then both STDOUT and STDERR once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you&rsquo;re following along with this story at home you should see something unexpected.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Starting subprocess
-</span></span><span class="line"><span class="cl">PID: <span class="m">90908</span>
-</span></span></code></pre></div><p>No log messages are printed to the console and the python script is actually stopped and will exit the stage. Let&rsquo;s fire up gdb and take a look to see whats going on.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> bt
-</span></span><span class="line"><span class="cl"><span class="c1">#0  0x00007f14ebc9df80 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#1  0x00007f14ebc27f13 in _IO_new_file_write (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=0x7ffc8f5b0ea0, n=13)</span>
-</span></span><span class="line"><span class="cl">    at fileops.c:1261
-</span></span><span class="line"><span class="cl"><span class="c1">#2  0x00007f14ebc286af in new_do_write (to_do=13, data=0x7ffc8f5b0ea0 &#34;Hello stderr\n&#34;,</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">fp</span><span class="o">=</span>0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;<span class="o">)</span> at fileops.c:538
-</span></span><span class="line"><span class="cl"><span class="c1">#3  _IO_new_file_xsputn (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=&lt;optimized out&gt;, n=13) at fileops.c:1343</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#4  0x00007f14ebbfdf0d in buffered_vfprintf (s=s@entry=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;,</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">format</span><span class="o">=</span>format@entry<span class="o">=</span>0x400710 <span class="s2">&#34;%s\n&#34;</span>, <span class="nv">args</span><span class="o">=</span>args@entry<span class="o">=</span>0x7ffc8f5b34c8<span class="o">)</span> at vfprintf.c:2377
-</span></span><span class="line"><span class="cl"><span class="c1">#5  0x00007f14ebbf8dfe in _IO_vfprintf_internal (s=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, format=0x400710 &#34;%s\n&#34;,</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">ap</span><span class="o">=</span>ap@entry<span class="o">=</span>0x7ffc8f5b34c8<span class="o">)</span> at vfprintf.c:1313
-</span></span><span class="line"><span class="cl"><span class="c1">#6  0x00007f14ebc03337 in __fprintf (stream=&lt;optimized out&gt;, format=&lt;optimized out&gt;) at fprintf.c:32</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#7  0x0000000000400658 in main (argc=2, argv=0x7ffc8f5b36a8) at main.c:10</span>
-</span></span></code></pre></div><p>From this we can see that our c program is actually deadlocked on trying to write <code>&quot;Hello stderr\n&quot;</code> to stderr. So why was the program ok running when there were only 5 messages to log out but now that we&rsquo;ve cranked it up to 6000 its deadlocks?</p>
-<p>It turns out that there is a limited buffer size for pipes. On linux you can find this limit by running <code>cat /proc/sys/fs/pipe-max-size</code>. Once this buffer files up and nothing on the other side is reading from the buffer the process will deadlock waiting for space in the buffer to free up. The <a href="https://docs.python.org/2/library/subprocess.html#subprocess.call">python documenation</a> does mention the potential to deadlock but does not go into the circumstances where a deadlock can occur.</p>
-<p>There are a few ways to work around this issue. The <a href="https://docs.python.org/2/library/subprocess.html#subprocess.Popen.communicate">first</a> and easiest is to use <code>subprocess.communicate</code> instead of calling <code>subprocess.wait()</code>. This will continually read off of the STDOUT and STDERR pipes and buffer the messages in memory, wait for the process to finish, and return them both as a tuple once the subprocess has finished. You should be careful here as well since the log output is buffered in memory it has the potential to consume all available memory depending on the output log volume of the subprocess. This is also not suitable for long running processes where python is acting as a supervisor as you will eventually run out of memory.</p>
-<p>For applications where python is performing the role of a supervisor we need to be stream the logs from the subprocess to another location. The easiest way to accomplish this is to redirect STDERR to STDOUT and create a log streaming function that will stream the logs via a background thread.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">async_stream_process_stdout</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">log_fn</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34; Stream the stdout and stderr for a process out to display async
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param process: the process to stream the log for
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param log_fn: a function that will be called for each log line
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :return: None
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">logging_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">stream_process_stdout</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">log_fn</span><span class="p">,</span> <span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="n">logging_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">logging_thread</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">stream_process_stdout</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">log_fn</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34; Stream the stdout and stderr for a process out to display
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param process: the process to stream the logs for
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param log_fn: a function that will be called for each log line
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :return: None
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">log_fn</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">log_fn</span><span class="p">(</span><span class="n">process</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">logTimes</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_one</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">((</span><span class="s2">&#34;./log&#34;</span><span class="p">,</span> <span class="n">logTimes</span><span class="p">),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_two</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">((</span><span class="s2">&#34;./log&#34;</span><span class="p">,</span> <span class="n">logTimes</span><span class="p">),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">logger_one</span> <span class="o">=</span> <span class="n">async_stream_process_stdout</span><span class="p">(</span><span class="n">ps_one</span><span class="p">,</span> <span class="n">log_fn</span><span class="p">(</span><span class="s2">&#34;ps_one&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">logger_two</span> <span class="o">=</span> <span class="n">async_stream_process_stdout</span><span class="p">(</span><span class="n">ps_two</span><span class="p">,</span> <span class="n">log_fn</span><span class="p">(</span><span class="s2">&#34;ps_two&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">logger_one</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">logger_two</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</span></span></code></pre></div><p>One other alternative is to make sure that you are always streaming the STDOUT and STDERR of a subprocess to a dedicated file rather than to <code>subprocess.PIPE</code>.</p>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
-</footer>
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-</html>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>A Tale of Two Pipes - Andrew Jorgensen</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=https://aj.codes/css/main.css><link rel=stylesheet type=text/css href=https://aj.codes/css/syntax.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body><header><div class=navbar><a class="logo navbar-item" href=https://aj.codes/>Andrew Jorgensen</a>
+<a class=navbar-item href=/tags>Tags</a></div></header><main><article><div><h1 class=title>A Tale of Two Pipes</h1><div class=meta><time class=date>2017-06-01</time>
+⋅
+<a class=no-underline href=/tags/python>python</a></div></div><section class=body><p>Let me first introduce you to two leading characters: STDIN and STDOUT</p><p>This story begins with a simple python script who&rsquo;s purpose is to shell out using pythons subprocess module and capture the output.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>subprocess</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ps</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>Popen</span><span class=p>((</span><span class=s2>&#34;ls&#34;</span><span class=p>,</span> <span class=s2>&#34;-la&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Wait for the process to finish</span>
+</span></span><span class=line><span class=cl><span class=n>ps</span><span class=o>.</span><span class=n>wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span> <span class=n>sys</span><span class=o>.</span><span class=n>stdout</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span> <span class=n>sys</span><span class=o>.</span><span class=n>stderr</span>
+</span></span></code></pre></div><p>At first glance this appears to work well for our use case, it will print the output of <code>ls -la</code> to the console. At this point we must add another character to this story, a c program that logs meaningless messages to stderr in order to prove a point.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span><span class=o>*</span> <span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>logTimes</span> <span class=o>=</span> <span class=n>atoi</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>logTimes</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>fprintf</span><span class=p>(</span><span class=n>stderr</span><span class=p>,</span> <span class=s>&#34;%s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=s>&#34;Hello stderr&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>After compiling this small program, running it will do what we expect, <code>./log 5</code> prints out <code>Hello stderr</code> 5 times to stderr.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Hello stderr
+</span></span><span class=line><span class=cl>Hello stderr
+</span></span><span class=line><span class=cl>Hello stderr
+</span></span><span class=line><span class=cl>Hello stderr
+</span></span><span class=line><span class=cl>Hello stderr
+</span></span></code></pre></div><p>Now that we have our shiny new program we want to use our python script to call it. We can modify our original python script to call out to our new c program to read its output.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>subprocess</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logTimes</span> <span class=o>=</span> <span class=n>sys</span><span class=o>.</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>ps</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>Popen</span><span class=p>((</span><span class=s2>&#34;./log&#34;</span><span class=p>,</span> <span class=n>logTimes</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                      <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                      <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span> <span class=s2>&#34;PID: &#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>ps</span><span class=o>.</span><span class=n>pid</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ps</span><span class=o>.</span><span class=n>wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span> <span class=n>ps</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span> <span class=n>ps</span><span class=o>.</span><span class=n>stderr</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+</span></span></code></pre></div><p>This again does what we expect, logs out the PID of the subprocess and then both STDOUT and STDERR once the subprocess has finished running. Lets pump up the jamz a bit and increase the number of log messages from 5 to 6000, if you&rsquo;re following along with this story at home you should see something unexpected.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Starting subprocess
+</span></span><span class=line><span class=cl>PID: <span class=m>90908</span>
+</span></span></code></pre></div><p>No log messages are printed to the console and the python script is actually stopped and will exit the stage. Let&rsquo;s fire up gdb and take a look to see whats going on.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>(</span>gdb<span class=o>)</span> bt
+</span></span><span class=line><span class=cl><span class=c1>#0  0x00007f14ebc9df80 in __write_nocancel () at ../sysdeps/unix/syscall-template.S:81</span>
+</span></span><span class=line><span class=cl><span class=c1>#1  0x00007f14ebc27f13 in _IO_new_file_write (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=0x7ffc8f5b0ea0, n=13)</span>
+</span></span><span class=line><span class=cl>    at fileops.c:1261
+</span></span><span class=line><span class=cl><span class=c1>#2  0x00007f14ebc286af in new_do_write (to_do=13, data=0x7ffc8f5b0ea0 &#34;Hello stderr\n&#34;,</span>
+</span></span><span class=line><span class=cl>    <span class=nv>fp</span><span class=o>=</span>0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;<span class=o>)</span> at fileops.c:538
+</span></span><span class=line><span class=cl><span class=c1>#3  _IO_new_file_xsputn (f=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, data=&lt;optimized out&gt;, n=13) at fileops.c:1343</span>
+</span></span><span class=line><span class=cl><span class=c1>#4  0x00007f14ebbfdf0d in buffered_vfprintf (s=s@entry=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;,</span>
+</span></span><span class=line><span class=cl>    <span class=nv>format</span><span class=o>=</span>format@entry<span class=o>=</span>0x400710 <span class=s2>&#34;%s\n&#34;</span>, <span class=nv>args</span><span class=o>=</span>args@entry<span class=o>=</span>0x7ffc8f5b34c8<span class=o>)</span> at vfprintf.c:2377
+</span></span><span class=line><span class=cl><span class=c1>#5  0x00007f14ebbf8dfe in _IO_vfprintf_internal (s=0x7f14ebf711c0 &lt;_IO_2_1_stderr_&gt;, format=0x400710 &#34;%s\n&#34;,</span>
+</span></span><span class=line><span class=cl>    <span class=nv>ap</span><span class=o>=</span>ap@entry<span class=o>=</span>0x7ffc8f5b34c8<span class=o>)</span> at vfprintf.c:1313
+</span></span><span class=line><span class=cl><span class=c1>#6  0x00007f14ebc03337 in __fprintf (stream=&lt;optimized out&gt;, format=&lt;optimized out&gt;) at fprintf.c:32</span>
+</span></span><span class=line><span class=cl><span class=c1>#7  0x0000000000400658 in main (argc=2, argv=0x7ffc8f5b36a8) at main.c:10</span>
+</span></span></code></pre></div><p>From this we can see that our c program is actually deadlocked on trying to write <code>"Hello stderr\n"</code> to stderr. So why was the program ok running when there were only 5 messages to log out but now that we&rsquo;ve cranked it up to 6000 its deadlocks?</p><p>It turns out that there is a limited buffer size for pipes. On linux you can find this limit by running <code>cat /proc/sys/fs/pipe-max-size</code>. Once this buffer files up and nothing on the other side is reading from the buffer the process will deadlock waiting for space in the buffer to free up. The <a href=https://docs.python.org/2/library/subprocess.html#subprocess.call>python documenation</a> does mention the potential to deadlock but does not go into the circumstances where a deadlock can occur.</p><p>There are a few ways to work around this issue. The <a href=https://docs.python.org/2/library/subprocess.html#subprocess.Popen.communicate>first</a> and easiest is to use <code>subprocess.communicate</code> instead of calling <code>subprocess.wait()</code>. This will continually read off of the STDOUT and STDERR pipes and buffer the messages in memory, wait for the process to finish, and return them both as a tuple once the subprocess has finished. You should be careful here as well since the log output is buffered in memory it has the potential to consume all available memory depending on the output log volume of the subprocess. This is also not suitable for long running processes where python is acting as a supervisor as you will eventually run out of memory.</p><p>For applications where python is performing the role of a supervisor we need to be stream the logs from the subprocess to another location. The easiest way to accomplish this is to redirect STDERR to STDOUT and create a log streaming function that will stream the logs via a background thread.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>subprocess</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>threading</span> <span class=kn>import</span> <span class=n>Thread</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>async_stream_process_stdout</span><span class=p>(</span><span class=n>process</span><span class=p>,</span> <span class=n>log_fn</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34; Stream the stdout and stderr for a process out to display async
+</span></span></span><span class=line><span class=cl><span class=s2>    :param process: the process to stream the log for
+</span></span></span><span class=line><span class=cl><span class=s2>    :param log_fn: a function that will be called for each log line
+</span></span></span><span class=line><span class=cl><span class=s2>    :return: None
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>logging_thread</span> <span class=o>=</span> <span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>stream_process_stdout</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                            <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>process</span><span class=p>,</span> <span class=n>log_fn</span><span class=p>,</span> <span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>logging_thread</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>logging_thread</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>stream_process_stdout</span><span class=p>(</span><span class=n>process</span><span class=p>,</span> <span class=n>log_fn</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34; Stream the stdout and stderr for a process out to display
+</span></span></span><span class=line><span class=cl><span class=s2>    :param process: the process to stream the logs for
+</span></span></span><span class=line><span class=cl><span class=s2>    :param log_fn: a function that will be called for each log line
+</span></span></span><span class=line><span class=cl><span class=s2>    :return: None
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>line</span> <span class=o>=</span> <span class=n>process</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>readline</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>line</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>log_fn</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>log_fn</span><span class=p>(</span><span class=n>process</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>lambda</span> <span class=n>line</span><span class=p>:</span> <span class=n>sys</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s2>&#34;</span><span class=si>%s</span><span class=s2>: </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>process</span><span class=p>,</span> <span class=n>line</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logTimes</span> <span class=o>=</span> <span class=n>sys</span><span class=o>.</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>ps_one</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>Popen</span><span class=p>((</span><span class=s2>&#34;./log&#34;</span><span class=p>,</span> <span class=n>logTimes</span><span class=p>),</span> <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span> <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>STDOUT</span><span class=p>,</span> <span class=n>bufsize</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>ps_two</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>Popen</span><span class=p>((</span><span class=s2>&#34;./log&#34;</span><span class=p>,</span> <span class=n>logTimes</span><span class=p>),</span> <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>PIPE</span><span class=p>,</span> <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>STDOUT</span><span class=p>,</span> <span class=n>bufsize</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logger_one</span> <span class=o>=</span> <span class=n>async_stream_process_stdout</span><span class=p>(</span><span class=n>ps_one</span><span class=p>,</span> <span class=n>log_fn</span><span class=p>(</span><span class=s2>&#34;ps_one&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>logger_two</span> <span class=o>=</span> <span class=n>async_stream_process_stdout</span><span class=p>(</span><span class=n>ps_two</span><span class=p>,</span> <span class=n>log_fn</span><span class=p>(</span><span class=s2>&#34;ps_two&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logger_one</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>logger_two</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span></code></pre></div><p>One other alternative is to make sure that you are always streaming the STDOUT and STDERR of a subprocess to a dedicated file rather than to <code>subprocess.PIPE</code>.</p></section></article></main><footer><hr><a class="soc no-underline" href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class="soc no-underline" href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|<a class="soc no-underline" href=/index.xml title=RSS><i data-feather=rss></i></a>|⚡️
+2022 © Andrew Jorgensen | Built with <a class=no-underline href=https://gohugo.io>Hugo</a>
+| <span id=theme-toggle></span></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>

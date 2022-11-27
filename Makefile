@@ -24,6 +24,12 @@ serve:
 deploy:
 	./deploy.sh
 
+build:
+	@hugo --minify
+
+gh-deploy:
+	git subtree push --prefix public origin gh-pages
+
 NOW=$(shell date +%Y%m%d%H%M%S)
 new-post:
 	@hugo new posts/$(NOW)-$(title).md
