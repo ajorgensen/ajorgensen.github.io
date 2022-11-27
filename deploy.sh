@@ -9,7 +9,7 @@ echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
 echo -e "\033[0;32mBuilding site...\033[0m"
-make build
+hugo --minify
 
 git diff-index --quiet HEAD --
 if [ $? -ne 0 ]; then
@@ -31,4 +31,4 @@ fi
 
 # Deploy to firebase
 echo -e "\033[0;32mDeploying ...\033[0m"
-make deploy
+git subtree push --prefix public origin gh-pages
