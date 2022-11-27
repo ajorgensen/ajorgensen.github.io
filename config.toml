@@ -5,6 +5,7 @@ languageCode = "en-us"
 theme = "ajorgensen"
 copyright = "© Andrew Jorgensen"
 enableRobotsTXT = true
+defaultContentLanguage = 'en'
 
 [params]
 	featherIconsCDN=true
