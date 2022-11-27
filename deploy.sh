@@ -9,7 +9,7 @@ echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
 echo -e "\033[0;32mBuilding site...\033[0m"
-hugo
+make build
 
 git diff-index --quiet HEAD --
 if [ $? -ne 0 ]; then
