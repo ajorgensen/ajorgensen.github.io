@@ -9,13 +9,9 @@ $(GOPATH)/bin/hugo:
 HOMEBREW_PREFIX ?= /usr/local
 HOMEBREW_BIN = $(HOMEBREW_PREFIX)/bin
 
-$(HOMEBREW_BIN)/firebase-cli:
-	brew install firebase-cli
-
-deps: $(GOPATH)/bin/hugo $(HOMEBREW_BIN)/firebase-cli
+deps: $(GOPATH)/bin/hugo
 
 setup: deps
-	@firebase use blog-9e399
 
 serve:
 	open "http://localhost:1313"
@@ -26,9 +22,6 @@ deploy:
 
 build:
 	@hugo --minify
-
-gh-deploy:
-	git subtree push --prefix public origin gh-pages
 
 NOW=$(shell date +%Y%m%d%H%M%S)
 new-post:

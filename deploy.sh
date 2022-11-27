@@ -5,11 +5,6 @@ if test ! $(which hugo); then
   exit 1
 fi
 
-if test ! $(which firebase); then
-  echo "You need to have firebase installed"
-  exit 1
-fi
-
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
@@ -35,5 +30,5 @@ if [ $? -ne 0 ]; then
 fi
 
 # Deploy to firebase
-echo -e "\033[0;32mDeploying to firebase hosting...\033[0m"
-firebase deploy
+echo -e "\033[0;32mDeploying ...\033[0m"
+make deploy
