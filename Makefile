@@ -9,13 +9,15 @@ $(GOPATH)/bin/hugo:
 HOMEBREW_PREFIX ?= /usr/local
 HOMEBREW_BIN = $(HOMEBREW_PREFIX)/bin
 
+#npm install postcss-cli
+
 deps: $(GOPATH)/bin/hugo
 
 setup: deps
 
 serve:
 	open "http://localhost:1313"
-	hugo serve --buildDrafts
+	hugo serve --disableFastRender --buildDrafts
 
 deploy:
 	./deploy.sh

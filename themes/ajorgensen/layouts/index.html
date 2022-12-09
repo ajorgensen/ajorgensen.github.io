@@ -2,7 +2,7 @@
 <html lang="{{ .Site.LanguageCode }}">
   {{ partial "head.html" . }}
 
-  <body>
+  <body class="bg-white dark:bg-black">
     {{ partial "header.html" . }}
 
     <main class="list">
@@ -15,6 +15,9 @@
         <a class="post-link" href="{{ .RelPermalink }}"> {{.Title}}</a>
       </section>
       {{ end }}
+
+      <h1 class="text-blue-700 text-3xl font-bold dark:text-red">thisSiteIsNew</h1>
+      <p class="bg-sky-600 text-slate-100">The thisSiteIsNew uses a theme called thisThemeIsNew</p>
     </main>
 
     {{ partial "footer.html" . }}

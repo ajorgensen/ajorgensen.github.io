@@ -1,0 +1,26 @@
+{
+  "name": "ajorgensen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-tw": "npx tailwindcss -i ./assets/css/main.css -o ./assets/css/style.css",
+    "start": "hugo --gc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.19",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "@fullhuman/postcss-purgecss": "^4.x",
+    "@tailwindcss/aspect-ratio": "^0.x",
+    "@tailwindcss/forms": "^0.x",
+    "@tailwindcss/line-clamp": "^0.x",
+    "@tailwindcss/typography": "^0.5.x",
+    "tailwindcss": "^3.2.4"
+  }
+}
