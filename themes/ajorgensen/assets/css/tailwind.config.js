@@ -1,25 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
+  darkMode: "class",
   content: [
     "./themes/**/layouts/**/*.html",
-    "./content/**/layouts/**/*.html",
+    "./themes/**/content/**/*.html",
     "./layouts/**/*.html",
-    "./content/**/*.html"
+    "./content/**/*.{html, md}",
   ],
+
+  purge: {
+		enabled: process.env.HUGO_ENVIRONMENT === 'production',
+  },
 
   theme: {
-    extend:{
+    extend: {
       colors: {
+        transparent: "transparent",
         accent: "#FF572D",
+        "dark-background": "#202630",
+        "light-background": "#F5F5F5"
       },
     },
-
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/line-clamp'),
-  ],
-}
+  plugins: [require("@tailwindcss/typography")],
+};

@@ -1,6 +1,12 @@
-<header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="{{ .Site.BaseURL }}"> {{ .Site.Title }} </a>
-    <a class="navbar-item" href="/tags">Tags</a>
+<header class="pt-4 pb-8">
+  <div class="flex flex-row justify-between">
+    <div>
+      <a class="text-2xl font-semibold text-white hover:text-accent" href="{{ .Site.BaseURL }}"> 
+        {{ .Site.Title }}
+      </a>
+    </div>
+    <div>
+      <a class="justify-between text-white hover:text-accent" href="/tags">Tags</a>
+    </div>
   </div>
 </header>

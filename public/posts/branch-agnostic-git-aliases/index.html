@@ -1,38 +1,96 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><link rel=canonical href=https://aj.codes/posts/branch-agnostic-git-aliases/><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@ajorgensen"><meta name=og:title content="Branch Agnostic Git Aliases"><meta property="og:type" content="website"><meta property="og:description" content><meta property="og:url" content="https://aj.codes/posts/branch-agnostic-git-aliases/"><meta name=og:image content="/images/cat.jpg"><meta name=twitter:image content="/images/cat.jpg"><meta name=twitter:creator content="@ajorgensen"><meta name=twitter:title content="Branch Agnostic Git Aliases"><title>Branch Agnostic Git Aliases - Andrew Jorgensen</title><link rel=stylesheet type=text/css href=https://aj.codes/css/main.css><link rel=stylesheet type=text/css href=https://aj.codes/css/syntax.css><script src=https://aj.codes/js/theme-toggle.js></script>
-<script src=https://aj.codes//js/feather.min.js></script></head><body><header><div class=navbar><a class="logo navbar-item" href=https://aj.codes/>Andrew Jorgensen</a>
-<a class=navbar-item href=/tags>Tags</a></div></header><main><article><div><h1 class=title>Branch Agnostic Git Aliases</h1><div class=meta><time class=date>2020-10-12</time>
-⋅
-<a class=no-underline href=/tags/git>git</a></div></div><section class=body><p>Github and others have recently changed the name of the default branch in git
-from <code>master</code> to <code>main</code>, you can read more about the change <a href=https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/ target=_blank rel="nofollow noopener noreferrer">here</a>. If you
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/branch-agnostic-git-aliases/" />
+
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Branch Agnostic Git Aliases" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
+		<meta property="og:url" content="https://aj.codes/posts/branch-agnostic-git-aliases/" /><meta name="og:image" content="/images/cat.jpg" />
+			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Branch Agnostic Git Aliases" /><title>Branch Agnostic Git Aliases - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0"><link rel="stylesheet" href="https://aj.codes/css/styles.css" integrity="">
+	
+  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
+
+  <script src="https://aj.codes/js/theme-toggle.js"></script>
+  <script src="https://aj.codes//js/feather.min.js"></script>
+</head>
+<body><header>
+  <div class="navbar">
+    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
+    <a class="navbar-item" href="/tags">Tags</a>
+  </div>
+</header>
+
+<main>
+	<article>
+		<div>
+			<h1 class="title">Branch Agnostic Git Aliases</h1>
+
+			<div class="meta">
+        <time class="date">2020-10-12</time>
+        ⋅
+        
+
+        
+          <a class="no-underline" href="/tags/git">git</a>
+        
+      </div>
+		</div>
+
+		<section class="body">
+			<p>Github and others have recently changed the name of the default branch in git
+from <code>master</code> to <code>main</code>, you can read more about the change <a href="https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/" target="_blank" rel="nofollow noopener noreferrer">here</a>. If you
 are like me you likely had a few git aliases that were hard coded to assume the
 default branch in a repository was <code>master</code>, however there is a better way of
-writing git aliases that will work no matter what the default is set to.</p><p>Git aliases allow you to create custom shortcuts to make your git workflow
+writing git aliases that will work no matter what the default is set to.</p>
+<p>Git aliases allow you to create custom shortcuts to make your git workflow
 easier and more intuitive, you can find a full list of the git aliases I use
-<a href=https://github.com/ajorgensen/dotfiles/blob/master/.gitconfig#L40 target=_blank rel="nofollow noopener noreferrer">here</a>. To outline the problem lets looks at a few example aliases that someone
-might have.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=p>[</span><span class=l>alias]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>diff = diff master</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>pom = push origin master</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>merged-branches = &#34;!git branch --merged master&#34;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>sync = &#34;!git fetch -p &amp;&amp; git rebase origin/master&#34;</span><span class=w>
+<a href="https://github.com/ajorgensen/dotfiles/blob/master/.gitconfig#L40" target="_blank" rel="nofollow noopener noreferrer">here</a>. To outline the problem lets looks at a few example aliases that someone
+might have.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">alias]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">diff = diff master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">pom = push origin master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">merged-branches = &#34;!git branch --merged master&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">sync = &#34;!git fetch -p &amp;&amp; git rebase origin/master&#34;</span><span class="w">
 </span></span></span></code></pre></div><p>With the change to the default branch being up to the repository maintainer you
 may be in a scenario where some repositories you work with will have different
 default branch names. One solution to this is to duplicate any aliases you want
 to work with each of the defaults but that can get tedious and error prone, what
-if someone chooses to go old school and use <code>trunk</code> instead?</p><p>Fortunately there is a way to write your git aliases in a branch agnostic way
-using <code>git symbolic-ref</code>. First the <strong>tl;dr</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=p>[</span><span class=l>alias]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>default-branch = &#34;!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/&#34;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>diff = diff $(git default-branch)</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>pom = push origin $(git default-branch)</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>merged-branches = &#34;!git branch --merged $(git default-branch)&#34;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>sync = &#34;!git fetch -p &amp;&amp; git rebase origin/$(git default-branch)&#34;</span><span class=w>
-</span></span></span></code></pre></div><h1 id=how-does-it-work>How does it work?</h1><p>If you want to rename the branch for your own repositories you can find steps
-<a href=https://jarv.is/notes/github-rename-master/ target=_blank rel="nofollow noopener noreferrer">here</a>.</p><p>In git there is a reference stored at the <code>.git/HEAD</code> that tells git what the
+if someone chooses to go old school and use <code>trunk</code> instead?</p>
+<p>Fortunately there is a way to write your git aliases in a branch agnostic way
+using <code>git symbolic-ref</code>. First the <strong>tl;dr</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">alias]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">default-branch = &#34;!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">diff = diff $(git default-branch)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">pom = push origin $(git default-branch)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">merged-branches = &#34;!git branch --merged $(git default-branch)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">sync = &#34;!git fetch -p &amp;&amp; git rebase origin/$(git default-branch)&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="how-does-it-work">How does it work?</h1>
+<p>If you want to rename the branch for your own repositories you can find steps
+<a href="https://jarv.is/notes/github-rename-master/" target="_blank" rel="nofollow noopener noreferrer">here</a>.</p>
+<p>In git there is a reference stored at the <code>.git/HEAD</code> that tells git what the
 default branch is. There is a similar reference on the remote side as well. One
 thing to note is that actually charging the default branch on the remote side,
-each client should also sync their local state as well to match using <code>git remote set-head origin --auto</code>.</p><p>Once this value is synchronized, it should be updated locally as well and we can
+each client should also sync their local state as well to match using <code>git remote set-head origin --auto</code>.</p>
+<p>Once this value is synchronized, it should be updated locally as well and we can
 use <code>git symbolic-ref</code> to get the branch that <code>HEAD</code>. Fortunately this gives as
 a way to create git aliases and scripts that are agnostic to what the remote has
-set the default branch to be.</p></section></article></main><footer><hr><a class="soc no-underline" href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class="soc no-underline" href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|<a class="soc no-underline" href=/index.xml title=RSS><i data-feather=rss></i></a>|⚡️
-2022 © Andrew Jorgensen | Built with <a class=no-underline href=https://gohugo.io>Hugo</a>
-| <span id=theme-toggle></span></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
-<script>feather.replace()</script></body></html>
+set the default branch to be.</p>
+		</section>
+	</article>
+</main>
+<footer>
+<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
+	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+      | <span id="theme-toggle"></span>
+</footer>
+
+
+
+<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+      feather.replace()
+</script><footer class="bottom-0 w-full p-4 text-xs text-center text-gray-400 border-t border-gray-200 bg-accent">
+      <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a> and <a href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a></p>
+</footer></body>
+</html>

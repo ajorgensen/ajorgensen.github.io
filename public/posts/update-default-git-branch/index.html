@@ -1,13 +1,70 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><link rel=canonical href=https://aj.codes/posts/update-default-git-branch/><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@ajorgensen"><meta name=og:title content="Change Default git Branch"><meta property="og:type" content="website"><meta property="og:description" content><meta property="og:url" content="https://aj.codes/posts/update-default-git-branch/"><meta name=og:image content="/images/cat.jpg"><meta name=twitter:image content="/images/cat.jpg"><meta name=twitter:creator content="@ajorgensen"><meta name=twitter:title content="Change Default git Branch"><title>Change Default git Branch - Andrew Jorgensen</title><link rel=stylesheet type=text/css href=https://aj.codes/css/main.css><link rel=stylesheet type=text/css href=https://aj.codes/css/syntax.css><script src=https://aj.codes/js/theme-toggle.js></script>
-<script src=https://aj.codes//js/feather.min.js></script></head><body><header><div class=navbar><a class="logo navbar-item" href=https://aj.codes/>Andrew Jorgensen</a>
-<a class=navbar-item href=/tags>Tags</a></div></header><main><article><div><h1 class=title>Change Default git Branch</h1><div class=meta><time class=date>2022-03-21</time>
-⋅
-<a class=no-underline href=/tags/git>git</a></div></div><section class=body><p>First we&rsquo;ll need to rename the old branch to the new branch. For this we&rsquo;ll be renaming the master branch to main.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git branch -m master main
-</span></span></code></pre></div><p>Since the rename was only a local change, we now need to push up the new renamed branch to remote.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git push -u origin main
-</span></span></code></pre></div><p>Next we need to tell git that main is the new default branch by updating the reference to HEAD</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
-</span></span></code></pre></div><p>Next if you&rsquo;re pushing to Github you&rsquo;ll want to go into the branches settings for the repository and update the default branch from the old branch to the new branch (main in this case)</p><p>At this point you can verify that the correct branch is set as the default in Github as well as check locally to make sure everything is setup correctly by doing</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git branch -a
-</span></span></code></pre></div><p>Once you&rsquo;ve verified everything is correct you can now safely delete the old branch from Github</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git push origin --delete master
-</span></span></code></pre></div></section></article></main><footer><hr><a class="soc no-underline" href=https://github.com/ajorgensen/ title=GitHub><i data-feather=github></i></a>|<a class="soc no-underline" href=https://twitter.com/ajorgensen/ title=Twitter><i data-feather=twitter></i></a>|<a class="soc no-underline" href=/index.xml title=RSS><i data-feather=rss></i></a>|⚡️
-2022 © Andrew Jorgensen | Built with <a class=no-underline href=https://gohugo.io>Hugo</a>
-| <span id=theme-toggle></span></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
-<script>feather.replace()</script></body></html>
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/update-default-git-branch/" />
+
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Change Default git Branch" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
+		<meta property="og:url" content="https://aj.codes/posts/update-default-git-branch/" /><meta name="og:image" content="/images/cat.jpg" />
+			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Change Default git Branch" /><title>Change Default git Branch - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0"><link rel="stylesheet" href="https://aj.codes/css/styles.css" integrity="">
+	
+  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
+
+  <script src="https://aj.codes/js/theme-toggle.js"></script>
+  <script src="https://aj.codes//js/feather.min.js"></script>
+</head>
+<body><header>
+  <div class="navbar">
+    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
+    <a class="navbar-item" href="/tags">Tags</a>
+  </div>
+</header>
+
+<main>
+	<article>
+		<div>
+			<h1 class="title">Change Default git Branch</h1>
+
+			<div class="meta">
+        <time class="date">2022-03-21</time>
+        ⋅
+        
+
+        
+          <a class="no-underline" href="/tags/git">git</a>
+        
+      </div>
+		</div>
+
+		<section class="body">
+			<p>First we&rsquo;ll need to rename the old branch to the new branch. For this we&rsquo;ll be renaming the master branch to main.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -m master main
+</span></span></code></pre></div><p>Since the rename was only a local change, we now need to push up the new renamed branch to remote.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push -u origin main
+</span></span></code></pre></div><p>Next we need to tell git that main is the new default branch by updating the reference to HEAD</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+</span></span></code></pre></div><p>Next if you&rsquo;re pushing to Github you&rsquo;ll want to go into the branches settings for the repository and update the default branch from the old branch to the new branch (main in this case)</p>
+<p>At this point you can verify that the correct branch is set as the default in Github as well as check locally to make sure everything is setup correctly by doing</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -a
+</span></span></code></pre></div><p>Once  you&rsquo;ve verified everything is correct you can now safely delete the old branch from Github</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push origin --delete master
+</span></span></code></pre></div>
+		</section>
+	</article>
+</main>
+<footer>
+<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
+	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
+      | <span id="theme-toggle"></span>
+</footer>
+
+
+
+<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+      feather.replace()
+</script><footer class="bottom-0 w-full p-4 text-xs text-center text-gray-400 border-t border-gray-200 bg-accent">
+      <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a> and <a href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a></p>
+</footer></body>
+</html>

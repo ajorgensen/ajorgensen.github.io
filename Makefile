@@ -1,22 +1,17 @@
 GO ?= go
 GOPATH ?= $(HOME)/go
-GO_VERSION = 1.18
+GO_VERSION = 1.19
 
-#$(GO) install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.44.2
 $(GOPATH)/bin/hugo:
-	$(GO) install github.com/gohugoio/hugo@v0.95.0
+	$(GO) install github.com/gohugoio/hugo@v0.108.0
 
 HOMEBREW_PREFIX ?= /usr/local
 HOMEBREW_BIN = $(HOMEBREW_PREFIX)/bin
 
-#npm install postcss-cli
-
+#npm install -g postcss-cli
 deps: $(GOPATH)/bin/hugo
 
-setup: deps
-
 serve:
-	open "http://localhost:1313"
 	hugo serve --disableFastRender --buildDrafts
 
 deploy:

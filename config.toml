@@ -8,7 +8,7 @@ enableRobotsTXT = true
 defaultContentLanguage = 'en'
 
 [build]
-  writeStats = true
+  writeStats = false
 
 [params]
 	featherIconsCDN=true

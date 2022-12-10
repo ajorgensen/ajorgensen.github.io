@@ -74,13 +74,24 @@
 
 	{{ hugo.Generator }}
 	
-	{{- $styles := resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") -}}
-	{{- if .Site.IsServer }}
-	<link rel="stylesheet" href="{{ $styles.Permalink }}"> 
+	{{ if .Site.IsServer }}
+			{{ $seed := "weqklrjfmnk213409ufasdfhnlk3j4bladsfsl" }}
+			{{ $random := delimit (shuffle (split (md5 $seed) "" )) "" }}
+			{{
+			$style := resources.Get "css/styles.css"
+			| postCSS (dict "config" "./assets/css/postcss.config.js")
+			| resources.ExecuteAsTemplate (printf "tailwind.dev.%s.css" $random) $random
+			}}
+			<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 	{{ else }}
-		{{- $styles := $styles| minify | fingerprint | resources.PostProcess -}}
-	<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
-	{{ end -}}
+			{{
+			$style := resources.Get "styles.css"
+					| resources.PostCSS
+					| resources.Minify
+			}}
+			<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+	{{ end }}
+
 
 	<!--
   <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/main.css" />

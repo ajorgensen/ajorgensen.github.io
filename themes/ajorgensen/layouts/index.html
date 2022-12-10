@@ -2,17 +2,17 @@
 <html lang="{{ .Site.LanguageCode }}">
   {{ partial "head.html" . }}
 
-  <body class="bg-white dark:bg-black">
+  <body class="mx-auto w-full max-w-2xl font-sans text-white bg-light-background dark:bg-dark-background">
     {{ partial "header.html" . }}
 
-    <main class="list">
+    <main class="">
       {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
       {{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
       {{ range $paginator.Pages }}
 
-      <section class="list-item">
-        <time class="date">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
-        <a class="post-link" href="{{ .RelPermalink }}"> {{.Title}}</a>
+      <section class="">
+        <time class="text-white font-mono">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
+        <a class="post-link text-accent" href="{{ .RelPermalink }}"> {{.Title}}</a>
       </section>
       {{ end }}
     </main>
