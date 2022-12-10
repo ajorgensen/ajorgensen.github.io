@@ -7,8 +7,14 @@ module.exports = {
     "./layouts/**/*.html",
     "./content/**/*.html"
   ],
+
   theme: {
-    extend:{}
+    extend:{
+      colors: {
+        accent: "#FF572D",
+      },
+    },
+
   },
   plugins: [
     require('@tailwindcss/typography'),
