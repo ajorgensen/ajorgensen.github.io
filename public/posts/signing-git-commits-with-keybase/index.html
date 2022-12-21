@@ -1,109 +1,17 @@
-<!DOCTYPE html>
-<html lang="en-us"><head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/signing-git-commits-with-keybase/" />
-
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Signing Git Commits With Keybase" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
-		<meta property="og:url" content="https://aj.codes/posts/signing-git-commits-with-keybase/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Signing Git Commits With Keybase" /><title>Signing Git Commits With Keybase - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
-
-	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
-  
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
-  <div class="flex flex-row justify-between">
-    <div>
-      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
-        Andrew Jorgensen
-      </a>
-    </div>
-    <div>
-      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
-    </div>
-  </div>
-</header>
-<main class="flex-1">
-<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
-	<h1>
-		<span>
-			Signing Git Commits With Keybase
-		</span>
-
-		<div class="text-xl mt-4">
-			<time class="font-mono not-prose font-thin">2019-05-28</time>
-			⋅
-			
-
-			
-				<a class=" text-accent text-xl m" href="/tags/git">git</a>
-			
-				<a class=" text-accent text-xl m" href="/tags/security">security</a>
-			
-				<a class=" text-accent text-xl m" href="/tags/keybase">keybase</a>
-			
-		</div>
-	</h1>
-
-	<section class="leading-normal space-y-4">
-		<p>Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn&rsquo;t like badges. Managing private keys can be a tricky process but fortunately <a href="https://keybase.io/" target="_blank" rel="nofollow noopener noreferrer">keybase</a> greatly simplifies this and allows us to easily share keys between different machines.</p>
-<h1 id="install-keybase">Install Keybase</h1>
-<p>If you are a homebrew fan then installing keybase is as easy as <code>brew cask install keybase</code>. If you&rsquo;re more of an &lsquo;old fashioned&rsquo; kind of person, head on over to <a href="https://keybase.io/download" target="_blank" rel="nofollow noopener noreferrer">keybase.io/download</a>.</p>
-<h1 id="export-your-gpg-key">Export your gpg key</h1>
-<p>First you will need to make sure that gpg is installed correctly on your machine. Installing gpg is pretty simple with homebrew, <code>brew install gnupg</code>.</p>
-<p>Now that we have that out of the way its time to export our signing key from Keybase so its available to use with gpg. <code>keybase pgp export | gpg --import</code> should do the trick. Note that this does assume you only have 1 key stored in keybase, if you have multiple you will need to re-run the same command with <code>-q &lt;keyID&gt;</code> to select the appropriate key.</p>
-<p>Now we need to export the pgp keys secret into gpg so it can be used for signing. <code>keybase pgp export --secret | gpg --import --allow-secret-key-import</code>. Similar to the previous command, if you have multiple keys in keybase you will need to use <code>-q &lt;keyID&gt;</code> to specify which secret you want to export.</p>
-<p>You should now be able to run <code>gpg --list-keys</code> to verify that your key has properly been imported into gpg. You can also run <code>gpg --list-secret-keys</code> to verify your secret has been successfully imported.</p>
-<h1 id="setup-git-to-sign-our-commits">Setup git to sign our commits</h1>
-<p>Now we need to teach git how to use our key to sign our commits. This is fairly straightforward, the first thing we need to do is to turn on commit signing <code>git config --global commit.gpgsign true</code>. This will modify your <code>~/.gitconfig</code> to enable gpg signing automatically on commit.</p>
-<p>You may also need to tell what signing key git should use. If you already know the signature, great! If not you can list your installed keys with <code>gpg --list-keys --keyid-format LONG</code> and find the signature that corresponds to your email address for the key you just imported. Now we can tell git which key to use for signing <code>git config --global user.signingKey B104211111</code>. While you&rsquo;re at it, make sure your email is set correctly <code>git config --global user.email user@mail.com</code>.</p>
-<h1 id="tell-github-to-give-us-that-sweet-verified-badge">Tell GitHub to give us that sweet Verified badge</h1>
-<p>Next we need to tell GitHub about our signing key so it can properly verify our signed commits. You can export the public signature using <code>gpg --armor --export keyID</code>. Copy this value and head on over to <a href="https://github.com/settings/keys" target="_blank" rel="nofollow noopener noreferrer">GitHub</a> and click on &ldquo;New GPG key&rdquo; to add it to your list of key signatures.</p>
-<p>Now all commits you make should be correctly signed with your private key and you&rsquo;ll get that Verified badge to let people know you are legit.</p>
-	</section>
-</article>
-
-    </main><footer class="flex flex-col mb-5">
-      <div >
-            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
-      </div>
-      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
-                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
-            </span>
-            <span>|</span><span>
-            2022  © Andrew Jorgensen  
-            </span>
-
-            <span>|</span>
-
-            <span>
-                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
-            </span>
-
-            <span>|</span> 
-
-            <span id="theme-toggle" class="hover:text-accent">
-            </span>
-      </div>
-</footer>
-
-
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-
-</html>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><link rel=canonical href=https://aj.codes/posts/signing-git-commits-with-keybase/><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@ajorgensen"><meta name=og:title content="Signing Git Commits With Keybase"><meta property="og:type" content="website"><meta property="og:description" content><meta property="og:url" content="https://aj.codes/posts/signing-git-commits-with-keybase/"><meta name=og:image content="/images/cat.jpg"><meta name=twitter:image content="/images/cat.jpg"><meta name=twitter:creator content="@ajorgensen"><meta name=twitter:title content="Signing Git Commits With Keybase"><title>Signing Git Commits With Keybase - Andrew Jorgensen</title><meta name=generator content="Hugo 0.108.0"><link rel=stylesheet type=text/css href=https://aj.codes/css/output.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class=py-8><div class="flex flex-row justify-between"><div><a class="text-xl font-semibold hover:text-accent" href=https://aj.codes/>Andrew Jorgensen</a></div><div><a class="justify-between text-lg hover:text-accent" href=/tags>Tags</a></div></div></header><main class=flex-1><article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl"><h1><span>Signing Git Commits With Keybase</span><div class="text-xl mt-4"><time class="font-mono not-prose font-thin">2019-05-28</time>
+⋅
+<a class="text-accent text-xl m" href=/tags/git>git</a>
+<a class="text-accent text-xl m" href=/tags/security>security</a>
+<a class="text-accent text-xl m" href=/tags/keybase>keybase</a></div></h1><section class="leading-normal space-y-4"><p>Signing your commits is a good practice that applies your John Hancock to your work so that others can verify that it was really you made the change, plus you get a cool Verified badge on GitHub and who doesn&rsquo;t like badges. Managing private keys can be a tricky process but fortunately <a href=https://keybase.io/ target=_blank rel="nofollow noopener noreferrer">keybase</a> greatly simplifies this and allows us to easily share keys between different machines.</p><h1 id=install-keybase>Install Keybase</h1><p>If you are a homebrew fan then installing keybase is as easy as <code>brew cask install keybase</code>. If you&rsquo;re more of an &lsquo;old fashioned&rsquo; kind of person, head on over to <a href=https://keybase.io/download target=_blank rel="nofollow noopener noreferrer">keybase.io/download</a>.</p><h1 id=export-your-gpg-key>Export your gpg key</h1><p>First you will need to make sure that gpg is installed correctly on your machine. Installing gpg is pretty simple with homebrew, <code>brew install gnupg</code>.</p><p>Now that we have that out of the way its time to export our signing key from Keybase so its available to use with gpg. <code>keybase pgp export | gpg --import</code> should do the trick. Note that this does assume you only have 1 key stored in keybase, if you have multiple you will need to re-run the same command with <code>-q &lt;keyID></code> to select the appropriate key.</p><p>Now we need to export the pgp keys secret into gpg so it can be used for signing. <code>keybase pgp export --secret | gpg --import --allow-secret-key-import</code>. Similar to the previous command, if you have multiple keys in keybase you will need to use <code>-q &lt;keyID></code> to specify which secret you want to export.</p><p>You should now be able to run <code>gpg --list-keys</code> to verify that your key has properly been imported into gpg. You can also run <code>gpg --list-secret-keys</code> to verify your secret has been successfully imported.</p><h1 id=setup-git-to-sign-our-commits>Setup git to sign our commits</h1><p>Now we need to teach git how to use our key to sign our commits. This is fairly straightforward, the first thing we need to do is to turn on commit signing <code>git config --global commit.gpgsign true</code>. This will modify your <code>~/.gitconfig</code> to enable gpg signing automatically on commit.</p><p>You may also need to tell what signing key git should use. If you already know the signature, great! If not you can list your installed keys with <code>gpg --list-keys --keyid-format LONG</code> and find the signature that corresponds to your email address for the key you just imported. Now we can tell git which key to use for signing <code>git config --global user.signingKey B104211111</code>. While you&rsquo;re at it, make sure your email is set correctly <code>git config --global user.email user@mail.com</code>.</p><h1 id=tell-github-to-give-us-that-sweet-verified-badge>Tell GitHub to give us that sweet Verified badge</h1><p>Next we need to tell GitHub about our signing key so it can properly verify our signed commits. You can export the public signature using <code>gpg --armor --export keyID</code>. Copy this value and head on over to <a href=https://github.com/settings/keys target=_blank rel="nofollow noopener noreferrer">GitHub</a> and click on &ldquo;New GPG key&rdquo; to add it to your list of key signatures.</p><p>Now all commits you make should be correctly signed with your private key and you&rsquo;ll get that Verified badge to let people know you are legit.</p></section></article></main><footer class="flex flex-col mb-5"><div><hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700"></div><div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span><a class="text-accent text-sm" href=https://github.com/ajorgensen/ title=GitHub><i class="w-5 h-5" data-feather=github></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=https://twitter.com/ajorgensen/ title=Twitter><i class="w-5 h-5" data-feather=twitter></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=/index.xml title=RSS><i class="w-5 h-5" data-feather=rss></i></a></span>
+<span>|</span><span>
+2022 © Andrew Jorgensen</span>
+<span>|</span>
+<span>Built with <a class=hover:text-accent href=https://gohugo.io>Hugo</a></span>
+<span>|</span>
+<span id=theme-toggle class=hover:text-accent></span></div></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>

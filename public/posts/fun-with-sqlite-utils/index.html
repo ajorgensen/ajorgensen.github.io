@@ -1,149 +1,64 @@
-<!DOCTYPE html>
-<html lang="en-us"><head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/fun-with-sqlite-utils/" />
-
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Fun With sqlite-utils" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
-		<meta property="og:url" content="https://aj.codes/posts/fun-with-sqlite-utils/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Fun With sqlite-utils" /><title>Fun With sqlite-utils - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
-
-	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
-  
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
-  <div class="flex flex-row justify-between">
-    <div>
-      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
-        Andrew Jorgensen
-      </a>
-    </div>
-    <div>
-      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
-    </div>
-  </div>
-</header>
-<main class="flex-1">
-<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
-	<h1>
-		<span>
-			Fun With sqlite-utils
-		</span>
-
-		<div class="text-xl mt-4">
-			<time class="font-mono not-prose font-thin">2022-03-23</time>
-			⋅
-			
-
-			
-				<a class=" text-accent text-xl m" href="/tags/sqlite">sqlite</a>
-			
-		</div>
-	</h1>
-
-	<section class="leading-normal space-y-4">
-		<p>sqlite-utils has a fun feature that allows you to easily create sql schema from json or csv.</p>
-<p>First we should make sure that we have sqlite3 and sqlite-utils installed.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install sqlite3 sqlite-utils
-</span></span></code></pre></div><p>Lets say we have an external service that we want to store the data that comes back from an api request.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;E3A2E012-2BCB-4236-8D4B-98E1D0C7DE73&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Shepard&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Balshen&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;sbalshen0@feedburner.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;update_at&#34;</span><span class="p">:</span> <span class="mi">1648051756</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Now we can use sqlite-utils to generate a new table to store the data from this request</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat response.json <span class="p">|</span> sqlite-utils insert api-responses.db users -
-</span></span></code></pre></div><p>Then we can easily check the schema to see how the table was created</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlite-utils schema api-responses.db
-</span></span><span class="line"><span class="cl">CREATE TABLE <span class="o">[</span>users<span class="o">]</span> <span class="o">(</span>
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>id<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>first_name<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>last_name<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>email<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>update_at<span class="o">]</span> INTEGER
-</span></span><span class="line"><span class="cl"><span class="o">)</span><span class="p">;</span>
-</span></span></code></pre></div><p>You might want to modify the schema to add, remove, or change columns or types but this should give a good starting point.</p>
-<p>If you want to get even fancier you can pipe the api response directly from curl into sqlite-utils to make this even easier. For example if we had a slightly more complicated json response.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;E3A2E012-2BCB-4236-8D4B-98E1D0C7DE73&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Shepard&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Balshen&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;sbalshen0@feedburner.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;activities&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;4988998C-24C2-4874-932C-80B9B24CCD7C&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bike&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="mi">1648051756</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;distance&#34;</span><span class="p">:</span> <span class="mi">20</span>
-</span></span><span class="line"><span class="cl">        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;5013FDC9-B6CF-41AF-9E0C-84A9D3F8092D&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;run&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;time&#34;</span><span class="p">:</span> <span class="mi">1648051756</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;distance&#34;</span><span class="p">:</span> <span class="mi">8</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;update_at&#34;</span><span class="p">:</span> <span class="mi">1648051756</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>We can then pipe the response from the api request directly into jq and then into sqlite-utils to easily create a schema that can be used to store the data</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -X GET -s localhost:8000 <span class="p">|</span> <span class="se">\ </span>
-</span></span><span class="line"><span class="cl">jq <span class="s1">&#39;.activities[0]&#39;</span> <span class="p">|</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>sqlite-utils insert activities.db activities -
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sqlite-utils schema activities.db
-</span></span><span class="line"><span class="cl">CREATE TABLE <span class="o">[</span>activities<span class="o">]</span> <span class="o">(</span>
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>id<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>type<span class="o">]</span> TEXT,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>time<span class="o">]</span> INTEGER,
-</span></span><span class="line"><span class="cl">   <span class="o">[</span>distance<span class="o">]</span> INTEGER
-</span></span><span class="line"><span class="cl"><span class="o">)</span><span class="p">;</span>
-</span></span></code></pre></div>
-	</section>
-</article>
-
-    </main><footer class="flex flex-col mb-5">
-      <div >
-            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
-      </div>
-      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
-                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
-            </span>
-            <span>|</span><span>
-            2022  © Andrew Jorgensen  
-            </span>
-
-            <span>|</span>
-
-            <span>
-                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
-            </span>
-
-            <span>|</span> 
-
-            <span id="theme-toggle" class="hover:text-accent">
-            </span>
-      </div>
-</footer>
-
-
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-
-</html>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><link rel=canonical href=https://aj.codes/posts/fun-with-sqlite-utils/><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@ajorgensen"><meta name=og:title content="Fun With sqlite-utils"><meta property="og:type" content="website"><meta property="og:description" content><meta property="og:url" content="https://aj.codes/posts/fun-with-sqlite-utils/"><meta name=og:image content="/images/cat.jpg"><meta name=twitter:image content="/images/cat.jpg"><meta name=twitter:creator content="@ajorgensen"><meta name=twitter:title content="Fun With sqlite-utils"><title>Fun With sqlite-utils - Andrew Jorgensen</title><meta name=generator content="Hugo 0.108.0"><link rel=stylesheet type=text/css href=https://aj.codes/css/output.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class=py-8><div class="flex flex-row justify-between"><div><a class="text-xl font-semibold hover:text-accent" href=https://aj.codes/>Andrew Jorgensen</a></div><div><a class="justify-between text-lg hover:text-accent" href=/tags>Tags</a></div></div></header><main class=flex-1><article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl"><h1><span>Fun With sqlite-utils</span><div class="text-xl mt-4"><time class="font-mono not-prose font-thin">2022-03-23</time>
+⋅
+<a class="text-accent text-xl m" href=/tags/sqlite>sqlite</a></div></h1><section class="leading-normal space-y-4"><p>sqlite-utils has a fun feature that allows you to easily create sql schema from json or csv.</p><p>First we should make sure that we have sqlite3 and sqlite-utils installed.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>brew install sqlite3 sqlite-utils
+</span></span></code></pre></div><p>Lets say we have an external service that we want to store the data that comes back from an api request.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;E3A2E012-2BCB-4236-8D4B-98E1D0C7DE73&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;first_name&#34;</span><span class=p>:</span> <span class=s2>&#34;Shepard&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;last_name&#34;</span><span class=p>:</span> <span class=s2>&#34;Balshen&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;sbalshen0@feedburner.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;update_at&#34;</span><span class=p>:</span> <span class=mi>1648051756</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Now we can use sqlite-utils to generate a new table to store the data from this request</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat response.json <span class=p>|</span> sqlite-utils insert api-responses.db users -
+</span></span></code></pre></div><p>Then we can easily check the schema to see how the table was created</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sqlite-utils schema api-responses.db
+</span></span><span class=line><span class=cl>CREATE TABLE <span class=o>[</span>users<span class=o>]</span> <span class=o>(</span>
+</span></span><span class=line><span class=cl>   <span class=o>[</span>id<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>first_name<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>last_name<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>email<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>update_at<span class=o>]</span> INTEGER
+</span></span><span class=line><span class=cl><span class=o>)</span><span class=p>;</span>
+</span></span></code></pre></div><p>You might want to modify the schema to add, remove, or change columns or types but this should give a good starting point.</p><p>If you want to get even fancier you can pipe the api response directly from curl into sqlite-utils to make this even easier. For example if we had a slightly more complicated json response.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;E3A2E012-2BCB-4236-8D4B-98E1D0C7DE73&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;first_name&#34;</span><span class=p>:</span> <span class=s2>&#34;Shepard&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;last_name&#34;</span><span class=p>:</span> <span class=s2>&#34;Balshen&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;sbalshen0@feedburner.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;activities&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;4988998C-24C2-4874-932C-80B9B24CCD7C&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;bike&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;time&#34;</span><span class=p>:</span> <span class=mi>1648051756</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;distance&#34;</span><span class=p>:</span> <span class=mi>20</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;5013FDC9-B6CF-41AF-9E0C-84A9D3F8092D&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;run&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;time&#34;</span><span class=p>:</span> <span class=mi>1648051756</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;distance&#34;</span><span class=p>:</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;update_at&#34;</span><span class=p>:</span> <span class=mi>1648051756</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>We can then pipe the response from the api request directly into jq and then into sqlite-utils to easily create a schema that can be used to store the data</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -X GET -s localhost:8000 <span class=p>|</span> <span class=se>\ </span>
+</span></span><span class=line><span class=cl>jq <span class=s1>&#39;.activities[0]&#39;</span> <span class=p>|</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>sqlite-utils insert activities.db activities -
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sqlite-utils schema activities.db
+</span></span><span class=line><span class=cl>CREATE TABLE <span class=o>[</span>activities<span class=o>]</span> <span class=o>(</span>
+</span></span><span class=line><span class=cl>   <span class=o>[</span>id<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>type<span class=o>]</span> TEXT,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>time<span class=o>]</span> INTEGER,
+</span></span><span class=line><span class=cl>   <span class=o>[</span>distance<span class=o>]</span> INTEGER
+</span></span><span class=line><span class=cl><span class=o>)</span><span class=p>;</span>
+</span></span></code></pre></div></section></article></main><footer class="flex flex-col mb-5"><div><hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700"></div><div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span><a class="text-accent text-sm" href=https://github.com/ajorgensen/ title=GitHub><i class="w-5 h-5" data-feather=github></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=https://twitter.com/ajorgensen/ title=Twitter><i class="w-5 h-5" data-feather=twitter></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=/index.xml title=RSS><i class="w-5 h-5" data-feather=rss></i></a></span>
+<span>|</span><span>
+2022 © Andrew Jorgensen</span>
+<span>|</span>
+<span>Built with <a class=hover:text-accent href=https://gohugo.io>Hugo</a></span>
+<span>|</span>
+<span id=theme-toggle class=hover:text-accent></span></div></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>

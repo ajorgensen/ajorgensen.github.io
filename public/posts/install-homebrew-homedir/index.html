@@ -1,109 +1,21 @@
-<!DOCTYPE html>
-<html lang="en-us"><head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/install-homebrew-homedir/" />
-
-
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Install homebrew to your home directory" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
-		<meta property="og:url" content="https://aj.codes/posts/install-homebrew-homedir/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Install homebrew to your home directory" /><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
-
-	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
-  
-
-  <script src="https://aj.codes/js/theme-toggle.js"></script>
-  <script src="https://aj.codes//js/feather.min.js"></script>
-</head>
-<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
-  <div class="flex flex-row justify-between">
-    <div>
-      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
-        Andrew Jorgensen
-      </a>
-    </div>
-    <div>
-      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
-    </div>
-  </div>
-</header>
-<main class="flex-1">
-<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
-	<h1>
-		<span>
-			Install homebrew to your home directory
-		</span>
-
-		<div class="text-xl mt-4">
-			<time class="font-mono not-prose font-thin">2017-04-22</time>
-			⋅
-			
-
-			
-				<a class=" text-accent text-xl m" href="/tags/homebrew">homebrew</a>
-			
-		</div>
-	</h1>
-
-	<section class="leading-normal space-y-4">
-		<p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh" target="_blank" rel="nofollow noopener noreferrer">homebrew website</a> for current installation instructions.</p>
-<p>Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.</p>
-<h2 id="fresh-install">Fresh install</h2>
-<p>If you already have homebrew installed you can run <code>brew list | tr '\r\n' ' '</code> to get a list of packages that were installed with homebrew. Save this list, we will use it later. At this point you can also uninstall homebrew so it does not conflict with the new installation.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ruby -e <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall<span class="k">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></div><p>Installing homebrew to a custom directory is pretty straightforward.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$HOME</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/mxcl/homebrew.git
-</span></span></code></pre></div><p>Next we need to make sure the homebrew bin directory is in your <code>$PATH</code> in order to use installed packages.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/homebrew/bin:<span class="nv">$PATH</span>
-</span></span></code></pre></div><p>It&rsquo;s important to note here that we are putting the <code>homebrew/bin</code> directory at the front of the path. This allows us to install packages that are also provided by OSX but because the homebrew directory comes first it will us our installed version rather than the default os version.</p>
-<p>At this point you can install all of the packages that were previously installed. This step might take a little while.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install vim tree tmux ...
-</span></span></code></pre></div><p>You&rsquo;re done! Reload your terminal and verify that running <code>which brew</code> shows homebrew is installed in its new location.</p>
-<h2 id="bonus-tip">Bonus tip</h2>
-<p>I&rsquo;ve create an alias that updates homebrew, upgrades any installed formulas, and then cleans up any files that are no longer necessary. This can be useful for keeping your system up to date. Running <code>brew cleanup</code> from time to time is also important as I&rsquo;ve seen it clean upwards of <strong>1GB</strong> of space.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">sysup</span><span class="o">=</span><span class="s1">&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
-</span></span></code></pre></div>
-	</section>
-</article>
-
-    </main><footer class="flex flex-col mb-5">
-      <div >
-            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
-      </div>
-      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
-                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
-            </span>
-            <span>|</span><span>
-                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
-            </span>
-            <span>|</span><span>
-            2022  © Andrew Jorgensen  
-            </span>
-
-            <span>|</span>
-
-            <span>
-                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
-            </span>
-
-            <span>|</span> 
-
-            <span id="theme-toggle" class="hover:text-accent">
-            </span>
-      </div>
-</footer>
-
-
-
-
-
-<script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-      feather.replace()
-</script></body>
-
-</html>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><link rel=canonical href=https://aj.codes/posts/install-homebrew-homedir/><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@ajorgensen"><meta name=og:title content="Install homebrew to your home directory"><meta property="og:type" content="website"><meta property="og:description" content><meta property="og:url" content="https://aj.codes/posts/install-homebrew-homedir/"><meta name=og:image content="/images/cat.jpg"><meta name=twitter:image content="/images/cat.jpg"><meta name=twitter:creator content="@ajorgensen"><meta name=twitter:title content="Install homebrew to your home directory"><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name=generator content="Hugo 0.108.0"><link rel=stylesheet type=text/css href=https://aj.codes/css/output.css><script src=https://aj.codes/js/theme-toggle.js></script>
+<script src=https://aj.codes//js/feather.min.js></script></head><body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class=py-8><div class="flex flex-row justify-between"><div><a class="text-xl font-semibold hover:text-accent" href=https://aj.codes/>Andrew Jorgensen</a></div><div><a class="justify-between text-lg hover:text-accent" href=/tags>Tags</a></div></div></header><main class=flex-1><article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl"><h1><span>Install homebrew to your home directory</span><div class="text-xl mt-4"><time class="font-mono not-prose font-thin">2017-04-22</time>
+⋅
+<a class="text-accent text-xl m" href=/tags/homebrew>homebrew</a></div></h1><section class="leading-normal space-y-4"><p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href=https://brew.sh target=_blank rel="nofollow noopener noreferrer">homebrew website</a> for current installation instructions.</p><p>Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.</p><h2 id=fresh-install>Fresh install</h2><p>If you already have homebrew installed you can run <code>brew list | tr '\r\n' ' '</code> to get a list of packages that were installed with homebrew. Save this list, we will use it later. At this point you can also uninstall homebrew so it does not conflict with the new installation.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ruby -e <span class=s2>&#34;</span><span class=k>$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall<span class=k>)</span><span class=s2>&#34;</span>
+</span></span></code></pre></div><p>Installing homebrew to a custom directory is pretty straightforward.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> <span class=nv>$HOME</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/mxcl/homebrew.git
+</span></span></code></pre></div><p>Next we need to make sure the homebrew bin directory is in your <code>$PATH</code> in order to use installed packages.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$HOME</span>/homebrew/bin:<span class=nv>$PATH</span>
+</span></span></code></pre></div><p>It&rsquo;s important to note here that we are putting the <code>homebrew/bin</code> directory at the front of the path. This allows us to install packages that are also provided by OSX but because the homebrew directory comes first it will us our installed version rather than the default os version.</p><p>At this point you can install all of the packages that were previously installed. This step might take a little while.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>brew install vim tree tmux ...
+</span></span></code></pre></div><p>You&rsquo;re done! Reload your terminal and verify that running <code>which brew</code> shows homebrew is installed in its new location.</p><h2 id=bonus-tip>Bonus tip</h2><p>I&rsquo;ve create an alias that updates homebrew, upgrades any installed formulas, and then cleans up any files that are no longer necessary. This can be useful for keeping your system up to date. Running <code>brew cleanup</code> from time to time is also important as I&rsquo;ve seen it clean upwards of <strong>1GB</strong> of space.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>sysup</span><span class=o>=</span><span class=s1>&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
+</span></span></code></pre></div></section></article></main><footer class="flex flex-col mb-5"><div><hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700"></div><div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span><a class="text-accent text-sm" href=https://github.com/ajorgensen/ title=GitHub><i class="w-5 h-5" data-feather=github></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=https://twitter.com/ajorgensen/ title=Twitter><i class="w-5 h-5" data-feather=twitter></i></a></span>
+<span>|</span><span>
+<a class="text-accent text-sm" href=/index.xml title=RSS><i class="w-5 h-5" data-feather=rss></i></a></span>
+<span>|</span><span>
+2022 © Andrew Jorgensen</span>
+<span>|</span>
+<span>Built with <a class=hover:text-accent href=https://gohugo.io>Hugo</a></span>
+<span>|</span>
+<span id=theme-toggle class=hover:text-accent></span></div></footer><script data-goatcounter=https://ajorgensen.goatcounter.com/count async src=//gc.zgo.at/count.js></script>
+<script>feather.replace()</script></body></html>
