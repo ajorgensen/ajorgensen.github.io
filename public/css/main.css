@@ -6,7 +6,6 @@ body {
   --label: #000000;
   --strong-label: black;
   --accent: #FF572D;
-  --font-size: 1em;
   --font-mono: "JetBrains MonoVariable", monospace;
 }
 
@@ -23,11 +22,11 @@ body {
   background-color: var(--background-color);
   color: var(--label);
   margin: 0 auto;
-  max-width: 50em;
+  max-width: 35em;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 2em 1em;
-  font-size: var(--font-size);
+  font-size: 1.2em;
 }
 
 header {
@@ -92,6 +91,10 @@ a, a:hover {
 
 svg {
   max-height: 15px;
+}
+
+strong {
+  color: var(--accent);
 }
 
 .soc {
