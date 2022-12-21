@@ -1,11 +1,10 @@
 ---
 title: "The Five Ws of a Git Commit"
-slug:
-date: 2022-12-21T14:48:54-05:00
+slug: five-ws-of-git-commit
+date: 2022-12-21T0:00:00-05:00
 draft: false
-tags: ["git"]
-description:
-ogType: "article"
+tags:
+    - git
 ---
 
 Your commit history is not for you, at least not for you of right now. You of right now are full of context and understanding that despite how much we may convince ourselves that we'll remember with perfect clarity tomorrow, I rarely find that to be the case. To solve this problem it's important to approach our commit history like a story.

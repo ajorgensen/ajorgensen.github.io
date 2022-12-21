@@ -9,6 +9,7 @@ echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
 echo -e "\033[0;32mBuilding site...\033[0m"
+NODE_ENV=production npx tailwindcss -i ./assets/css/styles.css -o static/css/output.css -m
 hugo --minify
 
 git diff-index --quiet HEAD --
