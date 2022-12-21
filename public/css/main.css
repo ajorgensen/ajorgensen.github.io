@@ -1,0 +1,117 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+/* variables */
+body {
+  --background-color: rgb(245, 245, 245);;
+  --label: #000000;
+  --strong-label: black;
+  --accent: #FF572D;
+  --font-mono: "JetBrains MonoVariable", monospace;
+}
+
+body.dark-mode {
+  --background-color: #202630;
+  --label: #dddddd;
+  --strong-label: white;
+  --accent: #FF572D;
+  --font-mono: "JetBrains MonoVariable", monospace;
+}
+
+/* styles */
+body {
+  background-color: var(--background-color);
+  color: var(--label);
+  margin: 0 auto;
+  max-width: 35em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  padding: 2em 1em;
+  font-size: 1.2em;
+}
+
+header {
+  margin-bottom: 2.5em;
+}
+
+h2 {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+time {
+  margin: 1rem 0;
+}
+
+.post-link {
+  margin-left: 1rem;
+}
+
+.date {
+  font-family: var(--font-mono);
+}
+
+.list-item {
+  margin-bottom: 2em;
+}
+
+.meta {
+  font-size: 1.2em;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content:  space-between;
+}
+
+.navbar-item {
+  padding-right: 1rem;
+  color: #4a4a4a;
+}
+
+.navbar a {
+  color: var(--label);
+  font-weight: 200;
+}
+
+.navbar-item.logo {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.title a {
+  color: var(--label);
+  font-weight: 800;
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+svg {
+  max-height: 15px;
+}
+
+strong {
+  color: var(--accent);
+}
+
+.soc {
+  position: relative;
+  top: 2px;
+}
+
+.highlight pre {
+  padding: 1em;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+#theme-toggle {
+  cursor: pointer;
+}
+
+#theme-toggle:hover{
+  text-decoration: underline;
+}
