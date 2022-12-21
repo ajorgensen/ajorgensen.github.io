@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="en-us"><head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/elixir-doctests/" />
 
@@ -7,40 +7,48 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Elixir ExUnit.DocTest" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
 		<meta property="og:url" content="https://aj.codes/posts/elixir-doctests/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Elixir ExUnit.DocTest" /><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0"><link rel="stylesheet" href="https://aj.codes/css/styles.css" integrity="">
-	
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
+			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Elixir ExUnit.DocTest" /><title>Elixir ExUnit.DocTest - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
+
+	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
+  
 
   <script src="https://aj.codes/js/theme-toggle.js"></script>
   <script src="https://aj.codes//js/feather.min.js"></script>
 </head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
+<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
+  <div class="flex flex-row justify-between">
+    <div>
+      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
+        Andrew Jorgensen
+      </a>
+    </div>
+    <div>
+      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
+    </div>
   </div>
 </header>
+<main class="flex-1">
+<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
+	<h1>
+		<span>
+			Elixir ExUnit.DocTest
+		</span>
 
-<main>
-	<article>
-		<div>
-			<h1 class="title">Elixir ExUnit.DocTest</h1>
+		<div class="text-xl mt-4">
+			<time class="font-mono not-prose font-thin">2016-11-09</time>
+			⋅
+			
 
-			<div class="meta">
-        <time class="date">2016-11-09</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/elixir">elixir</a>
-        
-          <a class="no-underline" href="/tags/testing">testing</a>
-        
-      </div>
+			
+				<a class=" text-accent text-xl m" href="/tags/elixir">elixir</a>
+			
+				<a class=" text-accent text-xl m" href="/tags/testing">testing</a>
+			
 		</div>
+	</h1>
 
-		<section class="body">
-			<p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/" target="_blank" rel="nofollow noopener noreferrer">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
+	<section class="leading-normal space-y-4">
+		<p>Have you ever been frustrated by the lack working examples in documentation? <a href="http://elixir-lang.org/" target="_blank" rel="nofollow noopener noreferrer">Elixir</a> helps solve this problem with a built in feature called DocTest.</p>
 <p>Elixir&rsquo;s testing framework ExUnit provides built in support for a feature called <a href="http://elixir-lang.org/docs/stable/ex_unit/ExUnit.DocTest.html" target="_blank" rel="nofollow noopener noreferrer">DocTest</a> which allows you to write test cases in the documentation block for a function. This works really well for pure functions that simply take data and return data but is not advised for any functions that have side effects.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-elixir" data-lang="elixir"><span class="line"><span class="cl"><span class="kd">defmodule</span> <span class="nc">Calculator</span> <span class="k">do</span>
 </span></span><span class="line"><span class="cl">  <span class="na">@doc</span> <span class="sh">&#34;&#34;&#34;
@@ -86,21 +94,46 @@
 </span></span><span class="line"><span class="cl">┃ iex&gt; Calculator.add<span class="o">(</span>5, 5<span class="o">)</span>
 </span></span><span class="line"><span class="cl">┃ <span class="m">10</span>
 </span></span></code></pre></div><p>The <a href="https://elixirschool.com/lessons/basics/documentation/#documenting-functions" target="_blank" rel="nofollow noopener noreferrer">Elixir School</a> also provides some great information on function documentation and the features that Elixir provides.</p>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
+	</section>
+</article>
+
+    </main><footer class="flex flex-col mb-5">
+      <div >
+            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
+      </div>
+      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
+                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
+            </span>
+            <span>|</span><span>
+            2022  © Andrew Jorgensen  
+            </span>
+
+            <span>|</span>
+
+            <span>
+                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
+            </span>
+
+            <span>|</span> 
+
+            <span id="theme-toggle" class="hover:text-accent">
+            </span>
+      </div>
 </footer>
+
+
 
 
 
 <script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
       feather.replace()
-</script><footer class="bottom-0 w-full p-4 text-xs text-center text-gray-400 border-t border-gray-200 bg-accent">
-      <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a> and <a href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a></p>
-</footer></body>
+</script></body>
+
 </html>

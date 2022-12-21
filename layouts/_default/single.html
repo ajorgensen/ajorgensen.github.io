@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
+	<h1>
+		<span>
+			{{ .Title }}
+		</span>
+
+		<div class="text-xl mt-4">
+			<time class="font-mono not-prose font-thin">{{ dateFormat "2006-01-02" .Date }}</time>
+			⋅
+			{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
+
+			{{ range .Params.tags }}
+				<a class=" text-accent text-xl m" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+			{{ end }}
+		</div>
+	</h1>
+
+	<section class="leading-normal space-y-4">
+		{{ .Content }}
+	</section>
+</article>
+{{ end }}

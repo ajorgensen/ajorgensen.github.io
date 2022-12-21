@@ -1,0 +1,82 @@
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{- if .IsHome -}}
+  <meta name="description" content="{{ .Site.Params.Description }}" />
+	{{- else -}}
+  <meta name="description" content="{{ .Params.Description }}" />
+	{{- end }}
+
+	{{- if isset .Params "canonical" -}}
+	<link rel="canonical" href="{{ .Params.canonical }}" />
+	{{- else -}}
+	<link rel="canonical" href="{{ .Permalink }}" />
+	{{- end }}
+
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="{{ .Site.Params.TwitterHandle }}" />
+
+	{{- if .IsHome -}}
+		<meta name="og:title" content="{{ .Site.Title }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:description" content="{{ .Site.Params.Description }}" />
+		<meta property="og:url" content="{{ .Site.BaseURL }}" />
+		<meta name="og:image" content="{{ .Site.Params.Image }}" />
+		<meta name="twitter:creator" content="{{ .Site.Params.TwitterHandle }}" />
+		<meta name="twitter:title" content="{{ .Site.Title }}" />
+
+		{{- if isset .Site.Params "Image" -}}
+			<meta name="twitter:image" content="{{ .Site.Params.Image }}" />
+		{{- else -}}
+			<meta name="twitter:image" content="{{ .Site.Params.Image }}" />
+		{{- end -}}
+	{{- else -}}
+		<meta name="og:title" content="{{ .Page.Title }}" />
+		{{- if isset .Params "ogType" -}}
+			<meta property="og:type" content="{{ .Params.ogType }}" />
+		{{- else -}}
+			<meta property="og:type" content="website" />
+		{{- end -}}
+		
+		<meta property="og:description" content="{{ .Params.Description }}" />
+		<meta property="og:url" content="{{ .Page.Permalink }}" />
+
+		{{- if isset .Params "FeaturedImage" -}}
+			<meta name="og:image/" content="{{ .Params.FeaturedImage }}" />
+			<meta name="twitter:image" content="{{ .Params.FeaturedImage }}" />
+		{{- else -}}
+			<meta name="og:image" content="{{ .Site.Params.Image }}" />
+			<meta name="twitter:image" content="{{ .Site.Params.Image }}" />
+		{{- end -}}
+
+		{{- if isset .Params "TwitterHandle" -}}  
+			<meta name="twitter:creator" content="{{ .Params.TwitterHandle }}" />
+		{{- else -}}
+			<meta name="twitter:creator" content="{{ .Site.Params.TwitterHandle }}" />
+		{{- end -}}
+
+		<meta name="twitter:title" content="{{ .Page.Title }}" />
+	{{- end }}
+
+	{{- $title := ( .Title ) -}}
+	{{- $siteTitle := ( .Site.Title ) -}}
+	{{- if .IsHome -}}
+	<title>{{ $siteTitle }} | Home </title>
+	{{- else -}}
+	<title>{{ $title }} - {{ $siteTitle }}</title>
+	{{- end -}}
+
+	{{- if isset .Site.Params "favicon" -}}
+	<link rel="icon" type="image/png" href={{ .Site.Params.favicon }} />
+	{{- end -}}
+
+	{{ hugo.Generator }}
+
+	<link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/output.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/syntax.css" /> -->
+
+  <script src="{{ .Site.BaseURL }}js/theme-toggle.js"></script>
+  <script src="{{ .Site.BaseURL}}/js/feather.min.js"></script>
+</head>

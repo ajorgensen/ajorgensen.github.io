@@ -2,7 +2,6 @@ baseURL = "https://aj.codes/"
 title = "Andrew Jorgensen"
 languageCode = "en-us"
 
-theme = "ajorgensen"
 copyright = "© Andrew Jorgensen"
 enableRobotsTXT = true
 defaultContentLanguage = 'en'

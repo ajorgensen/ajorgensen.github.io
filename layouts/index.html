@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+<div class="space-y-3">
+  {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+  {{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
+  {{ range $paginator.Pages }}
+    <section class="space-x-5 flex flex-row">
+      <div>
+        <time class="font-mono">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
+      </div>
+      <div>
+        <a class="post-link text-accent" href="{{ .RelPermalink }}"> {{.Title}}</a>
+      </div>
+    </section>
+  {{ end }}
+</div>
+
+{{ end }}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="en-us"><head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/branch-agnostic-git-aliases/" />
 
@@ -7,38 +7,46 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Branch Agnostic Git Aliases" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
 		<meta property="og:url" content="https://aj.codes/posts/branch-agnostic-git-aliases/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Branch Agnostic Git Aliases" /><title>Branch Agnostic Git Aliases - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0"><link rel="stylesheet" href="https://aj.codes/css/styles.css" integrity="">
-	
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
+			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Branch Agnostic Git Aliases" /><title>Branch Agnostic Git Aliases - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
+
+	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
+  
 
   <script src="https://aj.codes/js/theme-toggle.js"></script>
   <script src="https://aj.codes//js/feather.min.js"></script>
 </head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
+<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
+  <div class="flex flex-row justify-between">
+    <div>
+      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
+        Andrew Jorgensen
+      </a>
+    </div>
+    <div>
+      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
+    </div>
   </div>
 </header>
+<main class="flex-1">
+<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
+	<h1>
+		<span>
+			Branch Agnostic Git Aliases
+		</span>
 
-<main>
-	<article>
-		<div>
-			<h1 class="title">Branch Agnostic Git Aliases</h1>
+		<div class="text-xl mt-4">
+			<time class="font-mono not-prose font-thin">2020-10-12</time>
+			⋅
+			
 
-			<div class="meta">
-        <time class="date">2020-10-12</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/git">git</a>
-        
-      </div>
+			
+				<a class=" text-accent text-xl m" href="/tags/git">git</a>
+			
 		</div>
+	</h1>
 
-		<section class="body">
-			<p>Github and others have recently changed the name of the default branch in git
+	<section class="leading-normal space-y-4">
+		<p>Github and others have recently changed the name of the default branch in git
 from <code>master</code> to <code>main</code>, you can read more about the change <a href="https://www.zdnet.com/article/github-to-replace-master-with-main-starting-next-month/" target="_blank" rel="nofollow noopener noreferrer">here</a>. If you
 are like me you likely had a few git aliases that were hard coded to assume the
 default branch in a repository was <code>master</code>, however there is a better way of
@@ -76,21 +84,46 @@ each client should also sync their local state as well to match using <code>git 
 use <code>git symbolic-ref</code> to get the branch that <code>HEAD</code>. Fortunately this gives as
 a way to create git aliases and scripts that are agnostic to what the remote has
 set the default branch to be.</p>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
+	</section>
+</article>
+
+    </main><footer class="flex flex-col mb-5">
+      <div >
+            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
+      </div>
+      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
+                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
+            </span>
+            <span>|</span><span>
+            2022  © Andrew Jorgensen  
+            </span>
+
+            <span>|</span>
+
+            <span>
+                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
+            </span>
+
+            <span>|</span> 
+
+            <span id="theme-toggle" class="hover:text-accent">
+            </span>
+      </div>
 </footer>
+
+
 
 
 
 <script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
       feather.replace()
-</script><footer class="bottom-0 w-full p-4 text-xs text-center text-gray-400 border-t border-gray-200 bg-accent">
-      <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a> and <a href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a></p>
-</footer></body>
+</script></body>
+
 </html>

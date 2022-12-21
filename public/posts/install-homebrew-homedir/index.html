@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="en-us"><head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="" /><link rel="canonical" href="https://aj.codes/posts/install-homebrew-homedir/" />
 
@@ -7,38 +7,46 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@ajorgensen" /><meta name="og:title" content="Install homebrew to your home directory" /><meta property="og:type" content="website" /><meta property="og:description" content="" />
 		<meta property="og:url" content="https://aj.codes/posts/install-homebrew-homedir/" /><meta name="og:image" content="/images/cat.jpg" />
-			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Install homebrew to your home directory" /><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0"><link rel="stylesheet" href="https://aj.codes/css/styles.css" integrity="">
-	
-  <link rel="stylesheet" type="text/css" href="https://aj.codes/css/syntax.css" />
+			<meta name="twitter:image" content="/images/cat.jpg" /><meta name="twitter:creator" content="@ajorgensen" /><meta name="twitter:title" content="Install homebrew to your home directory" /><title>Install homebrew to your home directory - Andrew Jorgensen</title><meta name="generator" content="Hugo 0.108.0">
+
+	<link rel="stylesheet" type="text/css" href="https://aj.codes/css/output.css" />
+  
 
   <script src="https://aj.codes/js/theme-toggle.js"></script>
   <script src="https://aj.codes//js/feather.min.js"></script>
 </head>
-<body><header>
-  <div class="navbar">
-    <a class="logo navbar-item" href="https://aj.codes/"> Andrew Jorgensen </a>
-    <a class="navbar-item" href="/tags">Tags</a>
+<body class="flex flex-col md:mx-auto mx-8 min-h-screen max-w-prose font-sans text-gray-700 dark:text-white bg-light-background dark:bg-dark-background"><header class="py-8">
+  <div class="flex flex-row justify-between">
+    <div>
+      <a class="text-xl font-semibold hover:text-accent" href="https://aj.codes/"> 
+        Andrew Jorgensen
+      </a>
+    </div>
+    <div>
+      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
+    </div>
   </div>
 </header>
+<main class="flex-1">
+<article class="w-full prose max-w-prose dark:prose-invert lg:prose-xl">
+	<h1>
+		<span>
+			Install homebrew to your home directory
+		</span>
 
-<main>
-	<article>
-		<div>
-			<h1 class="title">Install homebrew to your home directory</h1>
+		<div class="text-xl mt-4">
+			<time class="font-mono not-prose font-thin">2017-04-22</time>
+			⋅
+			
 
-			<div class="meta">
-        <time class="date">2017-04-22</time>
-        ⋅
-        
-
-        
-          <a class="no-underline" href="/tags/homebrew">homebrew</a>
-        
-      </div>
+			
+				<a class=" text-accent text-xl m" href="/tags/homebrew">homebrew</a>
+			
 		</div>
+	</h1>
 
-		<section class="body">
-			<p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh" target="_blank" rel="nofollow noopener noreferrer">homebrew website</a> for current installation instructions.</p>
+	<section class="leading-normal space-y-4">
+		<p><strong>NOTE</strong>: This method of installation is no longer supported but I will leave the post here for posterity. The issues that this was meant to solve have since been fixed by homebrew. You can visit the <a href="https://brew.sh" target="_blank" rel="nofollow noopener noreferrer">homebrew website</a> for current installation instructions.</p>
 <p>Installing homebrew to your home directory allows for better control over where packages are installed and avoid running into System Integrity Protection which was added to El Capitan. Also its extremely easy to do.</p>
 <h2 id="fresh-install">Fresh install</h2>
 <p>If you already have homebrew installed you can run <code>brew list | tr '\r\n' ' '</code> to get a list of packages that were installed with homebrew. Save this list, we will use it later. At this point you can also uninstall homebrew so it does not conflict with the new installation.</p>
@@ -56,21 +64,46 @@
 <p>I&rsquo;ve create an alias that updates homebrew, upgrades any installed formulas, and then cleans up any files that are no longer necessary. This can be useful for keeping your system up to date. Running <code>brew cleanup</code> from time to time is also important as I&rsquo;ve seen it clean upwards of <strong>1GB</strong> of space.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">sysup</span><span class="o">=</span><span class="s1">&#39;brew update &amp;&amp; brew upgrade; brew cleanup&#39;</span>
 </span></span></code></pre></div>
-		</section>
-	</article>
-</main>
-<footer>
-<hr><a class="soc no-underline" href="https://github.com/ajorgensen/" title="GitHub"><i data-feather="github"></i></a>|<a class="soc no-underline" href="https://twitter.com/ajorgensen/" title="Twitter"><i data-feather="twitter"></i></a>|<a class="soc no-underline" href="/index.xml" title="RSS"><i data-feather="rss"></i></a>|⚡️
-	2022  © Andrew Jorgensen |  Built with <a class="no-underline" href="https://gohugo.io">Hugo</a>
-      | <span id="theme-toggle"></span>
+	</section>
+</article>
+
+    </main><footer class="flex flex-col mb-5">
+      <div >
+            <hr class="my-8 h-px w-full bg-gray-700 border-0 dark:bg-gray-700">
+      </div>
+      <div class="flex flex-row justify-evenly space-x-3 text-s divide-gray-400"><span>
+                  <a class=" text-accent text-sm" href="https://github.com/ajorgensen/" title="GitHub"><i class="w-5 h-5" data-feather="github"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="https://twitter.com/ajorgensen/" title="Twitter"><i class="w-5 h-5" data-feather="twitter"></i></a>
+            </span>
+            <span>|</span><span>
+                  <a class=" text-accent text-sm" href="/index.xml" title="RSS"><i class="w-5 h-5" data-feather="rss"></i></a>
+            </span>
+            <span>|</span><span>
+            2022  © Andrew Jorgensen  
+            </span>
+
+            <span>|</span>
+
+            <span>
+                  Built with <a class="hover:text-accent" href="https://gohugo.io">Hugo</a>
+            </span>
+
+            <span>|</span> 
+
+            <span id="theme-toggle" class="hover:text-accent">
+            </span>
+      </div>
 </footer>
+
+
 
 
 
 <script data-goatcounter="https://ajorgensen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
       feather.replace()
-</script><footer class="bottom-0 w-full p-4 text-xs text-center text-gray-400 border-t border-gray-200 bg-accent">
-      <p>made with <a href="https://gohugo.io" class="underline hover:text-blue-400">Hugo</a> and <a href="https://tailwindcss.com" class="underline hover:text-blue-400">TailwindCSS</a></p>
-</footer></body>
+</script></body>
+
 </html>
