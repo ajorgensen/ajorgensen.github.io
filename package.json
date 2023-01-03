@@ -9,8 +9,7 @@
     "dev": "run-p dev:*",
     "build:css": "NODE_ENV=production npx tailwindcss -i ./assets/css/styles.css -o static/css/output.css -m",
     "build:hugo": "hugo --minify",
-    "build": "run-s build:*",
-    "deploy": "./deploy.sh"
+    "build": "run-s build:*"
   },
 
   "keywords": [],
