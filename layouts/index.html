@@ -6,7 +6,7 @@
   {{ range $paginator.Pages }}
     <section class="space-x-5 flex flex-row">
       <div>
-        <time class="font-mono">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
+        <time class="font-mono whitespace-nowrap">{{ dateFormat "2006-01-02" .Date }}{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}</time>
       </div>
       <div>
         <a class="post-link text-accent" href="{{ .RelPermalink }}"> {{.Title}}</a>

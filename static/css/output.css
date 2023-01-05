@@ -1237,6 +1237,10 @@ video {
   scroll-behavior: auto;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
