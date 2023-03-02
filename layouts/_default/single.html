@@ -6,12 +6,11 @@
 		</span>
 
 		<div class="text-xl mt-4">
+			{{ if .Draft }} <span class="draft-label">DRAFT</span> ⋅ {{ end }}
 			<time class="font-mono not-prose font-thin">{{ dateFormat "2006-01-02" .Date }}</time>
 			⋅
-			{{ if .Draft }} <span class="draft-label">DRAFT</span> {{ end }}
-
 			{{ range .Params.tags }}
-				<a class=" text-accent text-xl m" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+				<a class="text-accent text-xl m" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
 			{{ end }}
 		</div>
 	</h1>
