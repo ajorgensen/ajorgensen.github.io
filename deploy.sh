@@ -30,6 +30,6 @@ if [ $? -ne 0 ]; then
   git push origin main
 fi
 
-# Deploy to firebase
+# Deploy to github pages
 echo -e "\033[0;32mDeploying ...\033[0m"
 git push origin `git subtree split --prefix public main`:gh-pages --force
