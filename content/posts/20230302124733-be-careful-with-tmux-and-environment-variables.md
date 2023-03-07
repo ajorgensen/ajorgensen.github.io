@@ -33,7 +33,7 @@ updated. You can see this with the following command in a tmux session:
 -SSH_ASKPASS
 SSH_AUTH_SOCK
 -SSH_CONNECTION
--WINDOWIDkj
+-WINDOWID
 -XAUTHORITY
 ```
 
