@@ -6,11 +6,15 @@ copyright = "© Andrew Jorgensen"
 enableRobotsTXT = true
 defaultContentLanguage = 'en'
 
+[Author]
+  name = "Andrew Jorgensen"
+  email = "blog@aj.codes"
+
 [build]
   writeStats = false
 
 [params]
-	featherIconsCDN=true
+  featherIconsCDN=true
   Description = "My little corner of the internet. Thoughts and opinions are my own"
   TwitterHandle = "@ajorgensen"
   Image = "/images/cat.jpg"
