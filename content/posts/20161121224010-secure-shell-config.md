@@ -9,8 +9,9 @@ tags:
 aliases:
     - "content/post/secure-shell-config/"
 ---
+This was shameless stolen from the one and only [Brian Hatfield](https://gist.github.com/bmhatfield/f613c10e360b4f27033761bbee4404fd)
+
 Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you're not careful.
-<!--more-->
 
 Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.
 
