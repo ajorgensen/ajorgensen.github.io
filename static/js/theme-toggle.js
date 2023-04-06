@@ -32,9 +32,9 @@ function updateToggleText() {
     const theme = currentTheme()
 
     if (theme === "dark") {
-        toggle.innerText = "Light Theme"; 
+        toggle.innerText = "Light Theme";
     } else {
-        toggle.innerText = "Dark Theme"; 
+        toggle.innerText = "Dark Theme";
     }
 }
 
@@ -55,7 +55,9 @@ function toggleTheme() {
 function applyTheme(t) {
     if (t === "dark") {
         document.documentElement.classList.add('dark')
+        document.documentElement.dataset.theme = 'dark'
     } else if (t === "light") {
         document.documentElement.classList.remove('dark')
+        document.documentElement.dataset.theme = 'light'
     }
 }

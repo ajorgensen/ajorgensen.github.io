@@ -1,12 +1,6 @@
-<header class="py-8">
-  <div class="flex flex-row justify-between">
-    <div>
-      <a class="text-xl font-semibold hover:text-accent" href="{{ .Site.BaseURL }}"> 
-        {{ .Site.Title }}
-      </a>
-    </div>
-    <div>
-      <a class="justify-between text-lg hover:text-accent" href="/tags">Tags</a>
-    </div>
-  </div>
+<header>
+    <a class="logo strong" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+    <nav>
+        <a class="logo" href="/tags">Tags</a>
+    </nav>
 </header>

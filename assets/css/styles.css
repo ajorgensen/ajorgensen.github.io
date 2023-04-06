@@ -1,6 +1,26 @@
+/*
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
 
-@import "syntax.css";
+:root {
+  --primary: #FF572D;
+}
+
+:root:not([data-theme="dark"]) {
+  --primary: #FF572D;
+}
+
+/* @import "syntax.css"; */
+*/
+
+:root {
+  --primary: #5e35b1;
+}
+
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --primary: #5e35b1;
+}
+
