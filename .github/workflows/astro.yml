@@ -36,7 +36,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v3
       - name: Install, build, and upload
-        uses: withastro/actions@v0
+        uses: withastro/action@v0
         with:
           path: ./public
 
