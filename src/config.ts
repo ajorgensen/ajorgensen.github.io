@@ -32,4 +32,10 @@ export const SOCIALS: SocialObjects = [
         linkTitle: `${SITE.title} on Twitter`,
         active: true,
     },
+    {
+        name: "RSS",
+        href: "/rss",
+        linkTitle: `${SITE.title} feed`,
+        active: true,
+    },
 ];
