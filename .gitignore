@@ -2,3 +2,4 @@ node_modules
 dist
 .jampack
 .husky
+.hugo_build.lock
