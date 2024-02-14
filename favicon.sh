@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Check if Image file is provided
-if [ $# -ne 1 ]; then
+if [ $# -ne 2 ]; then
   echo "Please provide an image file as an argument."
   exit 1
 fi
@@ -22,7 +22,7 @@ if [[ ! "$image_ext" =~ ^(png|jpg|jpeg)$ ]]; then
 fi
 
 # Define output directory and sizes
-output_dir="."
+output_dir=$2
 sizes=(16 32 48 64 72 96 144 152 192 256 310 512)
 
 # Ensure ImageMagick is installed
@@ -34,10 +34,11 @@ fi
 # Generate favicons in different sizes
 for size in "${sizes[@]}"; do
   output_file="${output_dir}/favicon-${size}.png"
-  convert "$image_file" -resize "${size}x${size}" -background none "$output_file"
+  convert "$image_file" -resize "${size}x${size}" -background transparent "$output_file"
 done
 
 # Generate .ico file with appropriate sizes
-convert -layers flatten "${output_dir}"/favicon-*.png "${output_dir}"/favicon.ico
+# -layers flatten
+convert "${output_dir}"/favicon-*.png -background transparent -colors 256 "${output_dir}"/favicon.ico
 
 echo "Favicons generated successfully in '${output_dir}' directory."
