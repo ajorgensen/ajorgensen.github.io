@@ -3,3 +3,4 @@ dist
 .jampack
 .husky
 .hugo_build.lock
+public

@@ -5,7 +5,6 @@ pubDate: 2023-03-02T12:47:33-05:00
 draft: false
 tags:
   - tmux
-description: Watch out for these common pitfalls when using tmux and environment variables and learn how to avoid them.
 ---
 
 tmux has an interesting quirk in the way it handles environment variables that if you're not careful can cause some seemingly strange behavior.
