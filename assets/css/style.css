@@ -1109,6 +1109,11 @@ video {
   margin-bottom: 0.125rem;
 }
 
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1119,6 +1124,11 @@ video {
 
 .table {
   display: table;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-accent {
