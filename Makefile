@@ -1,10 +1,14 @@
 GO ?= go
 GOPATH ?= $(HOME)/go
+GOBIN ?= $(GOPATH)/bin
 
-$(GOPATH)/bin/hugo: .hugo-version
+$(GOBIN)/hugo: .hugo.version
 	@echo "Installing Hugo"
-	$(GO) install github.com/gohugoio/hugo@$(shell cat .hugo-version)
+	$(GO) install github.com/gohugoio/hugo@$(shell cat .hugo.version)
+
+$(GOBIN)/reflex: .reflex.version
+	$(GO) install github.com/cespare/reflex@$(shell cat .reflex.version)
 
 .PHONY: run
-run: $(GOPATH)/bin/hugo
-	hugo server -w -D --verbose
+run: $(GOBIN)/hugo $(GOBIN)/reflex
+	@reflex -c reflex.conf --verbose
