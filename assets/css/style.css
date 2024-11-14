@@ -111,16 +111,16 @@ nav ul li a {
         font-weight: 600;
 }
 
-/* Utility Classes */
-.icon {
+.date__icon {
         width: 1.5em;
         height: 1.5em;
         display: inline-block;
         fill: rgb(var(--color-text-base));
         vertical-align: middle;
+        margin-right: var(--spacing-xs);
 }
 
-.date {
+.date__text {
         font-style: italic;
         color: rgba(var(--color-text-base), 0.8);
 }
