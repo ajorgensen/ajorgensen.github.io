@@ -57,9 +57,7 @@ completely separate session.
 There are a few different ways to work around this. If you know you'll want a specific environment variable updated each
 time you start a new session, you can add the variable to the global update list.
 
-```file
-tmux.conf
-
+```console
 set-option -g update-environment "FOO"
 ```
 

@@ -1,18 +1,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="16x16" href="favicon-16.png">
-<link rel="apple-touch-icon" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" sizes="64x64" href="favicon-64.png">
-<link rel="apple-touch-icon" sizes="144x144" href="favicon-144.png">
-<link rel="apple-touch-icon" sizes="256x256" href="favicon-256.png">
-<link rel="apple-touch-icon" sizes="512x512" href="favicon-512.png">
+<link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+<link rel="apple-touch-icon" sizes="16x16" href="{{ "favicon-16.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="32x32" href="{{ "favicon-32.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="64x64" href="{{ "favicon-64.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="144x144" href="{{ "favicon-144.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="256x256" href="{{ "favicon-256.png" | relURL }}">
+<link rel="apple-touch-icon" sizes="512x512" href="{{ "favicon-512.png" | relURL }}">
 
 {{ $title := print .Site.Title " | " .Title }}
 {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
 <title>{{ $title }}</title>
 
-<script is:inline src="/toggle-theme.js"></script>
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}

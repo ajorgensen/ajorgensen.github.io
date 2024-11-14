@@ -1,11 +1,12 @@
 {{ define "main" }}
-<div style="margin-bottom: 2rem;">
-    <article class="prose prose-gray dark:prose-invert">
-        <div class="metadata" style="margin-bottom: 2rem;">
-            <h1 class="my-0.5">{{ .Title }}</h1>
+<div>
+    <article>
+        <div class="metadata">
+            <h1>{{ .Title }}</h1>
             {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
             {{ $dateHuman := .Date | time.Format ":date_long" }}
-            <div class="date small">
+
+            <div class="date text-sm">
                 <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
             </div>
         </div>
