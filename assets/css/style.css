@@ -111,13 +111,8 @@ nav ul li a {
         font-weight: 600;
 }
 
-.date__icon {
-        width: 1.5em;
-        height: 1.5em;
-        display: inline-block;
-        fill: rgb(var(--color-text-base));
-        vertical-align: middle;
-        margin-right: var(--spacing-xs);
+.postTitle {
+        margin-bottom: 0;
 }
 
 .date__text {
