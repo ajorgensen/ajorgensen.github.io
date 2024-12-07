@@ -9,6 +9,8 @@ $(GOBIN)/hugo: .hugo.version
 $(GOBIN)/reflex: .reflex.version
 	$(GO) install github.com/cespare/reflex@$(shell cat .reflex.version)
 
+default: run
+
 .PHONY: run
 run: $(GOBIN)/hugo $(GOBIN)/reflex
 	@reflex -c reflex.conf --verbose

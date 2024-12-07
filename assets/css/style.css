@@ -2,44 +2,61 @@
 *,
 *::before,
 *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-        overflow-y: scroll;
-        height: 100%;
-        font-size: 100%;
-        -webkit-text-size-adjust: 100%;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    overflow-y: scroll;
+    height: 100%;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background: linear-gradient(to right, var(--color-background-start), var(--color-background-end));
+    background-color: var(--color-background-start);
+    background-attachment: fixed;
+    background-size: 100% 100%
 }
 
 :root {
-        --color-fill: 33, 39, 55;
-        --color-text-base: 234, 237, 243;
-        --color-accent: 255, 107, 1;
-        --color-card: 52, 63, 96;
-        --color-card-muted: 138, 51, 2;
-        --color-border: 171, 75, 8;
+    --color-fill: 33, 39, 55;
+    --color-text-base: 234, 237, 243;
+    --color-accent: 255, 107, 1;
+    --color-card: 52, 63, 96;
+    --color-card-muted: 138, 51, 2;
+    --color-border: 171, 75, 8;
 
-        /* Add some new variables for consistency */
-        --spacing-xs: 0.5rem;
-        --spacing-sm: 1rem;
-        --spacing-md: 1.5rem;
-        --spacing-lg: 2rem;
-        --spacing-xl: 3rem;
+    --color-white: rgb(236, 216, 213);
+    --background-color: #000;
+    --font-size-base: 18px;
+
+    --color-background-start: #14141f;
+    --color-background-end: #19192a;
+
+    /* Add some new variables for consistency */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
 }
 
 body {
-        background-color: rgb(var(--color-fill));
-        color: rgb(var(--color-text-base));
-        font-family: 'JetBrains Mono Variable', monospace;
-        margin: auto;
-        max-width: 48rem;
-        line-height: 1.6;
-        padding: var(--spacing-md);
+    color: var(--color-white);
+    font-size: var(--font-size-base);
+
+    height: 100%;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+
+    font-family: 'JetBrains Mono Variable', monospace;
+    margin: auto;
+    max-width: 48rem;
+    line-height: 1.6;
+    padding: var(--spacing-md);
 }
 
 /* Typography */
@@ -49,143 +66,143 @@ h3,
 h4,
 h5,
 h6 {
-        line-height: 1.25;
-        color: rgb(var(--color-accent));
-        margin-bottom: var(--spacing-sm);
-        margin-top: var(--spacing-lg);
+    line-height: 1.25;
+    color: rgb(var(--color-accent));
+    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
 }
 
 h1 {
-        font-size: 2.25em;
-        margin-top: 0;
+    font-size: 2.25em;
+    margin-top: 0;
 }
 
 h2 {
-        font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h3 {
-        font-size: 1.25em;
+    font-size: 1.25em;
 }
 
 p {
-        font-size: 1em;
-        margin-bottom: var(--spacing-md);
+    font-size: 1em;
+    margin-bottom: var(--spacing-md);
 }
 
 /* Links */
 a {
-        color: rgb(var(--color-accent));
-        text-decoration: none;
-        transition: all 0.2s ease;
+    color: rgb(var(--color-accent));
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
 a:hover {
-        text-decoration: underline;
-        opacity: 0.8;
+    text-decoration: underline;
+    opacity: 0.8;
 }
 
 /* Header and Navigation */
 header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: var(--spacing-lg);
-        padding-bottom: var(--spacing-md);
-        border-bottom: 1px solid rgba(var(--color-border), 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(var(--color-border), 0.2);
 }
 
 nav ul {
-        display: flex;
-        justify-content: space-between;
-        list-style: none;
-        gap: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    gap: var(--spacing-sm);
 }
 
 nav ul li a {
-        padding: var(--spacing-xs);
+    padding: var(--spacing-xs);
 }
 
 .logo {
-        font-size: 1.5rem;
-        font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .postTitle {
-        margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .date__text {
-        font-style: italic;
-        color: rgba(var(--color-text-base), 0.8);
+    font-style: italic;
+    color: rgba(var(--color-text-base), 0.8);
 }
 
 .text-sm {
-        font-size: 0.667rem;
+    font-size: 0.667rem;
 }
 
 .medium {
-        font-size: 1.125rem;
+    font-size: 1.125rem;
 }
 
 .small {
-        font-size: 0.75rem;
-        line-height: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
 }
 
 /* Additional Blog-specific Styles */
 blockquote {
-        border-left: 4px solid rgb(var(--color-accent));
-        padding-left: var(--spacing-md);
-        margin: var(--spacing-md) 0;
-        font-style: italic;
+    border-left: 4px solid rgb(var(--color-accent));
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    font-style: italic;
 }
 
 code {
-        padding: 0.2em 0.4em;
-        border-radius: 3px;
-        font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
 }
 
 pre {
-        padding-left: var(--spacing-md);
-        border-radius: 4px;
-        overflow-x: auto;
-        margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-md);
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: var(--spacing-md) 0;
 }
 
 img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 4px;
-        margin: var(--spacing-md) 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: var(--spacing-md) 0;
 }
 
 .metadata {
-        margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
 footer {
-        margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-        html {
-                font-size: 95%;
-        }
+    html {
+        font-size: 95%;
+    }
 
-        body {
-                padding: var(--spacing-sm);
-        }
+    body {
+        padding: var(--spacing-sm);
+    }
 
-        header {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-        }
+    header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 
-        nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-        }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
