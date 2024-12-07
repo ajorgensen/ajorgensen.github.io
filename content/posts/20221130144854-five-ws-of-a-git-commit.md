@@ -9,6 +9,8 @@ tags:
 
 Your commit history is not for you, at least not for you of right now. You of right now are full of context and understanding that despite how much we may convince ourselves that we'll remember with perfect clarity tomorrow, I rarely find that to be the case. To solve this problem it's important to approach our commit history like a story.
 
+<!--more-->
+
 As a brief aside, commit history has turned into a bit of a cult following. Whether you are a linearity purist or love to fall asleep with your head resting soundly on your merge bubbles, I believe these are both missing the more critical point. There are certainly pros and cons to both that I won't go into here but they miss the most important aspect of your git history, context.
 
 Similar to a good story, every commit must outline the **Who**, **What**, **Where**, **When**, and most importantly **Why**. These 5 aspects allow the audience to properly orient themselves in the story and to understand the context in which the commit was made. Even if we're just missing one of these aspects, the commit cannot adequately fulfill its purpose.

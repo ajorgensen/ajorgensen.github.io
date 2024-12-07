@@ -11,6 +11,8 @@ This was shameless stolen from the one and only [Brian Hatfield](https://gist.gi
 
 Sharing your dotfiles on the internet can have a lot of advantages but can become a huge pain if you're not careful.
 
+<!--more-->
+
 Uploading your dotfiles allows you to easily bootstrap a new machine with all of those precious settings that you painstakingly configured over the course of your career. It serves as a backup in case your machine decides its time to go to the great Apple store in the sky. Also its just awesome to look around at other peoples configs and learn new tricks that you might now have discovered on your own. The problem comes when you need to add some private credentials to your configuration without checking them in for the world to see.
 
 One good security practice is to not store any unencrypted credentials at rest. If you can run `cat` on a file and see the credentials appear on the screen this means that are unencrypted at rest and just waiting for an attacker to read that file and pull the credentials out for nefarious purposes. Typically credentials in your profile would look something like...

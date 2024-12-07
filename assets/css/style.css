@@ -182,6 +182,10 @@ img {
     margin-bottom: var(--spacing-md);
 }
 
+.summary {
+    margin: var(--spacing-md) 0;
+}
+
 footer {
     margin-top: var(--spacing-lg);
 }

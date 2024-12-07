@@ -1,0 +1,17 @@
+{{ range site.RegularPages }}
+<div>
+        <h2 class="postTitle">
+                <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        </h2>
+
+        <div class="date__text text-sm">
+                {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+                {{ $dateHuman := .Date | time.Format ":date_long" }}
+                <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </div>
+
+        <div class="summary">
+                {{ .Summary }}
+        </div>
+</div>
+{{ end}}

@@ -3,6 +3,7 @@ title: "Be Careful Using tmux and Environment Variables"
 postSlug: be-careful-using-tmux-and-environment-variables
 pubDate: 2023-03-02T12:47:33-05:00
 draft: false
+description: "foo bar baz"
 tags:
   - tmux
 ---
@@ -10,6 +11,8 @@ tags:
 tmux has an interesting quirk in the way it handles environment variables that if you're not careful can cause some seemingly strange behavior.
 
 Fortunately, this behavior is documented but in my opinion, is not intuitive. From the tmux man page:
+
+<!--more-->
 
 > <strong class="text-accent"> When the server is started, tmux copies the environment into the
 > global environment; </strong> in addition, each session has a session
