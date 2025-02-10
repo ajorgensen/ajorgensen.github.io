@@ -29,9 +29,7 @@ html {
     --color-card-muted: 138, 51, 2;
     --color-border: 171, 75, 8;
 
-    --color-white: rgb(236, 216, 213);
     --background-color: #000;
-    --font-size-base: 18px;
 
     --color-background-start: #14141f;
     --color-background-end: #19192a;
@@ -45,8 +43,8 @@ html {
 }
 
 body {
-    color: var(--color-white);
-    font-size: var(--font-size-base);
+    color: rgb(236, 216, 213);
+    font-size: 18px;
 
     height: 100%;
     min-height: 100vh;
@@ -54,7 +52,7 @@ body {
 
     font-family: 'JetBrains Mono Variable', monospace;
     margin: auto;
-    max-width: 48rem;
+    max-width: 800px;
     line-height: 1.6;
     padding: var(--spacing-md);
 }
@@ -66,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-    line-height: 1.25;
+    line-height: 1.2;
     color: rgb(var(--color-accent));
     margin-bottom: var(--spacing-sm);
     margin-top: var(--spacing-lg);
