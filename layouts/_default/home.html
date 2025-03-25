@@ -1,6 +1,12 @@
 {{ define "main" }}
 
-{{ .Content }}
-{{ partial "list.html" . }}
+<div class="home">
+    <div class="home__content">
+        {{ .Content }}
+    </div>
+    {{ range site.RegularPages }}
+        {{ partial "post.html" . }}
+    {{ end }}
+</div>
 
 {{ end }}

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="taxonomy-term">
+  <h1>{{ .Title }}</h1>
+  
+  {{ if .Content }}
+  <div class="taxonomy-content">
+    {{ .Content }}
+  </div>
+  {{ end }}
+
+  <div class="post-list">
+    {{ range .Pages }}
+        {{ partial "post.html" . }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+

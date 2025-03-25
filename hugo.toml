@@ -1,3 +1,9 @@
 baseURL = 'https://aj.codes/'
 languageCode = 'en-us'
 title = 'Andrew Jorgensen'
+
+[permalinks]
+  posts = "blog/:slug/"
+
+[params]
+    generate_aliases = true

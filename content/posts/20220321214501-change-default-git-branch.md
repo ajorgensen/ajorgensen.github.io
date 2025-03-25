@@ -1,5 +1,5 @@
 ---
-title: "Change Default git Branch"
+title: "Change the default git branch"
 pubDate: 2022-03-21T21:45:01-04:00
 tags:
     - git

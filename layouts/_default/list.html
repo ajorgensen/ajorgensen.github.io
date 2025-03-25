@@ -1,5 +1,9 @@
 {{ define "main" }}
 
-{{ partial "list.html" . }}
+<div class="post-list">
+    {{ range site.RegularPages }}
+        {{ partial "post.html" . }}
+    {{ end }}
+</div>
 
 {{ end }}

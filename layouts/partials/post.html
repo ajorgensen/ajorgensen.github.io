@@ -1,0 +1,24 @@
+<div class="post">
+    <h2 class="post__title">
+        <a href="{{ .RelPermalink }}" class="post__link">{{ .LinkTitle }}</a>
+    </h2>
+
+    <div class="post__meta">
+        <span class="post__date">
+            {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+            {{ $dateHuman := .Date | time.Format ":date_long" }}
+            <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </span>
+        {{ with .Params.tags }}
+        <span class="post__tags">
+            {{ range . }}
+            <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="post__tag">{{ . }}</a>
+            {{ end }}
+        </span>
+        {{ end }}
+    </div>
+
+    <div class="post__summary">
+        {{ .Summary }}
+    </div>
+</div>
