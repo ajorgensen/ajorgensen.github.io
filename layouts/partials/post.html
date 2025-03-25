@@ -10,6 +10,7 @@
             <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
         </span>
         {{ with .Params.tags }}
+        <span class="post__date-separator">•</span>
         <span class="post__tags">
             {{ range . }}
             <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="post__tag">{{ . }}</a>

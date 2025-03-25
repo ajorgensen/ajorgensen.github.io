@@ -253,9 +253,7 @@ a:focus {
     margin-bottom: var(--spacing-md);
 }
 
-/* Remove the absolute positioning and use flexbox for better alignment */
-.post__date::after {
-    content: "•";
+.post__date-separator {
     color: rgba(var(--color-text-base), 0.4);
     margin: 0 var(--spacing-xs);
     display: inline-block;
