@@ -77,7 +77,7 @@ html {
 
     /* Effects */
     --border-radius-sm: 4px;
-    --border-radius-md: 8px;
+    --border-radius-md: 0.5rem;
     --transition-normal: all 0.2s ease;
 }
 
@@ -496,4 +496,8 @@ th {
     pre {
         background-color: rgba(0, 0, 0, 0.2);
     }
+}
+
+.highlight pre {
+    border-radius: var(--border-radius-md);
 }
