@@ -1,14 +1,20 @@
 {{ define "main" }}
 <div class="post">
     <article class="article">
-        <div class="post__metadata">
-            <h1 class="post__title">{{ .Title }}</h1>
-            {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-            {{ $dateHuman := .Date | time.Format ":date_long" }}
-
-            <div class="post__date">
+        <div class="post__meta">
+            <span class="post__date">
+                {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+                {{ $dateHuman := .Date | time.Format ":date_long" }}
                 <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-            </div>
+            </span>
+            {{ with .Params.tags }}
+            <span class="post__date-separator">•</span>
+            <span class="post__tags">
+                {{ range . }}
+                <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="post__tag">{{ . }}</a>
+                {{ end }}
+            </span>
+            {{ end }}
         </div>
 
         <div class="post__content">
